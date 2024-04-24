@@ -1,70 +1,65 @@
-# Getting Started with Create React App
+### Passo 1: Criando o projeto React
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+1. Abrir o terminal.
+2. Executar o comando:
 
-## Available Scripts
+```bash
+npx create-react-app tattoo-management-react
+```
 
-In the project directory, you can run:
+Este comando cria uma nova pasta chamada `tattoo-management-react` com uma estrutura básica de projeto React.
 
-### `npm start`
+### Passo 2: Instalar o React Router DOM
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+1. Navegue até o diretório do projeto:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```bash
+cd tattoo-management-react
+```
 
-### `npm test`
+2. Instale o React Router DOM:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```bash
+npm install react-router-dom
+```
 
-### `npm run build`
+### Passo 3: Instalar o Axios
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. Ainda no diretório do projeto, instale o Axios:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+npm install axios
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Resumo das Dependências
 
-### `npm run eject`
+- `react`: Biblioteca principal do React.
+- `react-dom`: Responsável pela renderização do React no DOM.
+- `react-scripts`: Conjunto de scripts para iniciar, testar e criar builds da aplicação React.
+- `react-router-dom`: Biblioteca para roteamento de páginas no React.
+- `axios`: Cliente HTTP para fazer requisições para uma API.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Estrutura do Projeto
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- **src/**: Pasta que contém todo o código-fonte da aplicação.
+  - **components/**: Pasta para armazenar componentes reutilizáveis.
+    - **Navbar/**: Componente de barra de navegação.
+      - `Navbar.js`: Código JavaScript do componente Navbar.
+      - `Navbar.css`: Estilos CSS específicos do Navbar.
+    - **Sidebar/**: Componente de barra lateral.
+      - `Sidebar.js`: Código JavaScript do componente Sidebar.
+      - `Sidebar.css`: Estilos CSS específicos do Sidebar.
+  - **views/**: Pasta para armazenar as diferentes visualizações da aplicação.
+    - **Dashboard/**: Visualização do painel de controle.
+      - `Dashboard.js`: Código JavaScript da visualização Dashboard.
+      - `Dashboard.css`: Estilos CSS específicos do Dashboard.
+    - **Login/**: Visualização da página de login.
+      - `Login.js`: Código JavaScript da visualização Login.
+      - `Login.css`: Estilos CSS específicos do Login.
+    - **LoginSW/**: Visualização da página de login de um usuário comum.
+      - `LoginSW.js`: Código JavaScript da visualização LoginSW.
+      - `LoginSW.css`: Estilos CSS específicos do LoginSW.
+  - `App.js`: Arquivo principal que contém o componente raiz da aplicação.
+  - `index.js`: Arquivo principal que renderiza a aplicação no DOM.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Esta estrutura organiza os componentes reutilizáveis na pasta `components` e as diferentes visualizações da aplicação na pasta `views`. O arquivo `App.js` é o componente raiz que define a estrutura principal da aplicação e o arquivo `index.js` é responsável por renderizar a aplicação no DOM.
