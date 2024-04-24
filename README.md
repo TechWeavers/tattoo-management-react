@@ -9,15 +9,15 @@ npx create-react-app tattoo-management-react
 
 Este comando cria uma nova pasta chamada `tattoo-management-react` com uma estrutura básica de projeto React.
 
-### Passo 2: Instalar o React Router DOM
+### Passo 2: Instalando o React Router DOM
 
-1. Navegue até o diretório do projeto:
+1. Navegar até o diretório do projeto:
 
 ```bash
 cd tattoo-management-react
 ```
 
-2. Instale o React Router DOM:
+2. Instalar o React Router DOM:
 
 ```bash
 npm install react-router-dom
