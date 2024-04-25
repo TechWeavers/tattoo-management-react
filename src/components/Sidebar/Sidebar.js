@@ -53,11 +53,10 @@ function Sidebar() {
             <img className="rounded-circle" alt="" width="32" height="32" src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png" style={{ objectFit: "cover" }} />
         </a>
         <div className="dropdown-menu shadow text-small" data-popper-placement="top-start">
-            <a className="dropdown-item" href="/">New project...</a>
-            <a className="dropdown-item" href="/">Settings</a>
-            <a className="dropdown-item" href="/">Profile</a>
+            <a className="dropdown-item" href="/">Perfil</a>
+            <a className="dropdown-item" href="/">Configurações</a>
             <div className="dropdown-divider"></div>
-            <a className="dropdown-item" href="/">Sign out</a>
+            <a className="dropdown-item" href="/">Sair</a>
         </div>
     </div>
 </div>
