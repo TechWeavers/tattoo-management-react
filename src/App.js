@@ -3,6 +3,7 @@ import Login from "./views/Login/Login";
 import LoginSW from "./views/LoginSW/LoginSW";
 import Dashboard from "./views/Dashboard/Dashboard";
 import CadastroUsuario from "./views/CadastroUsuario/CadastroUsuario";
+import EsqueceuSenha from "./views/EsqueceuSenha/EsqueceuSenha";
 
 function App() {
   return (
@@ -12,7 +13,8 @@ function App() {
           <Route path="/" element={<Login />} />            
           <Route path="/sw" element={<LoginSW />} />            
           <Route path="/dashboard" element={<Dashboard />} />            
-          <Route path="/novo-usuario" element={<CadastroUsuario />} />            
+          <Route path="/novo-usuario" element={<CadastroUsuario />} />
+          <Route path="/esqueceu-senha" element={<EsqueceuSenha />} />               
         </Routes>
       </div>
     </BrowserRouter>

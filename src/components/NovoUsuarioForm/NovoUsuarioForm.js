@@ -10,7 +10,7 @@ function NovoUsuarioForm() {
     const handleSubmit = async(event) => {
         event.preventDefault();
         try {
-            await axios.post('http://127.0.0.1:8001/novo-usuario', {
+            await axios.post('http://localhost:8001/novo-usuario', {
                 username,
                 email,
                 password
@@ -50,10 +50,11 @@ function NovoUsuarioForm() {
         placeholder = "Nome de Usuário"
         value = { username }
         onChange = {
-            (e) => setUsername(e.target.value)
-        }
-        /> < /
-        div > <
+            (e) => setUsername(e.target.value) }
+        required /
+        >
+        <
+        /div> <
         div className = "mb-3" >
         <
         input className = "form-control"
@@ -63,10 +64,11 @@ function NovoUsuarioForm() {
         placeholder = "Email"
         value = { email }
         onChange = {
-            (e) => setEmail(e.target.value)
-        }
-        /> < /
-        div > <
+            (e) => setEmail(e.target.value) }
+        required /
+        >
+        <
+        /div> <
         div className = "mb-3" >
         <
         input className = "form-control"
@@ -76,23 +78,24 @@ function NovoUsuarioForm() {
         placeholder = "Senha"
         value = { password }
         onChange = {
-            (e) => setPassword(e.target.value)
-        }
-        /> < /
-        div > <
+            (e) => setPassword(e.target.value) }
+        required /
+        >
+        <
+        /div> <
         div >
         <
         button className = "btn btn-primary d-block w-100"
         type = "submit" >
         Cadastrar <
-        /button> < /
-        div > <
-        /form> < /
-        div > <
-        /div> < /
-        div > <
-        /div> < /
-        div > <
+        /button> <
+        /div> <
+        /form> <
+        /div> <
+        /div> <
+        /div> <
+        /div> <
+        /div> <
         /section>
     );
 }
