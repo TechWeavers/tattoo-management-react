@@ -1,31 +1,32 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom'; // Importe useHistory
 import './Login.css'; 
 import axios from 'axios';
 
 function Login() {
-
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const history = useHistory(); // Obtenha a instância de useHistory
 
     const handleSubmit = async (event) => {
         event.preventDefault();
 
         try {
-        const response = await axios.post('http://127.0.0.1:8000/login', {
-            username,
-            password
-        });
+            const response = await axios.post('http://127.0.0.1:8000/login', {
+                username,
+                password
+            });
 
-        // Verifique se a resposta foi bem-sucedida
-        if (response.status === 200) {
-            // Autenticação bem-sucedida, faça algo (por exemplo, redirecione para a página inicial)
-            console.log('Usuário autenticado:', response.data);
-        } else {
-            // Autenticação falhou, exiba uma mensagem de erro
-            console.error('Erro ao autenticar usuário');
-        }
+            // Verifique se a resposta foi bem-sucedida
+            if (response.status === 200) {
+                // Autenticação bem-sucedida, redirecione para a página /dashboard
+                history.push('/dashboard');
+            } else {
+                // Autenticação falhou, exiba uma mensagem de erro
+                console.error('Erro ao autenticar usuário');
+            }
         } catch (error) {
-        console.error('Erro ao processar requisição:', error);
+            console.error('Erro ao processar requisição:', error);
         }
     };
 

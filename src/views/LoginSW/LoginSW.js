@@ -12,21 +12,21 @@ function LoginSW() {
         event.preventDefault();
 
         try {
-        const response = await axios.post('http://127.0.0.1:8000/login', {
-            username,
-            password
-        });
+            const response = await axios.post('http://127.0.0.1:8000/login', {
+                username,
+                password
+            });
 
-        // Verifique se a resposta foi bem-sucedida
-        if (response.status === 200) {
-            // Autenticação bem-sucedida, faça algo (por exemplo, redirecione para a página inicial)
-            console.log('Usuário autenticado:', response.data);
-        } else {
-            // Autenticação falhou, exiba uma mensagem de erro
-            console.error('Erro ao autenticar usuário');
-        }
-        } catch (error) {
-        console.error('Erro ao processar requisição:', error);
+            // Verifique se a resposta foi bem-sucedida
+            if (response.status === 200) {
+                // Autenticação bem-sucedida, faça algo (por exemplo, redirecione para a página inicial)
+                console.log('Usuário autenticado:', response.data);
+            } else {
+                // Autenticação falhou, exiba uma mensagem de erro
+                console.error('Erro ao autenticar usuário');
+            }
+            } catch (error) {
+            console.error('Erro ao processar requisição:', error);
         }
     };
 
