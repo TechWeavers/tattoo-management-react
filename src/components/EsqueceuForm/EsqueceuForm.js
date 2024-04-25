@@ -8,15 +8,17 @@ function EsqueceuForm() {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-          await axios.post('http://localhost:8002/email', {
-            email: [email] 
-          });
-          alert('Email de recuperação de senha enviado');
-          setEmail('');
+            await axios.post('http://localhost:8002/email', {
+                email: [email]
+            });
+            alert('Email de recuperação de senha enviado');
+            setEmail('');
         } catch (error) {
-          alert('Erro ao enviar o email de recuperação de senha');
+            // If an error occurs during the axios request, set the error message state
+            alert('Esse email não possuí um usuário cadastrado');
         }
-      };
+    };
+
   
     return (
       <section className="position-relative py-4 py-xl-5">
