@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import './NovoUsuarioForm.min.css'; 
+import './NovoUsuarioForm.min.css';
 
 function NovoUsuarioForm() {
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      await axios.post('http://127.0.0.1:8001/novo-usuario', {
+      await axios.post('http://localhost:8001/novo-usuario', {
         username,
         email,
         password
@@ -43,6 +43,7 @@ function NovoUsuarioForm() {
                       placeholder="Nome de Usuário"
                       value={username}
                       onChange={(e) => setUsername(e.target.value)}
+                      required
                     />
                   </div>
                   <div className="mb-3">
@@ -54,6 +55,7 @@ function NovoUsuarioForm() {
                       placeholder="Email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
+                      required
                     />
                   </div>
                   <div className="mb-3">
@@ -65,6 +67,7 @@ function NovoUsuarioForm() {
                       placeholder="Senha"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
+                      required
                     />
                   </div>
                   <div>

@@ -56,7 +56,7 @@ function Login() {
                                             <button className="btn btn-primary d-block btn-user w-100" id="submitBtn" type="submit">Entrar</button>
                                             <hr />
                                         </form>
-                                        <div className="text-center"><a className="small" href="forgot-password.html">Esqueceu a Senha?</a></div>
+                                        <div className="text-center"><a className="small" href="esqueceu-senha">Esqueceu a Senha?</a></div>
                                         <div className="text-center"><a className="small" href="novo-usuario">Cadastrar Novo Usuário</a></div>
                                     </div>
                                 </div>
