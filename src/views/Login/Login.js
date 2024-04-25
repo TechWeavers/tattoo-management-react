@@ -1,33 +1,35 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Login.css'; 
 import axios from 'axios';
 
 function Login() {
-
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate(); // Get the useNavigate hook
 
     const handleSubmit = async (event) => {
         event.preventDefault();
 
         try {
-        const response = await axios.post('http://127.0.0.1:8000/login', {
-            username,
-            password
-        });
+            const response = await axios.post('http://127.0.0.1:8000/login', {
+                username,
+                password,
+            });
 
-        // Verifique se a resposta foi bem-sucedida
-        if (response.status === 200) {
-            // Autenticação bem-sucedida, faça algo (por exemplo, redirecione para a página inicial)
-            console.log('Usuário autenticado:', response.data);
-        } else {
-            // Autenticação falhou, exiba uma mensagem de erro
-            console.error('Erro ao autenticar usuário');
-        }
+            // Check if the response was successful
+            if (response.status === 200) {
+                // Successful authentication, redirect to /dashboard page
+                navigate('/dashboard');
+            } else {
+                // Authentication failed, display an error message
+                console.error('Error authenticating user');
+            }
         } catch (error) {
-        console.error('Erro ao processar requisição:', error);
+        console.error('Error processing request:', error);
         }
     };
+
 
     return (
         <div className="container" style={{ position: 'absolute', left: 0, right: 0, top: '50%', transform: 'translateY(-50%)', msTransform: 'translateY(-50%)', MozTransform: 'translateY(-50%)', WebkitTransform: 'translateY(-50%)', OTransform: 'translateY(-50%)' }}>
