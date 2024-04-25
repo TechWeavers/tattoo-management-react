@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './NovoUsuarioForm.min.css';
+import Swal from 'sweetalert2'
 
 function NovoUsuarioForm() {
     const [username, setUsername] = useState('');
@@ -15,88 +16,85 @@ function NovoUsuarioForm() {
                 email,
                 password
             });
-            alert('Usuário cadastrado com sucesso!');
-            // Limpar os campos do formulário após o envio bem-sucedido
+
+            Swal.fire({
+                title: "Usuário cadastrado com sucesso!",
+                icon: "success",
+                confirmButtonColor: "#FFB800",
+                iconColor: "#ffb800"
+            });
+
             setUsername('');
             setEmail('');
             setPassword('');
         } catch (error) {
-            alert('Erro ao cadastrar usuário. Por favor, tente novamente.');
+            Swal.fire({
+                title: "Opa, erro ao cadastrar o usuário",
+                text: "Por favor, tente novamente",
+                icon: "error",
+                confirmButtonColor: "#FFB800",
+                iconColor: "#ffb800"
+            });
         }
     };
 
-    return ( <
-        section className = "position-relative py-4 py-xl-5" >
-        <
-        div className = "container position-relative" >
-        <
-        div className = "row d-flex justify-content-center" >
-        <
-        div className = "col-md-8 col-lg-6 col-xl-5 col-xxl-4" >
-        <
-        div className = "card mb-5" >
-        <
-        div className = "card-body p-sm-5" >
-        <
-        h2 className = "text-center mb-4" > Cadastro de Usuário < /h2> <
-        form onSubmit = { handleSubmit } >
-        <
-        div className = "mb-3" >
-        <
-        input className = "form-control"
-        type = "text"
-        id = "username"
-        name = "username"
-        placeholder = "Nome de Usuário"
-        value = { username }
-        onChange = {
-            (e) => setUsername(e.target.value) }
-        required /
-        >
-        <
-        /div> <
-        div className = "mb-3" >
-        <
-        input className = "form-control"
-        type = "email"
-        id = "email"
-        name = "email"
-        placeholder = "Email"
-        value = { email }
-        onChange = {
-            (e) => setEmail(e.target.value) }
-        required /
-        >
-        <
-        /div> <
-        div className = "mb-3" >
-        <
-        input className = "form-control"
-        type = "password"
-        id = "password"
-        name = "password"
-        placeholder = "Senha"
-        value = { password }
-        onChange = {
-            (e) => setPassword(e.target.value) }
-        required /
-        >
-        <
-        /div> <
-        div >
-        <
-        button className = "btn btn-primary d-block w-100"
-        type = "submit" >
-        Cadastrar <
-        /button> <
-        /div> <
-        /form> <
-        /div> <
-        /div> <
-        /div> <
-        /div> <
-        /div> <
-        /section>
+    return ( 
+        <section className="position-relative py-4 py-xl-5">
+      <div className="container position-relative">
+        <div className="row d-flex justify-content-center">
+          <div className="col-md-8 col-lg-6 col-xl-5 col-xxl-4">
+            <div className="card mb-5">
+              <div className="card-body p-sm-5">
+                <h2 className="text-center mb-4">Cadastro de Usuário</h2>
+                <form onSubmit={handleSubmit}>
+                  <div className="mb-3">
+                    <input
+                      className="form-control"
+                      type="text"
+                      id="username"
+                      name="username"
+                      placeholder="Nome de Usuário"
+                      value={username}
+                      onChange={(e) => setUsername(e.target.value)}
+                      required
+                    />
+                  </div>
+                  <div className="mb-3">
+                    <input
+                      className="form-control"
+                      type="email"
+                      id="email"
+                      name="email"
+                      placeholder="Email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
+                    />
+                  </div>
+                  <div className="mb-3">
+                    <input
+                      className="form-control"
+                      type="password"
+                      id="password"
+                      name="password"
+                      placeholder="Senha"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      required
+                    />
+                  </div>
+                  <div>
+                    <button className="btn btn-primary d-block w-100" type="submit">
+                      Cadastrar
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
     );
 }
 

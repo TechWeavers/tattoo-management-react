@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './EsqueceuForm.css';
+import Swal from 'sweetalert2'
+
 
 function EsqueceuForm() {
     const [email, setEmail] = useState('');
@@ -8,14 +10,36 @@ function EsqueceuForm() {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            await axios.post('http://localhost:8002/email', {
-                email: [email]
-            });
-            alert('Email de recuperação de senha enviado');
-            setEmail('');
+          
+          Swal.fire({
+            title: "Aguarde um momento...",
+            html: "Estamos enviando o email",
+            allowOutsideClick: false,
+            didOpen: () => {
+              Swal.showLoading()
+            }
+          })
+
+          await axios.post('http://localhost:8002/email', {
+            email: [email]
+          });
+
+          Swal.fire({
+            title: "Enviado com sucesso!",
+            text: "Cheque o endereço de email informado",
+            icon: "success",
+            confirmButtonColor: "#FFB800",
+            iconColor: "#ffb800"
+          });
+          setEmail('');
         } catch (error) {
-            // If an error occurs during the axios request, set the error message state
-            alert('Esse email não possuí um usuário cadastrado');
+          Swal.fire({
+            title: "Opa, não existe nenhum usuário com esse email",
+            text: "Por favor, tente novamente",
+            icon: "error",
+            confirmButtonColor: "#FFB800",
+            iconColor: "#ffb800"
+          });
         }
     };
 
