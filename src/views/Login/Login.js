@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom'; // Importe useHistory
+import { useNavigate } from 'react-router-dom';
 import './Login.css'; 
 import axios from 'axios';
 
 function Login() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const history = useHistory(); // Obtenha a instância de useHistory
+    const navigate = useNavigate(); // Get the useNavigate hook
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -14,21 +14,22 @@ function Login() {
         try {
             const response = await axios.post('http://127.0.0.1:8000/login', {
                 username,
-                password
+                password,
             });
 
-            // Verifique se a resposta foi bem-sucedida
+            // Check if the response was successful
             if (response.status === 200) {
-                // Autenticação bem-sucedida, redirecione para a página /dashboard
-                history.push('/dashboard');
+                // Successful authentication, redirect to /dashboard page
+                navigate('/dashboard');
             } else {
-                // Autenticação falhou, exiba uma mensagem de erro
-                console.error('Erro ao autenticar usuário');
+                // Authentication failed, display an error message
+                console.error('Error authenticating user');
             }
         } catch (error) {
-            console.error('Erro ao processar requisição:', error);
+        console.error('Error processing request:', error);
         }
     };
+
 
     return (
         <div className="container" style={{ position: 'absolute', left: 0, right: 0, top: '50%', transform: 'translateY(-50%)', msTransform: 'translateY(-50%)', MozTransform: 'translateY(-50%)', WebkitTransform: 'translateY(-50%)', OTransform: 'translateY(-50%)' }}>
