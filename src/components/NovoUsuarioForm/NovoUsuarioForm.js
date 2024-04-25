@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import './NovoUsuarioForm.min.css'; 
+import './NovoUsuarioForm.min.css';
 
 function NovoUsuarioForm() {
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
   const handleSubmit = async (event) => {
     event.preventDefault();
