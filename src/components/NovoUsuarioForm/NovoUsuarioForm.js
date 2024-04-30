@@ -8,13 +8,20 @@ function NovoUsuarioForm() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
+    const [role, setRole] = useState('tatuador'); // Default role is 'tatuador'
+
+    const handleRoleChange = (selectedRole) => {
+        setRole(selectedRole);
+    };
+
     const handleSubmit = async(event) => {
         event.preventDefault();
         try {
             await axios.post('http://localhost:8001/novo-usuario', {
                 username,
                 email,
-                password
+                password,
+                role
             });
 
             Swal.fire({
@@ -83,6 +90,22 @@ function NovoUsuarioForm() {
                       required
                     />
                   </div>
+                  <div className="mb-3">
+                    <button
+                      className={`btn ${role === 'tatuador' ? 'btn-primary' : 'btn-secondary'}`}
+                      onClick={() => handleRoleChange('tatuador')}
+                      type="button"
+                    >
+                      Tatuador
+                    </button>
+                    <button
+                      className={`btn ${role === 'administrador' ? 'btn-primary' : 'btn-secondary'}`}
+                      onClick={() => handleRoleChange('administrador')}
+                      type="button"
+                    >
+                      Administrador
+                    </button>
+                </div>
                   <div>
                     <button className="btn btn-primary d-block w-100" type="submit">
                       Cadastrar
