@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 
 
-function ResetarSenha() {
+function RedefinirSenhaForm() {
     const [senha, setSenha] = useState('');
     const [senhaNovamente, setSenhaNovamente] = useState('');
-  
+
+    const navigate = useNavigate();
+
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
@@ -92,4 +95,4 @@ function ResetarSenha() {
     );
   }
 
-export default EsqueceuForm;
+export default RedefinirSenhaForm;

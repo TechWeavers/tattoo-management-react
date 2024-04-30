@@ -58,6 +58,7 @@ function Login() {
                                         </form>
                                         <div className="text-center"><a className="small" href="esqueceu-senha">Esqueceu a Senha?</a></div>
                                         <div className="text-center"><a className="small" href="novo-usuario">Cadastrar Novo Usuário</a></div>
+                                        <div className="text-center"><a className="small" href="redefinir-senha">Teste redefinir</a></div>
                                     </div>
                                 </div>
                             </div>
