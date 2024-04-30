@@ -45,7 +45,7 @@ function RedefinirSenhaForm() {
     } catch (error) {
       if (error.response && error.response.data && error.response.data.message) {
         Swal.fire({
-          title: "Opa, senhas diferentes!",
+          title: "Opa, senhas ",
           text: error.response.data.message,
           icon: "error",
           confirmButtonColor: "#FFB800",

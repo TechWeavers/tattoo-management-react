@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./views/Login/Login";
 import LoginSW from "./views/LoginSW/LoginSW";
 import Dashboard from "./views/Dashboard/Dashboard";
@@ -26,8 +26,7 @@ function App() {
 
 function RedefinirSenhaWrapper() {
   const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
-  const token = searchParams.get('token');
+  const { token } = querystring.parse(location.search);
 
   return <RedefinirSenha token={token} />;
 }

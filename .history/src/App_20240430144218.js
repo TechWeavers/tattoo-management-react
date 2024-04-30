@@ -26,8 +26,7 @@ function App() {
 
 function RedefinirSenhaWrapper() {
   const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
-  const token = searchParams.get('token');
+  const { token } = querystring.parse(location.search);
 
   return <RedefinirSenha token={token} />;
 }
