@@ -21,7 +21,7 @@ function EsqueceuForm() {
           })
  
           await axios.post('http://localhost:8002/EsqueceuSenha', {
-            email: [email]
+            email: email
           });
  
           Swal.fire({

@@ -9,7 +9,7 @@ function RedefinirSenhaForm() {
     const [senhaNovamente, setSenhaNovamente] = useState('');
 
     const navigate = useNavigate();
-
+    
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
@@ -23,7 +23,7 @@ function RedefinirSenhaForm() {
             }
           })
 
-          await axios.post('http://localhost:8002/RedefinirSenha', {
+          await axios.put('http://localhost:8002/RedefinirSenha', {
             senha: [senha],
             senhaNovamente: [senhaNovamente]
           });

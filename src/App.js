@@ -16,7 +16,7 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />            
           <Route path="/novo-usuario" element={<CadastroUsuario />} />
           <Route path="/esqueceu-senha" element={<EsqueceuSenha />} />               
-          <Route path="/redefinir-senha" element={<RedefinirSenha />} />               
+          <Route path="/redefinir-senha/:token" element={<RedefinirSenha />} />               
         </Routes>
       </div>
     </BrowserRouter>
