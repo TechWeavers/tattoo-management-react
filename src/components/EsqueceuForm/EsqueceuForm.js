@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './EsqueceuForm.css';
-import Swal from 'sweetalert2'
-
-
+import Swal from 'sweetalert2';
+ 
+ 
 function EsqueceuForm() {
     const [email, setEmail] = useState('');
-  
+ 
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-          
+         
           Swal.fire({
             title: "Aguarde um momento...",
             html: "Estamos enviando o email",
@@ -19,11 +19,11 @@ function EsqueceuForm() {
               Swal.showLoading()
             }
           })
-
-          await axios.post('http://localhost:8002/email', {
+ 
+          await axios.post('http://localhost:8002/EsqueceuSenha', {
             email: [email]
           });
-
+ 
           Swal.fire({
             title: "Enviado com sucesso!",
             text: "Cheque o endereço de email informado",
@@ -42,8 +42,8 @@ function EsqueceuForm() {
           });
         }
     };
-
-  
+ 
+ 
     return (
       <section className="position-relative py-4 py-xl-5">
         <div className="container position-relative">
@@ -67,7 +67,7 @@ function EsqueceuForm() {
                     </div>
                     <div>
                       <button className="btn btn-primary d-block w-100" type="submit">
-                        Recuperar senha
+                        Recuperar senha.
                       </button>
                     </div>
                   </form>
@@ -79,5 +79,5 @@ function EsqueceuForm() {
       </section>
     );
   }
-
+ 
 export default EsqueceuForm;
