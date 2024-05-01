@@ -44,8 +44,8 @@ function NovoUsuarioForm() {
         } catch (error) {
             console.log(error)
             Swal.fire({
-                title: error["detail"],//"Opa, erro ao cadastrar o usuário",
-                text: "Por favor, tente novamente",
+                title: "Opa! Ocorreu um erro!",//"Opa, erro ao cadastrar o usuário",
+                text: error.response.data.detail,
                 icon: "error",
                 confirmButtonColor: "#FFB800",
                 iconColor: "#ffb800"

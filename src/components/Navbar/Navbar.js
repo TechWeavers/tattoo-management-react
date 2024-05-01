@@ -11,12 +11,7 @@ import axios from 'axios';
     const carregarAtributo = async () => {
       try {
 
-        const auth = {
-          headers: {
-            'Authorization': `Bearer ${token}`
-          }
-        };
-          const response = await axios.post('http://localhost:8001/obter-tipo', {},auth);
+          const response = await axios.get(`http://localhost:8000/tipo-usuario/${token}`);
 
           // Extrair o atributo da resposta
           const tipoExtraido = response.data;
@@ -44,8 +39,7 @@ import axios from 'axios';
                 <path d="M6 4.5H1.866a1 1 0 1 0 0 1h2.668A6.517 6.517 0 0 0 1.814 9H2.5c.123 0 .244.015.358.043a5.517 5.517 0 0 1 3.185-3.185A1.503 1.503 0 0 1 6 5.5v-1zm3.957 1.358A1.5 1.5 0 0 0 10 5.5v-1h4.134a1 1 0 1 1 0 1h-2.668a6.517 6.517 0 0 1 2.72 3.5H13.5c-.123 0-.243.015-.358.043a5.517 5.517 0 0 0-3.185-3.185z"></path>
                 </svg>
             </span>
-            <span>InkDash - </span>
-            <span>{tipo}</span>
+            <span>InkDash -          {tipo} </span>
             </a>
             <button className="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navcol-5">
             <span className="visually-hidden">Toggle navigation</span>
