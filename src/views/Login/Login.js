@@ -32,7 +32,7 @@ function Login() {
         } catch (error) {
             if (error.response && error.response.data && error.response.data.message) {
               Swal.fire({
-                title: "Opa, usuário ou senha incorretos!",
+                title: "Usuário ou senha incorretos!",
                 text: error.response.data.message,
                 icon: "error",
                 confirmButtonColor: "#FFB800",
@@ -44,42 +44,62 @@ function Login() {
 
 
     return (
-        <div className="container" style={{ position: 'absolute', left: 0, right: 0, top: '50%', transform: 'translateY(-50%)', msTransform: 'translateY(-50%)', MozTransform: 'translateY(-50%)', WebkitTransform: 'translateY(-50%)', OTransform: 'translateY(-50%)' }}>
-            <div className="row justify-content-center">
-                <div className="col-md-10 col-lg-9 col-xl-9 col-xxl-7">
-                    <div className="card shadow-lg o-hidden border-0 my-5">
-                        <div className="card-body p-0">
-                            <div className="row">
-                                <div className="col-lg-12">
-                                    <div className="p-5">
-                                        <div className="text-center">
-                                            <h4 className="text-dark mb-4">InkDash - Tattoo Management</h4>
-                                        </div>
-                                        <form className="user" onSubmit={handleSubmit}>
-                                            <div className="mb-3">
-                                                <input className="form-control form-control-user" type="text" id="email" placeholder="Nome de Usuário" name="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-                                            </div>
-                                            <div className="mb-3">
-                                                <input className="form-control form-control-user" type="password" placeholder="Password" name="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-                                            </div>
-                                            <div className="row mb-3">
-                                                <p id="errorMsg" className="text-danger" style={{ display: 'none' }}>Paragraph</p>
-                                            </div>
-                                            <button className="btn btn-primary d-block btn-user w-100" id="submitBtn" type="submit">Entrar</button>
-                                            <hr />
-                                        </form>
-                                        <div className="text-center"><a className="small" href="esqueceu-senha">Esqueceu a Senha?</a></div>
-                                        {/*<div className="text-center"><a className="small" href="novo-usuario">Cadastrar Novo Usuário</a></div>*/}
-                                        <div className="text-center"><a className="small" href="redefinir-senha">Teste redefinir</a></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        
+        <section className="position-relative py-4 py-xl-5">
+          <div className="container position-relative ">
+            <div className="row d-flex justify-content-center">
+              <div className="col-md-8 col-lg-6 col-xl-5 col-xxl-4">
+                <div className="card mb-5">
+                  <div className="card-body p-sm-5">
+                    <h2 className="text-center mb-4">InkDash<br></br>Tattoo management</h2>
+                    <form onSubmit={handleSubmit}>
+                      <div className="mb-3">
+                        <input
+                          className="form-control"
+                          type="email"
+                          id="email"
+                          name="email"
+                          placeholder="Email"
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                          required
+                        />
+                      </div>
+                      <div className="mb-3">
+                        <input
+                          className="form-control"
+                          type="password"
+                          id="password"
+                          name="password"
+                          placeholder="password"
+                          value={password}
+                          onChange={(e) => setPassword(e.target.value)}
+                          required
+                        />
+                      </div>
+                      <div>
+                        <button className="btn btn-primary d-block w-100" type="submit">
+                          Entrar
+                        </button>
+                      </div>
+                      <div>
+                        <div className="text-center"><a className="small" href="esqueceu-senha">Esqueceu a Senha?</a></div>
+                            {/*<div className="text-center"><a className="small" href="novo-usuario">Cadastrar Novo Usuário</a></div>*/}
+                        <div className="text-center"><a className="small" href="redefinir-senha">Teste redefinir</a></div>
+                      </div>
+                    </form>
+                  </div>
                 </div>
+              </div>
             </div>
-        </div>
+          </div>
+        </section>
+        
+        
+
     );
+
+
 }
 
 export default Login;

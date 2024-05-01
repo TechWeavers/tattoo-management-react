@@ -71,6 +71,9 @@ function EsqueceuForm() {
                       </button>
                     </div>
                   </form>
+                  <div>
+                    <div className="text-center"><a className="small" href="/">Voltar para o login</a></div>
+                  </div>
                 </div>
               </div>
             </div>
