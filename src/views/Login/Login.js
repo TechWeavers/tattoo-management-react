@@ -20,8 +20,8 @@ function Login() {
 
             // Check if the response was successful
             if (response.status === 200) {
+                
                 // Store token in localStorage
-                console.log(response)
                 localStorage.setItem('token', response.data);
                 // Successful authentication, redirect to /dashboard page
                 navigate('/dashboard');
