@@ -4,11 +4,11 @@ import './NovoUsuarioForm.min.css';
 import Swal from 'sweetalert2'
 
 function NovoUsuarioForm() {
-    const [username, setUsername] = useState('');
+    const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const [role, setRole] = useState('tatuador'); // Default role is 'tatuador'
+    const [role, setRole] = useState('Tatuador'); // Default role is 'tatuador'
 
     const handleRoleChange = (selectedRole) => {
         setRole(selectedRole);
@@ -18,10 +18,11 @@ function NovoUsuarioForm() {
         event.preventDefault();
         try {
             await axios.post('http://localhost:8001/novo-usuario', {
-                username,
+                role,
+                name,
                 email,
                 password,
-                role
+                
             });
 
             Swal.fire({
@@ -31,12 +32,12 @@ function NovoUsuarioForm() {
                 iconColor: "#ffb800"
             });
 
-            setUsername('');
+            setName('');
             setEmail('');
             setPassword('');
         } catch (error) {
             Swal.fire({
-                title: "Opa, erro ao cadastrar o usuário",
+                title: handleSubmit.detail,//"Opa, erro ao cadastrar o usuário",
                 text: "Por favor, tente novamente",
                 icon: "error",
                 confirmButtonColor: "#FFB800",
@@ -61,8 +62,8 @@ function NovoUsuarioForm() {
                       id="username"
                       name="username"
                       placeholder="Nome de Usuário"
-                      value={username}
-                      onChange={(e) => setUsername(e.target.value)}
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
                       required
                     />
                   </div>
@@ -92,15 +93,15 @@ function NovoUsuarioForm() {
                   </div>
                   <div className="mb-3">
                     <button
-                      className={`btn ${role === 'tatuador' ? 'btn-primary' : 'btn-secondary'}`}
-                      onClick={() => handleRoleChange('tatuador')}
+                      className={`btn ${role === 'Tatuador' ? 'btn-primary' : 'btn-secondary'}`}
+                      onClick={() => handleRoleChange('Tatuador')}
                       type="button"
                     >
                       Tatuador
                     </button>
                     <button
-                      className={`btn ${role === 'administrador' ? 'btn-primary' : 'btn-secondary'}`}
-                      onClick={() => handleRoleChange('administrador')}
+                      className={`btn ${role === 'Administrador' ? 'btn-primary' : 'btn-secondary'}`}
+                      onClick={() => handleRoleChange('Administrador')}
                       type="button"
                     >
                       Administrador
