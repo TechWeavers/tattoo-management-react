@@ -47,9 +47,8 @@ import axios from 'axios';
             </button>
             <div className="collapse navbar-collapse" id="navcol-5">
             <ul className="navbar-nav ms-auto">              
-                <li className="nav-item"><a className="nav-link" href="/profile">Perfil</a></li>
+                <li className="nav-item"><a className="nav-link" href="/listar-usuario">Listar Usuário</a></li>
                 <li className="nav-item"><a className="nav-link" href="/novo-usuario">Cadastrar Usuário</a></li>
-                <li className="nav-item"><a className="nav-link" href="/settings">Configurações</a></li>
             </ul>
             <a className="btn btn-primary ms-md-2" role="button" href="/">Sair</a>
             </div>
