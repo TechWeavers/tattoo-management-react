@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Login.css'; 
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 function Login() {
     const [email, setEmail] = useState('');
@@ -13,8 +14,8 @@ function Login() {
 
         try {
             const response = await axios.post('http://127.0.0.1:8000/login', {
-                email: email,
-                password: password,
+                email,
+                password
             });
 
             // Check if the response was successful
