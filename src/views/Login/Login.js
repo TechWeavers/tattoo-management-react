@@ -20,6 +20,9 @@ function Login() {
 
             // Check if the response was successful
             if (response.status === 200) {
+                // Store token in localStorage
+                console.log(response)
+                localStorage.setItem('token', response.data);
                 // Successful authentication, redirect to /dashboard page
                 navigate('/dashboard');
             } else {
@@ -66,7 +69,7 @@ function Login() {
                                             <hr />
                                         </form>
                                         <div className="text-center"><a className="small" href="esqueceu-senha">Esqueceu a Senha?</a></div>
-                                        <div className="text-center"><a className="small" href="novo-usuario">Cadastrar Novo Usuário</a></div>
+                                        {/*<div className="text-center"><a className="small" href="novo-usuario">Cadastrar Novo Usuário</a></div>*/}
                                         <div className="text-center"><a className="small" href="redefinir-senha">Teste redefinir</a></div>
                                     </div>
                                 </div>

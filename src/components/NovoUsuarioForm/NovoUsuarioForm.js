@@ -14,6 +14,13 @@ function NovoUsuarioForm() {
         setTipo(selectedTipo);
     };
 
+    const token = localStorage.getItem('token')
+    console.log(token)
+    const auth = {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    };
     const handleSubmit = async(event) => {
         event.preventDefault();
         try {
@@ -23,7 +30,7 @@ function NovoUsuarioForm() {
                 email,
                 password,
                 
-            });
+            }, auth);
 
             Swal.fire({
                 title: "Usuário cadastrado com sucesso!",
