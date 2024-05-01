@@ -16,7 +16,7 @@ function ListarUsuario() {
         axios.get("http://localhost:8001/listar-usuarios")
             .then(response => setUsers(response.data))
             .catch(err => console.log(err));
-    }, auth);
+    }, [auth]);
 
     return (
         <div className="dashboard-container">
