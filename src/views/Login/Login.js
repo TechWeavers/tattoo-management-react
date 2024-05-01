@@ -13,8 +13,8 @@ function Login() {
 
         try {
             const response = await axios.post('http://127.0.0.1:8000/login', {
-                email,
-                password,
+                email: email,
+                password: password,
             });
 
             // Check if the response was successful
@@ -26,8 +26,16 @@ function Login() {
                 console.error('Error authenticating user');
             }
         } catch (error) {
-        console.error('Error processing request:', error);
-        }
+            if (error.response && error.response.data && error.response.data.message) {
+              Swal.fire({
+                title: "Opa, usuário ou senha incorretos!",
+                text: error.response.data.message,
+                icon: "error",
+                confirmButtonColor: "#FFB800",
+                iconColor: "#ffb800"
+              });
+            } 
+          }
     };
 
 
