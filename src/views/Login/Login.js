@@ -30,10 +30,10 @@ function Login() {
                 console.error('Error authenticating user');
             }
         } catch (error) {
-            if (error.response && error.response.data && error.response.data.message) {
+            if (error/*error.response && error.response.data && error.response.data.message*/) {
               Swal.fire({
-                title: "Usuário ou senha incorretos!",
-                text: error.response.data.message,
+                title: error.response.data.detail,
+                text: "",
                 icon: "error",
                 confirmButtonColor: "#FFB800",
                 iconColor: "#ffb800"
