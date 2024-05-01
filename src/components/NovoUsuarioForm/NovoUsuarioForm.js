@@ -8,17 +8,17 @@ function NovoUsuarioForm() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const [role, setRole] = useState('Tatuador'); // Default role is 'tatuador'
+    const [tipo, setTipo] = useState('Tatuador'); // Default role is 'tatuador'
 
-    const handleRoleChange = (selectedRole) => {
-        setRole(selectedRole);
+    const handleTipoChange = (selectedTipo) => {
+        setTipo(selectedTipo);
     };
 
     const handleSubmit = async(event) => {
         event.preventDefault();
         try {
             await axios.post('http://localhost:8001/novo-usuario', {
-                role,
+                tipo,
                 name,
                 email,
                 password,
@@ -36,8 +36,9 @@ function NovoUsuarioForm() {
             setEmail('');
             setPassword('');
         } catch (error) {
+            console.log(error)
             Swal.fire({
-                title: handleSubmit.detail,//"Opa, erro ao cadastrar o usuário",
+                title: error["detail"],//"Opa, erro ao cadastrar o usuário",
                 text: "Por favor, tente novamente",
                 icon: "error",
                 confirmButtonColor: "#FFB800",
@@ -93,15 +94,15 @@ function NovoUsuarioForm() {
                   </div>
                   <div className="mb-3">
                     <button
-                      className={`btn ${role === 'Tatuador' ? 'btn-primary' : 'btn-secondary'}`}
-                      onClick={() => handleRoleChange('Tatuador')}
+                      className={`btn ${tipo === 'Tatuador' ? 'btn-primary' : 'btn-secondary'}`}
+                      onClick={() => handleTipoChange('Tatuador')}
                       type="button"
                     >
                       Tatuador
                     </button>
                     <button
-                      className={`btn ${role === 'Administrador' ? 'btn-primary' : 'btn-secondary'}`}
-                      onClick={() => handleRoleChange('Administrador')}
+                      className={`btn ${tipo === 'Administrador' ? 'btn-primary' : 'btn-secondary'}`}
+                      onClick={() => handleTipoChange('Administrador')}//
                       type="button"
                     >
                       Administrador
