@@ -5,6 +5,7 @@ import Dashboard from "./views/Dashboard/Dashboard";
 import CadastroUsuario from "./views/CadastroUsuario/CadastroUsuario";
 import EsqueceuSenha from "./views/EsqueceuSenha/EsqueceuSenha";
 import RedefinirSenha from "./views/RedefinirSenha/RedefinirSenha";
+import ListarUsuario from "./views/ListarUsuario/ListarUsuario";
 
 function App() {
   return (
@@ -16,7 +17,8 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />            
           <Route path="/novo-usuario" element={<CadastroUsuario />} />
           <Route path="/esqueceu-senha" element={<EsqueceuSenha />} />               
-          <Route path="/redefinir-senha" element={<RedefinirSenhaWrapper />} />     
+          <Route path="/redefinir-senha" element={<RedefinirSenhaWrapper />} />
+          <Route path="/listar-usuario" element={<ListarUsuario />} />          
         </Routes>
       </div>
     </BrowserRouter>
