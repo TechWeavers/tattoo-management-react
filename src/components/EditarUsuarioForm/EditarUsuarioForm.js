@@ -48,7 +48,7 @@ function EditarUsuarioForm({ user, closeAlert }) {
     } catch (error) {
       Swal.fire({
         title: "Erro ao atualizar usuário",
-        text: error.response,
+        text: error,
         icon: "error",
         confirmButtonColor: "#FFB800",
         iconColor: "#ffb800"
