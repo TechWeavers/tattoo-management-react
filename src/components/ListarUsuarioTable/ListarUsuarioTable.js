@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import Swal from 'sweetalert2-react-content';
+import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import EditarUsuarioForm from "../../components/EditarUsuarioForm/EditarUsuarioForm";
 import { useNavigate } from 'react-router-dom';
@@ -58,7 +58,15 @@ function ListarUsuarioTable() {
             })
             .catch(err => {
                 console.log(err);
-                setEditingUserId(null);
+                console.log(err);
+                Swal.fire({
+                    title: "Erro ao atualizar usuário",
+                    text: err.response.data.detail,
+                    icon: "error",
+                    confirmButtonColor: "#FFB800",
+                    iconColor: "#ffb800"
+                });
+                //setUsers([]);
             });
     };
 
@@ -96,7 +104,14 @@ function ListarUsuarioTable() {
             })
             .catch(err => {
                 console.log(err);
-                setUsers([]);
+                Swal.fire({
+                    title: "Erro ao atualizar usuário",
+                    text: err.response.data.detail,
+                    icon: "error",
+                    confirmButtonColor: "#FFB800",
+                    iconColor: "#ffb800"
+                });
+                //setUsers([]);
             });
     };
 
@@ -120,7 +135,7 @@ function ListarUsuarioTable() {
                     <div className="card">
                         <div className="card-body">
                             <div className="row justify-content-center mb-4">
-                                <div className="col-md-6">
+                                <div className="col-md-6 central">
                                     <div className="input-group">
                                         <input
                                             type="text"
@@ -137,6 +152,8 @@ function ListarUsuarioTable() {
                                             Buscar
                                         </button>
                                     </div>
+                                    <br />
+                                    <button className="btn  bt-cadastrar botao" type="button"><a href="/novo-usuario">Cadastrar novo usuário</a></button>
                                 </div>
                             </div>
                             <div className="table-responsive" style={{ maxHeight: '400px' }}>
