@@ -3,8 +3,7 @@ import './Sidebar.min.css';
 
 function Sidebar() {
   return (
-    <div className="container-fluid">
-            <div className="row">
+            <div className="row me-0">
                 <div id="sidebar" className="col-sm-auto sticky-top">
                     <div id="itensSidebar" className="d-flex flex-sm-column flex-row flex-nowrap align-items-center sticky-top">
                         <a href="/" className="d-block p-3 link-dark text-decoration-none" title="" data-bs-toggle="tooltip"
@@ -33,7 +32,7 @@ function Sidebar() {
                                 <p className="fw-light text-center fs-6 text-light">Agendamentos</p>
                             </li>
                             <li>
-                                <a href="/" className="nav-link py-1 px-2" title="" data-bs-toggle="tooltip"
+                                <a href="/listar-usuario" className="nav-link py-1 px-2" title="" data-bs-toggle="tooltip"
                                     data-bs-placement="right" data-bs-original-title="Orders">
                                     <i className="bi bi-person-circle h4 text-light"></i>
                                     <p className="fw-light text-center fs-6 text-light">Usuarios</p>
@@ -58,8 +57,6 @@ function Sidebar() {
                     
                 </div>
             </div>
-        </div>
-
     );
 }
 

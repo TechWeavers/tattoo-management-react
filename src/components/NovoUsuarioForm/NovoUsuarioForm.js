@@ -53,6 +53,7 @@ function NovoUsuarioForm() {
         }
     };
 
+    if (token){
     return ( 
         <section className="position-relative py-4 py-xl-5">
       <div className="container position-relative">
@@ -100,7 +101,7 @@ function NovoUsuarioForm() {
                   </div>
                   <div className="mb-3">
                     <button
-                      className={`btn ${tipo === 'Tatuador' ? 'btn-primary' : 'btn-secondary'}`}
+                      className={`btn ${tipo === 'Tatuador' ? 'btn-primary' : 'btn-secondary'} `}
                       onClick={() => handleTipoChange('Tatuador')}
                       type="button"
                     >
@@ -127,6 +128,13 @@ function NovoUsuarioForm() {
       </div>
     </section>
     );
+  }else{
+    return(
+      <>
+        <h1>Usuário não autenticado</h1>
+      </>
+    )
+  }
 }
 
 export default NovoUsuarioForm;
