@@ -27,7 +27,7 @@ function EditarUsuarioForm({ user, closeAlert }) {
         }
       };
 
-      await axios.patch(`http://localhost:8001/atualizar-usuario`, {
+      const response = await axios.patch(`http://localhost:8001/atualizar-usuario`, {
         name: name,
         email: email,
         tipo: tipo,
@@ -48,7 +48,7 @@ function EditarUsuarioForm({ user, closeAlert }) {
     } catch (error) {
       Swal.fire({
         title: "Erro ao atualizar usuário",
-        text: error,
+        text: error.response,
         icon: "error",
         confirmButtonColor: "#FFB800",
         iconColor: "#ffb800"

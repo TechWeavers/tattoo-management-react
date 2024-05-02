@@ -71,7 +71,7 @@ function ListarUsuarioTable() {
     };
 
     const handleSubmit = (editedUserData) => {
-        axios.patch(`http://localhost:8001/atualizar-usuario`, editedUserData, auth)
+        axios.patch(`http://localhost:8001/atualizar-usuario`, {editedUserData}, auth)
             .then(() => {
                 Swal.fire({
                     title: "Atualizado com sucesso!",
@@ -86,7 +86,7 @@ function ListarUsuarioTable() {
             .catch(err => {
                 console.log(err);
                 Swal.fire({
-                    title: "Erro ao atualizar usuário",
+                    title: "Erro em atualizar usuário",
                     text: err.response.data.detail,
                     icon: "error",
                     confirmButtonColor: "#FFB800",
@@ -127,15 +127,17 @@ function ListarUsuarioTable() {
     };
 
     return (
-        <div className="container py-4">
-            <h2 className="text-center mb-4">Listar Usuários</h2>
+        
+        
             
+        <div className="col-sm p-3 min-vh-100 ms-auto">
             <div className="row justify-content-center">
                 <div className="col-md-8">
                     <div className="card">
                         <div className="card-body">
                             <div className="row justify-content-center mb-4">
                                 <div className="col-md-6 central">
+                                <h2 className="text-center mb-4">Listar Usuários</h2>
                                     <div className="input-group">
                                         <input
                                             type="text"
@@ -196,6 +198,7 @@ function ListarUsuarioTable() {
                 </div>
             </div>
         </div>
+        
     );
 }
 
