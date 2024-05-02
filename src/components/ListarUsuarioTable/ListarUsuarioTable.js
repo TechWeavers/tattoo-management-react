@@ -127,7 +127,7 @@ function ListarUsuarioTable() {
     };
 
     return (
-       <div className="col-sm p-3 min-vh-100 ms-auto">
+       <div className="col-sm-10 p-3 min-vh-100 ms-auto">
             <div className="row justify-content-center">
                 <div className="col-md-8">
                     <div className="card">
@@ -171,7 +171,7 @@ function ListarUsuarioTable() {
                                                 <td>{user.name}</td>
                                                 <td>{user.email}</td>
                                                 <td>{user.tipo}</td>
-                                                <td className="text-center">
+                                                <td className="text-center d-flex">
                                                     <button 
                                                         className="btn btn-primary mr-2 botao" 
                                                         onClick={() => handleEdit(user.email)}
