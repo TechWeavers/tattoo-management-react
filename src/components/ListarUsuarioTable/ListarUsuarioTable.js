@@ -112,15 +112,14 @@ function ListarUsuarioTable() {
     };
 
     return (
-        <div className="container py-4">
-            <h2 className="text-center mb-4">Listar Usuários</h2>
-            
+       <div className="col-sm p-3 min-vh-100 ms-auto">
             <div className="row justify-content-center">
                 <div className="col-md-8">
                     <div className="card">
                         <div className="card-body">
                             <div className="row justify-content-center mb-4">
                                 <div className="col-md-6">
+                                    <h2 className="text-center mb-4">Listar Usuários</h2>
                                     <div className="input-group">
                                         <input
                                             type="text"
@@ -179,6 +178,7 @@ function ListarUsuarioTable() {
                 </div>
             </div>
         </div>
+        
     );
 }
 
