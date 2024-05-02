@@ -1,7 +1,34 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './Navbar.min.css'; 
+import axios from 'axios';
 
-function Navbar() {
+ function Navbar() {
+  const [tipo, setTipo] = useState('')
+
+  useEffect(()=>{
+    const token = localStorage.getItem('token')
+    
+    const carregarAtributo = async () => {
+      try {
+
+          const response = await axios.get(`http://localhost:8000/tipo-usuario/${token}`);
+
+          // Extrair o atributo da resposta
+          const tipoExtraido = response.data;
+
+          // Atualizar o estado com o atributo extraído
+          setTipo(tipoExtraido);
+      } catch (error) {
+          console.error('Erro ao carregar atributo:', error);
+      }
+  };
+
+  carregarAtributo();
+  },[]);
+// Executa apenas uma vez, quando o componente é montado
+
+
+
   return (
     <nav className="navbar navbar-expand-md bg-dark py-3" data-bs-theme="dark">
         <div className="container">
@@ -12,17 +39,16 @@ function Navbar() {
                 <path d="M6 4.5H1.866a1 1 0 1 0 0 1h2.668A6.517 6.517 0 0 0 1.814 9H2.5c.123 0 .244.015.358.043a5.517 5.517 0 0 1 3.185-3.185A1.503 1.503 0 0 1 6 5.5v-1zm3.957 1.358A1.5 1.5 0 0 0 10 5.5v-1h4.134a1 1 0 1 1 0 1h-2.668a6.517 6.517 0 0 1 2.72 3.5H13.5c-.123 0-.243.015-.358.043a5.517 5.517 0 0 0-3.185-3.185z"></path>
                 </svg>
             </span>
-            <span>InkDash</span>
+            <span>InkDash -          {tipo} </span>
             </a>
             <button className="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navcol-5">
             <span className="visually-hidden">Toggle navigation</span>
             <span className="navbar-toggler-icon"></span>
             </button>
             <div className="collapse navbar-collapse" id="navcol-5">
-            <ul className="navbar-nav ms-auto">                
-                <li className="nav-item"><a className="nav-link" href="/profile">Perfil</a></li>
+            <ul className="navbar-nav ms-auto">              
+                <li className="nav-item"><a className="nav-link" href="/listar-usuario">Listar Usuário</a></li>
                 <li className="nav-item"><a className="nav-link" href="/novo-usuario">Cadastrar Usuário</a></li>
-                <li className="nav-item"><a className="nav-link" href="/settings">Configurações</a></li>
             </ul>
             <a className="btn btn-primary ms-md-2" role="button" href="/">Sair</a>
             </div>
@@ -31,5 +57,6 @@ function Navbar() {
 
   );
 }
+
 
 export default Navbar;

@@ -4,25 +4,32 @@ import './NovoUsuarioForm.min.css';
 import Swal from 'sweetalert2'
 
 function NovoUsuarioForm() {
-    const [username, setUsername] = useState('');
+    const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const [role, setRole] = useState('tatuador'); // Default role is 'tatuador'
+    const [tipo, setTipo] = useState('Tatuador'); // Default role is 'tatuador'
 
-    const handleRoleChange = (selectedRole) => {
-        setRole(selectedRole);
+    const handleTipoChange = (selectedTipo) => {
+        setTipo(selectedTipo);
     };
 
+    const token = localStorage.getItem('token')
+    const auth = {
+      headers: {
+        'Authorization': `Bearer ${token}`
+      }
+    };
     const handleSubmit = async(event) => {
         event.preventDefault();
         try {
             await axios.post('http://localhost:8001/novo-usuario', {
-                username,
+                tipo,
+                name,
                 email,
                 password,
-                role
-            });
+                
+            }, auth);
 
             Swal.fire({
                 title: "Usuário cadastrado com sucesso!",
@@ -31,13 +38,14 @@ function NovoUsuarioForm() {
                 iconColor: "#ffb800"
             });
 
-            setUsername('');
+            setName('');
             setEmail('');
             setPassword('');
         } catch (error) {
+            console.log(error)
             Swal.fire({
-                title: "Opa, erro ao cadastrar o usuário",
-                text: "Por favor, tente novamente",
+                title: "Opa! Ocorreu um erro!",//"Opa, erro ao cadastrar o usuário",
+                text: error.response.data.detail,
                 icon: "error",
                 confirmButtonColor: "#FFB800",
                 iconColor: "#ffb800"
@@ -61,8 +69,8 @@ function NovoUsuarioForm() {
                       id="username"
                       name="username"
                       placeholder="Nome de Usuário"
-                      value={username}
-                      onChange={(e) => setUsername(e.target.value)}
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
                       required
                     />
                   </div>
@@ -92,15 +100,15 @@ function NovoUsuarioForm() {
                   </div>
                   <div className="mb-3">
                     <button
-                      className={`btn ${role === 'tatuador' ? 'btn-primary' : 'btn-secondary'}`}
-                      onClick={() => handleRoleChange('tatuador')}
+                      className={`btn ${tipo === 'Tatuador' ? 'btn-primary' : 'btn-secondary'}`}
+                      onClick={() => handleTipoChange('Tatuador')}
                       type="button"
                     >
                       Tatuador
                     </button>
                     <button
-                      className={`btn ${role === 'administrador' ? 'btn-primary' : 'btn-secondary'}`}
-                      onClick={() => handleRoleChange('administrador')}
+                      className={`btn ${tipo === 'Administrador' ? 'btn-primary' : 'btn-secondary'}`}
+                      onClick={() => handleTipoChange('Administrador')}//
                       type="button"
                     >
                       Administrador
