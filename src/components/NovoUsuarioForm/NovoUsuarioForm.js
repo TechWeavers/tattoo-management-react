@@ -101,7 +101,7 @@ function NovoUsuarioForm() {
                   </div>
                   <div className="mb-3">
                     <button
-                      className={`btn ${tipo === 'Tatuador' ? 'btn-primary' : 'btn-secondary'}`}
+                      className={`btn ${tipo === 'Tatuador' ? 'btn-primary' : 'btn-secondary'} `}
                       onClick={() => handleTipoChange('Tatuador')}
                       type="button"
                     >
