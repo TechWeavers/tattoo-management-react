@@ -6,7 +6,7 @@ import CadastroUsuario from "./views/CadastroUsuario/CadastroUsuario";
 import EsqueceuSenha from "./views/EsqueceuSenha/EsqueceuSenha";
 import RedefinirSenha from "./views/RedefinirSenha/RedefinirSenha";
 import ListarUsuario from "./views/ListarUsuario/ListarUsuario";
-import EditarUsuarioForm from "./components/EditarUsuarioForm/EditarUsuarioForm";
+
 
 function App() {
   return (
