@@ -3,8 +3,8 @@ import './Sidebar.min.css';
 
 function Sidebar() {
   return (
-            <div className="row me-0">
-                <div id="sidebar" className="col-sm-auto sticky-top">
+            
+                <div id="sidebar" className="col-sm-2 sticky-top">
                     <div id="itensSidebar" className="d-flex flex-sm-column flex-row flex-nowrap align-items-center sticky-top">
                         <a href="/" className="d-block p-3 link-dark text-decoration-none" title="" data-bs-toggle="tooltip"
                             data-bs-placement="right" data-bs-original-title="Icon-only">
@@ -56,7 +56,7 @@ function Sidebar() {
                     </div>
                     
                 </div>
-            </div>
+            
     );
 }
 
