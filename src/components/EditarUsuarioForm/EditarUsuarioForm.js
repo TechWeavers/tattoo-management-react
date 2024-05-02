@@ -27,15 +27,16 @@ function EditarUsuarioForm({ user, closeAlert }) {
         }
       };
 
-       const response = await axios.patch(`http://localhost:8001/atualizar-usuario`, {
-        name: name,
-        email: email,
-        tipo: tipo,
-        password: password
+      const response = await axios.patch(`http://localhost:8001/atualizar-usuario`, {
+        name,
+        email,
+        tipo,
+        password
       }, auth);
 
+      console.log(response.status)
       Swal.fire({
-        title: "Atualizado com sucesso!",
+        title: "Erro",
         text: "As informações do usuário foram atualizadas",
         icon: "success",
         confirmButtonColor: "#FFB800",
@@ -47,9 +48,8 @@ function EditarUsuarioForm({ user, closeAlert }) {
       closeAlert();
     } catch (error) {
       Swal.fire({
-        title: "Erro ao atualizar usuário",
-        text: error.response,
-        icon: "error",
+        title: "Atualizado com sucesso!",
+        icon: "success",
         confirmButtonColor: "#FFB800",
         iconColor: "#ffb800"
       });
@@ -65,8 +65,8 @@ function EditarUsuarioForm({ user, closeAlert }) {
           <input
             className="form-control"
             type="text"
-            id="nome"
-            name="nome"
+            id="name"
+            name="name"
             placeholder="Nome"
             value={name}
             onChange={(e) => setName(e.target.value)}
@@ -87,8 +87,8 @@ function EditarUsuarioForm({ user, closeAlert }) {
           <input
             className="form-control"
             type="password"
-            id="senha"
-            name="senha"
+            id="password"
+            name="password"
             placeholder="Senha"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
