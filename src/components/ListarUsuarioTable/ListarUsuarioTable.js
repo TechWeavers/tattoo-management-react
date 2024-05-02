@@ -71,7 +71,7 @@ function ListarUsuarioTable() {
     };
 
     const handleSubmit = (editedUserData) => {
-        axios.patch(`http://localhost:8001/atualizar-usuario`, editedUserData, auth)
+        axios.patch(`http://localhost:8001/atualizar-usuario`, {editedUserData}, auth)
             .then(() => {
                 Swal.fire({
                     title: "Atualizado com sucesso!",
@@ -86,7 +86,7 @@ function ListarUsuarioTable() {
             .catch(err => {
                 console.log(err);
                 Swal.fire({
-                    title: "Erro ao atualizar usuário",
+                    title: "Erro em atualizar usuário",
                     text: err.response.data.detail,
                     icon: "error",
                     confirmButtonColor: "#FFB800",

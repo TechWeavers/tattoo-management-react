@@ -27,7 +27,7 @@ function EditarUsuarioForm({ user, closeAlert }) {
         }
       };
 
-      await axios.patch(`http://localhost:8001/atualizar-usuario`, {
+      const response = await axios.patch(`http://localhost:8001/atualizar-usuario`, {
         name: name,
         email: email,
         tipo: tipo,
