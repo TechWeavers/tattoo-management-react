@@ -87,7 +87,7 @@ function ListarUsuarioTable() {
                 console.log(err);
                 Swal.fire({
                     title: "Erro ao atualizar usuário",
-                    text: "Por favor, tente novamente",
+                    text: err.response.data.detail,
                     icon: "error",
                     confirmButtonColor: "#FFB800",
                     iconColor: "#ffb800"
