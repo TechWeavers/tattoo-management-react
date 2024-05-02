@@ -43,7 +43,7 @@ function ListarUsuarioTable() {
         axios.get(`http://localhost:8001/buscar-usuario/${userEmail}`,auth)
             .then(response => {
                 //setEditingUser(response.data);
-                navigate('/EditarUsuarioForm');
+                //navigate('/EditarUsuarioForm');
                 MySwal.fire({
                     html: <EditarUsuarioForm user={response.data} handleSubmit={handleSubmit} />,
                     customClass: {

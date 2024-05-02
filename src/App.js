@@ -15,8 +15,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Login />} />            
           <Route path="/sw" element={<LoginSW />} />            
-          <Route path="/dashboard" element={<Dashboard />} />    
-          <Route path="/EditarUsuarioForm" element={<Dashboard />} />         
+          <Route path="/dashboard" element={<Dashboard />} />             
           <Route path="/novo-usuario" element={<CadastroUsuario />} />
           <Route path="/esqueceu-senha" element={<EsqueceuSenha />} />               
           <Route path="/redefinir-senha" element={<RedefinirSenhaWrapper />} />
