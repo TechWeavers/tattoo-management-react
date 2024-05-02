@@ -45,11 +45,11 @@ function Login() {
 
     return (
         
-        <section className="position-relative py-4 py-xl-5">
+        <section className="position-relative py-4 py-xl-5" >
           <div className="container position-relative ">
             <div className="row d-flex justify-content-center">
               <div className="col-md-8 col-lg-6 col-xl-5 col-xxl-4">
-                <div className="card mb-5">
+                <div className="card mb-5 login">
                   <div className="card-body p-sm-5">
                     <h2 className="text-center mb-4">InkDash<br></br>Tattoo management</h2>
                     <form onSubmit={handleSubmit}>
@@ -84,9 +84,6 @@ function Login() {
                       </div>
                       <div>
                         <div className="text-center"><a className="small" href="esqueceu-senha">Esqueceu a Senha?</a></div>
-                            {/*<div className="text-center"><a className="small" href="novo-usuario">Cadastrar Novo Usuário</a></div>*/}
-                        <div className="text-center"><a className="small" href="redefinir-senha">Teste redefinir</a></div>
-                        <div className="text-center"><a className="small" href="listar-usuario">Teste redefinir</a></div>
                       </div>
                     </form>
                   </div>

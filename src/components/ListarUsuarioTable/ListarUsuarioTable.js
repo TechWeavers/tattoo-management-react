@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import Swal from 'sweetalert2';
+import Swal from 'sweetalert2-react-content';
 import withReactContent from 'sweetalert2-react-content';
 import EditarUsuarioForm from "../../components/EditarUsuarioForm/EditarUsuarioForm";
+import { useNavigate } from 'react-router-dom';
+import './ListarUsuarioTable.css'
 
 const MySwal = withReactContent(Swal);
 
@@ -11,6 +13,7 @@ function ListarUsuarioTable() {
     const [searchTerm, setSearchTerm] = useState("");
     const [editingUserId, setEditingUserId] = useState(null); // Estado para armazenar o ID do usuário que está sendo editado
     const [editingUser, setEditingUser] = useState(null); // Estado para armazenar os dados do usuário que está sendo editado
+    const navigate = useNavigate(); // Get the useNavigate hook
     const token = localStorage.getItem('token');
     const auth = {
         headers: {
@@ -34,12 +37,13 @@ function ListarUsuarioTable() {
             .catch(err => console.log(err));
     };
 
-    const handleEdit = (userId) => {
+    const handleEdit = (userEmail) => {
         // Abre o alerta com o formulário de edição
-        setEditingUserId(userId);
-        axios.get(`http://localhost:8001/buscar-usuario/${userId}`, auth)
+        //setEditingUserId(userEmail);
+        axios.get(`http://localhost:8001/buscar-usuario/${userEmail}`,auth)
             .then(response => {
-                setEditingUser(response.data);
+                //setEditingUser(response.data);
+                navigate('/EditarUsuarioForm');
                 MySwal.fire({
                     html: <EditarUsuarioForm user={response.data} handleSubmit={handleSubmit} />,
                     customClass: {
@@ -59,7 +63,7 @@ function ListarUsuarioTable() {
     };
 
     const handleSubmit = (editedUserData) => {
-        axios.patch(`http://localhost:8001/atualizar-usuario/${editingUserId}`, editedUserData, auth)
+        axios.patch(`http://localhost:8001/atualizar-usuario`, editedUserData, auth)
             .then(() => {
                 Swal.fire({
                     title: "Atualizado com sucesso!",
@@ -126,7 +130,7 @@ function ListarUsuarioTable() {
                                             onChange={(e) => setSearchTerm(e.target.value)}
                                         />
                                         <button 
-                                            className="btn btn-primary" 
+                                            className="btn btn-primary botao" 
                                             type="button"
                                             onClick={handleSearch}
                                         >
@@ -153,13 +157,13 @@ function ListarUsuarioTable() {
                                                 <td>{user.tipo}</td>
                                                 <td className="text-center">
                                                     <button 
-                                                        className="btn btn-primary mr-2" 
-                                                        onClick={() => handleEdit(user._id)}
+                                                        className="btn btn-primary mr-2 botao" 
+                                                        onClick={() => handleEdit(user.email)}
                                                     >
                                                         Editar
                                                     </button>
                                                     <button 
-                                                        className="btn btn-danger" 
+                                                        className="btn btn-danger botao" 
                                                         onClick={() => handleDelete(user)}
                                                     >
                                                         Deletar

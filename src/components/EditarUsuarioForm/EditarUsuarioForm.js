@@ -3,10 +3,10 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 
 function EditarUsuarioForm({ user, closeAlert }) {
-  const [nome, setNome] = useState(user.nome);
+  const [name, setName] = useState(user.name);
   const [email, setEmail] = useState(user.email);
   const [tipo, setTipo] = useState(user.tipo);
-  const [senha, setSenha] = useState('');
+  const [password, setPassword] = useState('');
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -20,12 +20,19 @@ function EditarUsuarioForm({ user, closeAlert }) {
         }
       });
 
-      await axios.put(`http://localhost:8002/atualizar-usuario/${user._id}`, {
-        nome: nome,
+      const token = localStorage.getItem('token');
+      const auth = {
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+      };
+
+      await axios.patch(`http://localhost:8001/atualizar-usuario`, {
+        name: name,
         email: email,
         tipo: tipo,
-        senha: senha
-      });
+        password: password
+      }, auth);
 
       Swal.fire({
         title: "Atualizado com sucesso!",
@@ -35,7 +42,7 @@ function EditarUsuarioForm({ user, closeAlert }) {
         iconColor: "#ffb800"
       });
       // Limpar os campos após o envio bem-sucedido
-      setSenha('');
+      setPassword('');
       // Fechar o alerta após a conclusão do envio bem-sucedido
       closeAlert();
     } catch (error) {
@@ -61,8 +68,8 @@ function EditarUsuarioForm({ user, closeAlert }) {
             id="nome"
             name="nome"
             placeholder="Nome"
-            value={nome}
-            onChange={(e) => setNome(e.target.value)}
+            value={name}
+            onChange={(e) => setName(e.target.value)}
           />
         </div>
         <div className="mb-3">
@@ -83,8 +90,8 @@ function EditarUsuarioForm({ user, closeAlert }) {
             id="senha"
             name="senha"
             placeholder="Senha"
-            value={senha}
-            onChange={(e) => setSenha(e.target.value)}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
         </div>
         <div className="mb-3">
