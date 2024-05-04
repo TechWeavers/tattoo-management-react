@@ -11,8 +11,8 @@ const MySwal = withReactContent(Swal);
 function ListarUsuarioTable() {
     const [users, setUsers] = useState([]);
     const [searchTerm, setSearchTerm] = useState("");
-    const [editingUserId, setEditingUserId] = useState(null); // Estado para armazenar o ID do usuário que está sendo editado
-    const [editingUser, setEditingUser] = useState(null); // Estado para armazenar os dados do usuário que está sendo editado
+    const [userEmailAtual, setUserEmailAtual] = useState("");
+
     const navigate = useNavigate(); // Get the useNavigate hook
     const token = localStorage.getItem('token');
     const auth = {
@@ -38,14 +38,11 @@ function ListarUsuarioTable() {
     };
 
     const handleEdit = (userEmail) => {
-        // Abre o alerta com o formulário de edição
-        //setEditingUserId(userEmail);
-        axios.get(`http://localhost:8001/buscar-usuario/${userEmail}`,auth)
+        setUserEmailAtual(userEmail); // Atualize o estado diretamente aqui
+        axios.get(`http://localhost:8001/buscar-usuario/${userEmail}`, auth)
             .then(response => {
-                //setEditingUser(response.data);
-                //navigate('/EditarUsuarioForm');
                 MySwal.fire({
-                    html: <EditarUsuarioForm user={response.data} handleSubmit={handleSubmit} />,
+                    html: <EditarUsuarioForm user={response.data} handleSubmit={handleSubmit} userEmailAtual={userEmail} />, // Use userEmail diretamente aqui
                     customClass: {
                         container: 'my-swal-container',
                         popup: 'my-swal-popup',
@@ -53,11 +50,10 @@ function ListarUsuarioTable() {
                         confirmButton: 'btn btn-primary',
                         cancelButton: 'btn btn-secondary'
                     },
-                    showConfirmButton: false // Remover o botão "OK"
+                    showConfirmButton: false // Remove the "OK" button
                 });
             })
             .catch(err => {
-                console.log(err);
                 console.log(err);
                 Swal.fire({
                     title: "Erro ao atualizar usuário",
@@ -66,12 +62,12 @@ function ListarUsuarioTable() {
                     confirmButtonColor: "#FFB800",
                     iconColor: "#ffb800"
                 });
-                //setUsers([]);
             });
     };
+    
 
     const handleSubmit = (editedUserData) => {
-        axios.patch(`http://localhost:8001/atualizar-usuario`, {editedUserData}, auth)
+        axios.patch(`http://localhost:8001/atualizar-usuario/${userEmailAtual}`, editedUserData , auth)
             .then(() => {
                 Swal.fire({
                     title: "Atualizado com sucesso!",
@@ -81,6 +77,7 @@ function ListarUsuarioTable() {
                     iconColor: "#ffb800"
                 });
                 fetchUsers();
+                setUserEmailAtual("");
                 MySwal.close();
             })
             .catch(err => {
@@ -96,10 +93,9 @@ function ListarUsuarioTable() {
     };
 
     const handleDelete = (user) => {
-        const userEmail = user.email; // Extrair o e-mail do usuário
+        const userEmail = user.email;
         axios.delete(`http://localhost:8001/deletar-usuario/${userEmail}`, auth)
             .then(() => {
-                // Após a exclusão bem-sucedida, buscar a lista atualizada de usuários
                 fetchUsers();
             })
             .catch(err => {
@@ -111,7 +107,6 @@ function ListarUsuarioTable() {
                     confirmButtonColor: "#FFB800",
                     iconColor: "#ffb800"
                 });
-                //setUsers([]);
             });
     };
 
@@ -195,7 +190,6 @@ function ListarUsuarioTable() {
                 </div>
             </div>
         </div>
-        
     );
 }
 

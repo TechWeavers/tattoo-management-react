@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 
-function EditarUsuarioForm({ user, closeAlert }) {
-  const [name, setName] = useState(user.name);
-  const [email, setEmail] = useState(user.email);
-  const [tipo, setTipo] = useState(user.tipo);
-  const [password, setPassword] = useState('');
+function EditarUsuarioForm({ user, closeAlert, userEmailAtual }) {
+  const [name, setName] = useState(user.name ?? "");
+  const [email, setEmail] = useState(user.email ?? "");
+  const [tipo, setTipo] = useState(user.tipo ?? "");
+  const [password, setPassword] = useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -23,16 +23,12 @@ function EditarUsuarioForm({ user, closeAlert }) {
       const token = localStorage.getItem('token');
       const auth = {
         headers: {
-            'Authorization': `Bearer ${token}`
+          'Authorization': `Bearer ${token}`
         }
       };
 
-      const response = await axios.patch(`http://localhost:8001/atualizar-usuario`, {
-        name,
-        email,
-        tipo,
-        password
-      }, auth);
+      const editedUserData = { name, email, tipo, password};
+      const response = await axios.patch(`http://localhost:8001/atualizar-usuario/${userEmailAtual}`, editedUserData, auth);
 
       Swal.fire({
         title: "Atualizado com sucesso!",
@@ -43,7 +39,6 @@ function EditarUsuarioForm({ user, closeAlert }) {
       }).then(() => {
         window.location.reload();
       });
-
 
     } catch (error) {
       console.log(error)
@@ -82,17 +77,6 @@ function EditarUsuarioForm({ user, closeAlert }) {
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
-        <div className="mb-3">
-          <input
-            className="form-control"
-            type="password"
-            id="password"
-            name="password"
-            placeholder="Senha"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
           />
         </div>
         <div className="mb-3">
