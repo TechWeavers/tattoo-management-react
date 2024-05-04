@@ -13,11 +13,11 @@ function NovoUsuarioForm() {
   };
 
   const token = localStorage.getItem('token');
-    const auth = {
-        headers: {
-            'Authorization': `Bearer ${token}`
-        }
-    };
+  const auth = {
+    headers: {
+      'Authorization': `Bearer ${token}`
+    }
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -52,76 +52,80 @@ function NovoUsuarioForm() {
   };
 
   return (
-    <div className="container py-4">
+    <div className="col-sm-10 p-3 min-vh-100 ms-auto">
       <div className="row justify-content-center">
-        <div className="col-md-6">
+        <div className="col-md-8">
           <div className="card">
             <div className="card-body">
-              <h2 className="text-center mb-4">Cadastro de Usuário</h2>
-              <form onSubmit={handleSubmit}>
-                <div className="mb-3">
-                  <input
-                    className="form-control"
-                    type="text"
-                    id="username"
-                    name="username"
-                    placeholder="Nome de Usuário"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    required
-                  />
+              <div className="row justify-content-center mb-4">
+                <div className="col-md-6">
+                      <h2 className="text-center mb-4">Cadastro de Usuário</h2>
+                      <form onSubmit={handleSubmit}>
+                        <div className="mb-3">
+                          <input
+                            className="form-control"
+                            type="text"
+                            id="username"
+                            name="username"
+                            placeholder="Nome de Usuário"
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                            required
+                          />
+                        </div>
+                        <div className="mb-3">
+                          <input
+                            className="form-control"
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="Email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                          />
+                        </div>
+                        <div className="mb-3">
+                          <input
+                            className="form-control"
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="Senha"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                          />
+                        </div>
+                        <div className="mb-3">
+                          <button
+                            className={`btn ${tipo === 'Tatuador' ? 'btn-primary' : 'btn-secondary'}`}
+                            onClick={() => handleTipoChange('Tatuador')}
+                            type="button"
+                          >
+                            Tatuador
+                          </button>
+                          <button
+                            className={`btn ${tipo === 'Administrador' ? 'btn-primary' : 'btn-secondary'}`}
+                            onClick={() => handleTipoChange('Administrador')}
+                            type="button"
+                          >
+                            Administrador
+                          </button>
+                        </div>
+                        <div>
+                          <button className="btn btn-primary d-block w-100" type="submit">
+                            Cadastrar
+                          </button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
                 </div>
-                <div className="mb-3">
-                  <input
-                    className="form-control"
-                    type="email"
-                    id="email"
-                    name="email"
-                    placeholder="Email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                  />
-                </div>
-                <div className="mb-3">
-                  <input
-                    className="form-control"
-                    type="password"
-                    id="password"
-                    name="password"
-                    placeholder="Senha"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                  />
-                </div>
-                <div className="mb-3">
-                  <button
-                    className={`btn ${tipo === 'Tatuador' ? 'btn-primary' : 'btn-secondary'}`}
-                    onClick={() => handleTipoChange('Tatuador')}
-                    type="button"
-                  >
-                    Tatuador
-                  </button>
-                  <button
-                    className={`btn ${tipo === 'Administrador' ? 'btn-primary' : 'btn-secondary'}`}
-                    onClick={() => handleTipoChange('Administrador')}
-                    type="button"
-                  >
-                    Administrador
-                  </button>
-                </div>
-                <div>
-                  <button className="btn btn-primary d-block w-100" type="submit">
-                    Cadastrar
-                  </button>
-                </div>
-              </form>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
   );
 }
 

@@ -6,11 +6,11 @@ function ListarUsuario() {
     return (
         <>
         <Navbar></Navbar>
-        <div class="container my-0 mx-0">
-        <div class="row">
+        
+        <div class="row ">
         <Sidebar></Sidebar>
         <ListarUsuarioTable></ListarUsuarioTable>
-        </div></div>
+        </div>
         </>
       );
 }

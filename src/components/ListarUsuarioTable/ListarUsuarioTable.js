@@ -142,24 +142,24 @@ function ListarUsuarioTable() {
     };
 
     return (
-       <div className="col-sm-10 p-3 min-vh-100 ms-auto">
-            <div className="row justify-content-center">
-                <div className="col-md-8">
-                    <div className="card">
-                        <div className="card-body">
-                            <div className="row justify-content-center mb-4">
-                                <div className="col-md-6">
+       <div className="col-lg-10 p-3 min-vh-100 ms-auto">
+            <div className="row justify-content-center  ">
+                <div className="col-lg  ">
+                    <div className="card bg-white border border-warning border-3 rounded-3 bg-opacity-25">
+                        <div className="card-body ">
+                            <div className="row justify-content-center mb-4 ">
+                                <div className="col-md-6  ">
                                     <h2 className="text-center mb-4">Listar Usuários</h2>
                                     <div className="input-group">
                                         <input
                                             type="text"
-                                            className="form-control"
+                                            className="form-control bg-transparent border-warning border-3"
                                             placeholder="Buscar usuários por email"
                                             value={searchTerm}
                                             onChange={(e) => setSearchTerm(e.target.value)}
                                         />
                                         <button 
-                                            className="btn btn-primary botao" 
+                                            className="btn btn-primary fw-normal" 
                                             type="button"
                                             onClick={handleSearch}
                                         >
@@ -167,34 +167,34 @@ function ListarUsuarioTable() {
                                         </button>
                                     </div>
                                     <br />
-                                    <button className="btn  bt-cadastrar botao" type="button"><a href="/novo-usuario">Cadastrar novo usuário</a></button>
+                                    <button className="btn input-group bt-cadastrar " type="button"><a href="/novo-usuario">Cadastrar novo usuário</a></button>
                                 </div>
                             </div>
-                            <div className="table-responsive" style={{ maxHeight: '400px' }}>
-                                <table className="table table-bordered table-fixed">
-                                    <thead>
+                            <div className="table-responsive rounded-3" style={{ maxHeight: '400px' }}>
+                                <table className="table bg-transparent   rounded-3 table-bordered table-fixed">
+                                    <thead className="border-secondary  border-3 rounded-3">
                                         <tr>
-                                            <th scope="col">Nome</th>
-                                            <th scope="col">Email</th>
-                                            <th scope="col">Função</th>
-                                            <th scope="col" className="text-center">Opções</th>
+                                            <th scope="col" className=" bg-secondary bg-opacity-10 text-center">Nome</th>
+                                            <th scope="col" className=" bg-secondary bg-opacity-10 text-center">Email</th>
+                                            <th scope="col" className=" bg-secondary bg-opacity-10 text-center">Função</th>
+                                            <th scope="col" className=" bg-secondary bg-opacity-10 text-center">Opções</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody className="border-secondary border-3 rounded-3">
                                         {users.map(user => (
                                             <tr key={user._id}>
-                                                <td>{user.name}</td>
-                                                <td>{user.email}</td>
-                                                <td>{user.tipo}</td>
-                                                <td className="text-center d-flex">
+                                                <td className=" bg-transparent text-center">{user.name}</td>
+                                                <td className=" bg-transparent text-center">{user.email}</td>
+                                                <td className=" bg-transparent text-center">{user.tipo}</td>
+                                                <td className="text-center bg-transparent d-flex justify-content-evenly">
                                                     <button 
-                                                        className="btn btn-primary mr-2 botao" 
+                                                        className="btn  btn-primary mr-2 " 
                                                         onClick={() => handleEdit(user.email)}
                                                     >
                                                         Editar
                                                     </button>
                                                     <button 
-                                                        className="btn btn-danger botao" 
+                                                        className="btn btn-danger " 
                                                         onClick={() => handleDelete(user)}
                                                     >
                                                         Deletar
