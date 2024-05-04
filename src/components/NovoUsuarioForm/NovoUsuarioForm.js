@@ -89,20 +89,15 @@ function NovoUsuarioForm() {
                   />
                 </div>
                 <div className="mb-3">
-                  <button
-                    className={`btn ${tipo === 'Tatuador' ? 'btn-primary' : 'btn-secondary'}`}
-                    onClick={() => handleTipoChange('Tatuador')}
-                    type="button"
+                  <select
+                    className="form-select"
+                    aria-label="Default select example"
+                    value={tipo}
+                    onChange={(e) => setTipo(e.target.value)}
                   >
-                    Tatuador
-                  </button>
-                  <button
-                    className={`btn ${tipo === 'Administrador' ? 'btn-primary' : 'btn-secondary'}`}
-                    onClick={() => handleTipoChange('Administrador')}
-                    type="button"
-                  >
-                    Administrador
-                  </button>
+                    <option value="Tatuador">Tatuador</option>
+                    <option value="Administrador">Administrador</option>
+                  </select>
                 </div>
                 <div>
                   <button className="btn btn-primary d-block w-100" type="submit">
