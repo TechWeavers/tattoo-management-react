@@ -12,6 +12,7 @@ function ListarUsuarioTable() {
     const [users, setUsers] = useState([]);
     const [searchTerm, setSearchTerm] = useState("");
     const [userEmailAtual, setUserEmailAtual] = useState("");
+    const [userEmailToDelete, setUserEmailToDelete] = useState("");
 
     const navigate = useNavigate(); // Get the useNavigate hook
     const token = localStorage.getItem('token');
@@ -93,21 +94,40 @@ function ListarUsuarioTable() {
     };
 
     const handleDelete = (user) => {
-        const userEmail = user.email;
+        setUserEmailToDelete(user.email); // Salvando o email do usuário a ser deletado
+        Swal.fire({
+            title: 'Tem certeza que deseja deletar este usuário?',
+            html: "Não será possível recuperar os dados depois",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#ffb800',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Sim, deletar!',
+            cancelButtonText: 'Cancelar',
+            iconColor: "#ffb800"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                handleDeleteConfirmed();
+            }
+        });
+    };
+
+    const handleDeleteConfirmed = () => {
+        const userEmail = userEmailToDelete;
         axios.delete(`http://localhost:8001/deletar-usuario/${userEmail}`, auth)
-            .then(() => {
-                fetchUsers();
-            })
-            .catch(err => {
-                console.log(err);
-                Swal.fire({
-                    title: "Erro ao atualizar usuário",
-                    text: err.response.data.detail,
-                    icon: "error",
-                    confirmButtonColor: "#FFB800",
-                    iconColor: "#ffb800"
-                });
+        .then(() => {
+            fetchUsers();
+        })
+        .catch(err => {
+            console.log(err);
+            Swal.fire({
+                title: "Erro ao atualizar usuário",
+                text: err.response.data.detail,
+                icon: "error",
+                confirmButtonColor: "#FFB800",
+                iconColor: "#ffb800"
             });
+        });
     };
 
     const handleSearch = () => {
