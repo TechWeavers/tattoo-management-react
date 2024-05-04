@@ -147,7 +147,6 @@ function ListarUsuarioTable() {
                                         </button>
                                     </div>
                                     <br />
-                                    <button className="btn  bt-cadastrar botao" type="button"><a href="/novo-usuario">Cadastrar novo usuário</a></button>
                                 </div>
                             </div>
                             <div className="table-responsive" style={{ maxHeight: '400px' }}>
