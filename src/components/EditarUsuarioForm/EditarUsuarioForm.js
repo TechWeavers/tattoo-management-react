@@ -80,22 +80,16 @@ function EditarUsuarioForm({ user, closeAlert, userEmailAtual }) {
           />
         </div>
         <div className="mb-3">
-          <div className="btn-group" role="group" aria-label="Tipo de Usuário">
-            <button
-              type="button"
-              className={`btn ${tipo === 'Tatuador' ? 'btn-primary' : 'btn-secondary'}`}
-              onClick={() => setTipo('Tatuador')}
-            >
-              Tatuador
-            </button>
-            <button
-              type="button"
-              className={`btn ${tipo === 'Administrador' ? 'btn-primary' : 'btn-secondary'}`}
-              onClick={() => setTipo('Administrador')}
-            >
-              Administrador
-            </button>
-          </div>
+          <select
+            className="form-select"
+            aria-label="Default select example"
+            value={tipo}
+            onChange={(e) => setTipo(e.target.value)}
+          >
+            <option value="">Selecione uma opção</option>
+            <option value="Tatuador">Tatuador</option>
+            <option value="Administrador">Administrador</option>
+          </select>
         </div>
         <div className="text-center">
           <button className="btn btn-primary" type="submit">
