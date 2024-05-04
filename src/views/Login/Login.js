@@ -23,6 +23,7 @@ function Login() {
                 
                 // Store token in localStorage
                 localStorage.setItem('token', response.data);
+                console.log(response.data)
                 // Successful authentication, redirect to /dashboard page
                 navigate('/dashboard');
             } else {
