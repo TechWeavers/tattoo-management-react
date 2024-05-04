@@ -34,21 +34,22 @@ function EditarUsuarioForm({ user, closeAlert }) {
         password
       }, auth);
 
-      console.log(response.status)
       Swal.fire({
-        title: "Erro",
+        title: "Atualizado com sucesso!",
         text: "As informações do usuário foram atualizadas",
         icon: "success",
         confirmButtonColor: "#FFB800",
-        iconColor: "#ffb800"
+        iconColor: "#ffb800",
+      }).then(() => {
+        window.location.reload();
       });
-      // Limpar os campos após o envio bem-sucedido
-      setPassword('');
-      // Fechar o alerta após a conclusão do envio bem-sucedido
-      closeAlert();
+
+
     } catch (error) {
+      console.log(error)
       Swal.fire({
-        title: "Atualizado com sucesso!",
+        title: "Erro",
+        text: "deu merda aq chefia",
         icon: "success",
         confirmButtonColor: "#FFB800",
         iconColor: "#ffb800"
