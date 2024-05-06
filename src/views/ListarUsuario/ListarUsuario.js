@@ -1,6 +1,6 @@
-import Navbar from "../../components/Navbar/Navbar";
-import Sidebar from "../../components/Sidebar/Sidebar";
-import ListarUsuarioTable from "../../components/ListarUsuarioTable/ListarUsuarioTable";
+import Navbar from "../../components/Dashboard/Navbar/Navbar";
+import Sidebar from "../../components/Dashboard/Sidebar/Sidebar";
+import ListarUsuarioTable from "../../components/Listar/ListarUsuarioTable/ListarUsuarioTable";
 
 function ListarUsuario() {
     return (

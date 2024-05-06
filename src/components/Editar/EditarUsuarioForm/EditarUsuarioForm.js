@@ -1,12 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 
 function EditarUsuarioForm({ user, closeAlert, userEmailAtual }) {
-  const [name, setName] = useState(user.name ?? "");
-  const [email, setEmail] = useState(user.email ?? "");
-  const [tipo, setTipo] = useState(user.tipo ?? "");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [tipo, setTipo] = useState("");
   const [password, setPassword] = useState("");
+
+  useEffect(() => {
+    if (user.length > 0) { 
+      const userData = user[0];
+      setName(userData.name ?? "");
+      setEmail(userData.email ?? "");
+      setTipo(userData.tipo ?? "");
+    }
+  }, [user]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -41,7 +50,6 @@ function EditarUsuarioForm({ user, closeAlert, userEmailAtual }) {
       });
 
     } catch (error) {
-      console.log(error)
       Swal.fire({
         title: "Erro",
         text: "deu merda aq chefia",
@@ -55,7 +63,6 @@ function EditarUsuarioForm({ user, closeAlert, userEmailAtual }) {
   return (
     <div>
       <h2 className="text-center mb-4">Editar Usuário</h2>
-      <p className="text-center mb-4">Caso não queira editar um dos <br></br>campos deixe-o em branco</p>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <input
@@ -65,7 +72,9 @@ function EditarUsuarioForm({ user, closeAlert, userEmailAtual }) {
             name="name"
             placeholder="Nome"
             value={name}
-            onChange={(e) => setName(e.target.value)}
+            onChange={(e) => {
+              setName(e.target.value);
+            }}
           />
         </div>
         <div className="mb-3">

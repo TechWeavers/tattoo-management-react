@@ -1,4 +1,4 @@
-import RedefinirSenhaForm from "../../components/RedefinirSenhaForm/RedefinirSenhaForm";
+import RedefinirSenhaForm from "../../components/RedefinirSenha/RedefinirSenhaForm/RedefinirSenhaForm";
 
 function RedefinirSenha() {
   return (

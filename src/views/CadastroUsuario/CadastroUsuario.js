@@ -1,6 +1,6 @@
-import Navbar from "../../components/Navbar/Navbar";
-import NovoUsuarioForm from "../../components/NovoUsuarioForm/NovoUsuarioForm";
-import Sidebar from "../../components/Sidebar/Sidebar";
+import Navbar from "../../components/Dashboard/Navbar/Navbar";
+import NovoUsuarioForm from "../../components/Cadastro/NovoUsuarioForm/NovoUsuarioForm";
+import Sidebar from "../../components/Dashboard/Sidebar/Sidebar";
 
 function CadastroUsuario() {
   return (

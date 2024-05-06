@@ -1,4 +1,4 @@
-import EsqueceuForm from "../../components/EsqueceuForm/EsqueceuForm";
+import EsqueceuForm from "../../components/RedefinirSenha/EsqueceuForm/EsqueceuForm";
 
 function EsqueceuSenha() {
   return (
