@@ -4,15 +4,14 @@ import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import EditarUsuarioForm from "../../Editar/EditarUsuarioForm/EditarUsuarioForm";
 import { useNavigate } from 'react-router-dom';
-import './ListarUsuarioTable.css'
 
 const MySwal = withReactContent(Swal);
 
 function ListarUsuarioTable() {
-    const [users, setUsers] = useState([]);
+    const [materiais, setMateriais] = useState([]);
     const [searchTerm, setSearchTerm] = useState("");
-    const [userEmailAtual, setUserEmailAtual] = useState("");
-    const [userEmailToDelete, setUserEmailToDelete] = useState("");
+    const [materialNomeAtual, setMaterialNomeAtual] = useState("");
+    const [materialNomeToDelete, setMaterialNomeToDelete] = useState("");
 
     const navigate = useNavigate(); // Get the useNavigate hook
     const token = localStorage.getItem('token');
@@ -23,14 +22,14 @@ function ListarUsuarioTable() {
     };
 
     useEffect(() => {
-        fetchUsers();
+        fetchMateriais();
     }, []);
 
-    const fetchUsers = () => {
+    const fetchMateriais = () => {
         axios.get("http://localhost:8004/listar-usuarios", auth)
             .then(response => {
-                if (response.data.users && Array.isArray(response.data.users)) {
-                    setUsers(response.data.users);
+                if (response.data.materiais && Array.isArray(response.data.materiais)) {
+                    setMateriais(response.data.materiais);
                 } else {
                     console.log("Resposta inválida:", response.data);
                 }
@@ -38,15 +37,15 @@ function ListarUsuarioTable() {
             .catch(err => console.log(err));
     };
 
-    const handleEdit = (userEmail) => {
-        setUserEmailAtual(userEmail); // Atualize o estado diretamente aqui
-        axios.get(`http://localhost:8001/buscar-usuario/${userEmail}`, auth)
+    const handleEdit = (material) => {
+        setMaterialNomeAtual(material.nome); // Atualize o estado diretamente aqui
+        axios.get(`http://localhost:8001/buscar-usuario/${materialNomeAtual}`, auth)
             .then(response => {
                 MySwal.fire({
                     html: <EditarUsuarioForm 
-                        user={response.data} 
+                        material={response.data} 
                         handleSubmit={handleSubmit} 
-                        userEmailAtual={userEmail} 
+                        materialNomeAtual={materialNomeAtual} 
                     />,
                     customClass: {
                         container: 'my-swal-container',
@@ -61,7 +60,7 @@ function ListarUsuarioTable() {
             .catch(err => {
                 console.log(err);
                 Swal.fire({
-                    title: "Erro ao atualizar usuário",
+                    title: "Erro ao atualizar material",
                     text: err.response.data.detail,
                     icon: "error",
                     confirmButtonColor: "#FFB800",
@@ -71,24 +70,24 @@ function ListarUsuarioTable() {
     };
     
 
-    const handleSubmit = (editedUserData) => {
-        axios.patch(`http://localhost:8001/atualizar-usuario/${userEmailAtual}`, editedUserData , auth)
+    const handleSubmit = (editedMaterialData) => {
+        axios.patch(`http://localhost:8001/atualizar-material/${materialNomeAtual}`, editedMaterialData , auth)
             .then(() => {
                 Swal.fire({
                     title: "Atualizado com sucesso!",
-                    text: "As informações do usuário foram atualizadas",
+                    text: "As informações do material foram atualizadas",
                     icon: "success",
                     confirmButtonColor: "#FFB800",
                     iconColor: "#ffb800"
                 });
-                fetchUsers();
-                setUserEmailAtual("");
+                fetchMateriais();
+                setMaterialNomeAtual("");
                 MySwal.close();
             })
             .catch(err => {
                 console.log(err);
                 Swal.fire({
-                    title: "Erro em atualizar usuário",
+                    title: "Erro em atualizar material",
                     text: err.response.data.detail,
                     icon: "error",
                     confirmButtonColor: "#FFB800",
@@ -97,10 +96,10 @@ function ListarUsuarioTable() {
             });
     };
 
-    const handleDelete = (user) => {
-        setUserEmailToDelete(user.email); // Salvando o email do usuário a ser deletado
+    const handleDelete = (material) => {
+        setMaterialNomeToDelete(material.nome); 
         Swal.fire({
-            title: 'Tem certeza que deseja deletar este usuário?',
+            title: 'Tem certeza que deseja deletar este material?',
             html: "Não será possível recuperar os dados depois",
             icon: 'warning',
             showCancelButton: true,
@@ -117,10 +116,10 @@ function ListarUsuarioTable() {
     };
 
     const handleDeleteConfirmed = () => {
-        const userEmail = userEmailToDelete;
-        axios.delete(`http://localhost:8001/deletar-usuario/${userEmail}`, auth)
+        const materialNome = materialNomeToDelete;
+        axios.delete(`http://localhost:8001/deletar-usuario/${materialNome}`, auth)
         .then(() => {
-            fetchUsers();
+            fetchMateriais();
         })
         .catch(err => {
             console.log(err);
@@ -137,11 +136,11 @@ function ListarUsuarioTable() {
     const handleSearch = () => {
         axios.get(`http://localhost:8001/buscar-usuario/${searchTerm}`, auth)
             .then(response => {
-                setUsers(response.data);
+                setMateriais(response.data);
             })
             .catch(err => {
                 console.log(err);
-                setUsers([]);
+                setMateriais([]);
             });
     };
 
@@ -153,12 +152,12 @@ function ListarUsuarioTable() {
                         <div className="card-body ">
                             <div className="row justify-content-center mb-4 ">
                                 <div className="col-md-6  ">
-                                    <h2 className="text-center mb-4">Banco de usuários</h2>
+                                    <h2 className="text-center mb-4">Estoque</h2>
                                     <div className="input-group">
                                         <input
                                             type="text"
                                             className="form-control bg-transparent border-warning border-3"
-                                            placeholder="Buscar usuários por email"
+                                            placeholder="Buscar materiais por nome"
                                             value={searchTerm}
                                             onChange={(e) => setSearchTerm(e.target.value)}
                                         />
@@ -171,7 +170,7 @@ function ListarUsuarioTable() {
                                         </button>
                                     </div>
                                     <br />
-                                    <a href="/novo-usuario"><button className="btn input-group bt-cadastrar " type="button">Cadastrar novo usuário</button></a>
+                                    <a href="/novo-usuario"><button className="btn input-group bt-cadastrar " type="button">Cadastrar novo material</button></a>
                                 </div>
                             </div>
                             <div className="table-responsive rounded-3" style={{ maxHeight: '400px' }}>
@@ -179,27 +178,29 @@ function ListarUsuarioTable() {
                                     <thead className="border-secondary  border-3 rounded-3">
                                         <tr>
                                             <th scope="col" className=" bg-secondary bg-opacity-10 text-center">Nome</th>
-                                            <th scope="col" className=" bg-secondary bg-opacity-10 text-center">Email</th>
-                                            <th scope="col" className=" bg-secondary bg-opacity-10 text-center">Função</th>
+                                            <th scope="col" className=" bg-secondary bg-opacity-10 text-center">Quantidade</th>
+                                            <th scope="col" className=" bg-secondary bg-opacity-10 text-center">Valor unitário</th>
+                                            <th scope="col" className=" bg-secondary bg-opacity-10 text-center">Data de atualização</th>
                                             <th scope="col" className=" bg-secondary bg-opacity-10 text-center">Opções</th>
                                         </tr>
                                     </thead>
                                     <tbody className="border-secondary border-3 rounded-3">
-                                        {users.map(user => (
-                                            <tr key={user._id}>
-                                                <td className=" bg-transparent text-center">{user.name}</td>
-                                                <td className=" bg-transparent text-center">{user.email}</td>
-                                                <td className=" bg-transparent text-center">{user.tipo}</td>
+                                        {materiais.map(material => (
+                                            <tr key={material._id}>
+                                                <td className=" bg-transparent text-center">{material.nome}</td>
+                                                <td className=" bg-transparent text-center">{material.quantidae}</td>
+                                                <td className=" bg-transparent text-center">{material.valor_unitario}</td>
+                                                <td className=" bg-transparent text-center">{material.data_atualizacao}</td>
                                                 <td className="text-center bg-transparent d-flex justify-content-evenly">
                                                     <button 
                                                         className="btn  btn-primary mr-2 " 
-                                                        onClick={() => handleEdit(user.email)}
+                                                        onClick={() => handleEdit(material.nome)}
                                                     >
                                                         Editar
                                                     </button>
                                                     <button 
                                                         className="btn btn-danger " 
-                                                        onClick={() => handleDelete(user)}
+                                                        onClick={() => handleDelete(material)}
                                                     >
                                                         Deletar
                                                     </button>

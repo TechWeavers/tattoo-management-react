@@ -7,6 +7,7 @@ import EsqueceuSenha from "./views/EsqueceuSenha/EsqueceuSenha";
 import RedefinirSenha from "./views/RedefinirSenha/RedefinirSenha";
 import ListarUsuario from "./views/ListarUsuario/ListarUsuario";
 import ListarClientes from "./views/ListarClientes/ListarClientes";
+import ListarMateriais from "./views/ListarMateriais/ListarMateriais"
 
 
 function App() {
@@ -21,7 +22,8 @@ function App() {
           <Route path="/esqueceu-senha" element={<EsqueceuSenha />} />               
           <Route path="/redefinir-senha" element={<RedefinirSenhaWrapper />} />
           <Route path="/listar-usuario" element={<ListarUsuario />} /> 
-          <Route path="/listar-clientes" element={<ListarClientes />} />            
+          <Route path="/listar-clientes" element={<ListarClientes />} />  
+          <Route path="/listar-materiais" element={<ListarMateriais />} />            
         </Routes>
       </div>
     </BrowserRouter>
