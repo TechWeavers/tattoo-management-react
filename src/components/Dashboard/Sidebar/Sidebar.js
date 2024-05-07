@@ -46,7 +46,7 @@ function Sidebar() {
                                 </a>
                             </li>
                             <li>
-                                <a href="/" className="nav-link py-1 px-2" title="" data-bs-toggle="tooltip"
+                                <a href="/listar-clientes" className="nav-link py-1 px-2" title="" data-bs-toggle="tooltip"
                                     data-bs-placement="right" data-bs-original-title="Products">
                                     <i className="bi bi-people h4 text-light"></i>
                                     <p className="fw-light text-center fs-6 text-light">Clientes</p>

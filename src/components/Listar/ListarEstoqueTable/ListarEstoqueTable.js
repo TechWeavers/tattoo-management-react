@@ -8,11 +8,11 @@ import './ListarUsuarioTable.css'
 
 const MySwal = withReactContent(Swal);
 
-function ListarClienteTable() {
-    const [clientes, setClientes] = useState([]);
+function ListarUsuarioTable() {
+    const [users, setUsers] = useState([]);
     const [searchTerm, setSearchTerm] = useState("");
-    const [userCpfAtual, setUserCpfAtual] = useState("");
-    const [userCpfToDelete, setUserCpfToDelete] = useState("");
+    const [userEmailAtual, setUserEmailAtual] = useState("");
+    const [userEmailToDelete, setUserEmailToDelete] = useState("");
 
     const navigate = useNavigate(); // Get the useNavigate hook
     const token = localStorage.getItem('token');
@@ -23,14 +23,14 @@ function ListarClienteTable() {
     };
 
     useEffect(() => {
-        fetchClientes();
+        fetchUsers();
     }, []);
 
-    const fetchClientes = () => {
-        axios.get("http://localhost:8001/listar-clientes", auth)
+    const fetchUsers = () => {
+        axios.get("http://localhost:8004/listar-usuarios", auth)
             .then(response => {
-                if (response.data.clientes && Array.isArray(response.data.clientes)) {
-                    setClientes(response.data.clientes);
+                if (response.data.users && Array.isArray(response.data.users)) {
+                    setUsers(response.data.users);
                 } else {
                     console.log("Resposta inválida:", response.data);
                 }
@@ -38,15 +38,15 @@ function ListarClienteTable() {
             .catch(err => console.log(err));
     };
 
-    const handleEdit = (userData) => {
-        setUserEmailAtual(userData.email); // Atualize o estado diretamente aqui
-        axios.get(`http://localhost:8001/buscar-usuario/${userData.email}`, auth)
+    const handleEdit = (userEmail) => {
+        setUserEmailAtual(userEmail); // Atualize o estado diretamente aqui
+        axios.get(`http://localhost:8001/buscar-usuario/${userEmail}`, auth)
             .then(response => {
                 MySwal.fire({
                     html: <EditarUsuarioForm 
                         user={response.data} 
                         handleSubmit={handleSubmit} 
-                        userEmailAtual={userData.email} 
+                        userEmailAtual={userEmail} 
                     />,
                     customClass: {
                         container: 'my-swal-container',
@@ -72,23 +72,23 @@ function ListarClienteTable() {
     
 
     const handleSubmit = (editedUserData) => {
-        axios.patch(`http://localhost:8001/atualizar-cliente/${userCpfAtual}`, editedUserData , auth)
+        axios.patch(`http://localhost:8001/atualizar-usuario/${userEmailAtual}`, editedUserData , auth)
             .then(() => {
                 Swal.fire({
                     title: "Atualizado com sucesso!",
-                    text: "As informações do cliente foram atualizadas",
+                    text: "As informações do usuário foram atualizadas",
                     icon: "success",
                     confirmButtonColor: "#FFB800",
                     iconColor: "#ffb800"
                 });
-                fetchClientes();
-                setUserCpfAtual("");
+                fetchUsers();
+                setUserEmailAtual("");
                 MySwal.close();
             })
             .catch(err => {
                 console.log(err);
                 Swal.fire({
-                    title: "Erro em atualizar cliente",
+                    title: "Erro em atualizar usuário",
                     text: err.response.data.detail,
                     icon: "error",
                     confirmButtonColor: "#FFB800",
@@ -98,9 +98,9 @@ function ListarClienteTable() {
     };
 
     const handleDelete = (user) => {
-        setUserCpfToDelete(user.cpf); 
+        setUserEmailToDelete(user.email); // Salvando o email do usuário a ser deletado
         Swal.fire({
-            title: 'Tem certeza que deseja deletar este cliente?',
+            title: 'Tem certeza que deseja deletar este usuário?',
             html: "Não será possível recuperar os dados depois",
             icon: 'warning',
             showCancelButton: true,
@@ -117,15 +117,15 @@ function ListarClienteTable() {
     };
 
     const handleDeleteConfirmed = () => {
-        const userCpf = userEmailToDelete;
-        axios.delete(`http://localhost:8001/deletar-cliente/${userCpf}`, auth)
+        const userEmail = userEmailToDelete;
+        axios.delete(`http://localhost:8001/deletar-usuario/${userEmail}`, auth)
         .then(() => {
-            fetchClientes();
+            fetchUsers();
         })
         .catch(err => {
             console.log(err);
             Swal.fire({
-                title: "Erro ao atualizar cliente",
+                title: "Erro ao atualizar usuário",
                 text: err.response.data.detail,
                 icon: "error",
                 confirmButtonColor: "#FFB800",
@@ -135,19 +135,15 @@ function ListarClienteTable() {
     };
 
     const handleSearch = () => {
-        axios.get(`http://localhost:8001/buscar-cliente/${searchTerm}`, auth)
+        axios.get(`http://localhost:8001/buscar-usuario/${searchTerm}`, auth)
             .then(response => {
-                setClientes(response.data);
+                setUsers(response.data);
             })
             .catch(err => {
                 console.log(err);
-                setClientes([]);
+                setUsers([]);
             });
     };
-
-    const handleFicha = () => {
-
-    }
 
     return (
        <div className="col-lg-10 p-3 min-vh-100 ms-auto">
@@ -157,12 +153,12 @@ function ListarClienteTable() {
                         <div className="card-body ">
                             <div className="row justify-content-center mb-4 ">
                                 <div className="col-md-6  ">
-                                    <h2 className="text-center mb-4">Banco de clientes</h2>
+                                    <h2 className="text-center mb-4">Banco de usuários</h2>
                                     <div className="input-group">
                                         <input
                                             type="text"
                                             className="form-control bg-transparent border-warning border-3"
-                                            placeholder="Buscar clientes por CPF"
+                                            placeholder="Buscar usuários por email"
                                             value={searchTerm}
                                             onChange={(e) => setSearchTerm(e.target.value)}
                                         />
@@ -175,7 +171,7 @@ function ListarClienteTable() {
                                         </button>
                                     </div>
                                     <br />
-                                    <button className="btn input-group bt-cadastrar " type="button"><a href="/novo-cliente">Cadastrar novo cliente</a></button>
+                                    <a href="/novo-usuario"><button className="btn input-group bt-cadastrar " type="button">Cadastrar novo usuário</button></a>
                                 </div>
                             </div>
                             <div className="table-responsive rounded-3" style={{ maxHeight: '400px' }}>
@@ -183,34 +179,27 @@ function ListarClienteTable() {
                                     <thead className="border-secondary  border-3 rounded-3">
                                         <tr>
                                             <th scope="col" className=" bg-secondary bg-opacity-10 text-center">Nome</th>
-                                            <th scope="col" className=" bg-secondary bg-opacity-10 text-center">CPF</th>
                                             <th scope="col" className=" bg-secondary bg-opacity-10 text-center">Email</th>
-                                            <th scope="col" className=" bg-secondary bg-opacity-10 text-center">Telefone</th>
+                                            <th scope="col" className=" bg-secondary bg-opacity-10 text-center">Função</th>
+                                            <th scope="col" className=" bg-secondary bg-opacity-10 text-center">Opções</th>
                                         </tr>
                                     </thead>
                                     <tbody className="border-secondary border-3 rounded-3">
-                                        {clientes.map(cliente => (
-                                            <tr key={cliente._id}>
-                                                <td className=" bg-transparent text-center">{cliente.nome}</td>
-                                                <td className=" bg-transparent text-center">{cliente.cpf}</td>
-                                                <td className=" bg-transparent text-center">{cliente.email}</td>
-                                                <td className=" bg-transparent text-center">{cliente.telefone}</td>
+                                        {users.map(user => (
+                                            <tr key={user._id}>
+                                                <td className=" bg-transparent text-center">{user.name}</td>
+                                                <td className=" bg-transparent text-center">{user.email}</td>
+                                                <td className=" bg-transparent text-center">{user.tipo}</td>
                                                 <td className="text-center bg-transparent d-flex justify-content-evenly">
                                                     <button 
-                                                        className="btn btn-primary mr-2" 
-                                                        onClick={() => handleFicha(cliente)}
-                                                    >
-                                                        Ver Ficha
-                                                    </button>
-                                                    <button 
                                                         className="btn  btn-primary mr-2 " 
-                                                        onClick={() => handleEdit(cliente.cpf)}
+                                                        onClick={() => handleEdit(user.email)}
                                                     >
                                                         Editar
                                                     </button>
                                                     <button 
                                                         className="btn btn-danger " 
-                                                        onClick={() => handleDelete(cliente)}
+                                                        onClick={() => handleDelete(user)}
                                                     >
                                                         Deletar
                                                     </button>
@@ -228,4 +217,4 @@ function ListarClienteTable() {
     );
 }
 
-export default ListarClienteTable;
+export default ListarUsuarioTable;
