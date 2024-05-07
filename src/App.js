@@ -19,7 +19,8 @@ function App() {
           <Route path="/novo-usuario" element={<CadastroUsuario />} />
           <Route path="/esqueceu-senha" element={<EsqueceuSenha />} />               
           <Route path="/redefinir-senha" element={<RedefinirSenhaWrapper />} />
-          <Route path="/listar-usuario" element={<ListarUsuario />} />          
+          <Route path="/listar-usuario" element={<ListarUsuario />} /> 
+          <Route path="/listar-materiais" element={<ListarMateriais />} />         
         </Routes>
       </div>
     </BrowserRouter>
