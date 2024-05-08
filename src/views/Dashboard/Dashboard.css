@@ -1,0 +1,5 @@
+.dashboard-container {
+    position: relative;
+    width: 100%;
+    height: 100vh; /* Or set height as needed */
+  }

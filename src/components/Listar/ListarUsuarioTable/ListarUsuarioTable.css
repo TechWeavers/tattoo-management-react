@@ -1,0 +1,29 @@
+    .botao {
+        margin-right: 30px;
+        box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+        background-color: rgb(255, 187, 1);
+    }
+    
+    .bt-cadastrar {
+        background-color: black;
+        color: white;
+        margin: 0 auto;
+        text-align: center;
+    }
+    
+    .bt-cadastrar:hover {
+        background-color: black;
+        color: white;
+        opacity: 0.7;
+        transition: 0.7s;
+    }
+    
+    .bt-cadastrar a {
+        color: white;
+        text-decoration: none;
+    }
+    
+    .central {
+        margin: 0 auto;
+        text-align: center;
+    }
