@@ -43,10 +43,10 @@ function ListarClientesTable() {
             .then(response => {
                 setClienteCpfAtual(clienteData.cpf);
                 MySwal.fire({
-                    html: <EditarClienteForm
-                        user={response.data}
-                        handleSubmit={handleSubmit}
-                        clienteCpfAtual={clienteData.cpf}
+                    html: <EditarClienteForm 
+                        user={response.data} 
+                        handleSubmit={handleSubmit} 
+                        clienteCpfAtual={clienteData.cpf} 
                     />,
                     customClass: {
                         container: 'my-swal-container',
@@ -70,10 +70,10 @@ function ListarClientesTable() {
                 });
             });
     };
-
+    
 
     const handleSubmit = (editedClienteData) => {
-        axios.patch(`http://localhost:8003/atualizar-cliente/${clienteCpfAtual}`, editedClienteData, auth)
+        axios.patch(`http://localhost:8003/atualizar-cliente/${clienteCpfAtual}`, editedClienteData , auth)
             .then(() => {
                 Swal.fire({
                     title: "Atualizado com sucesso!",
@@ -116,7 +116,6 @@ function ListarClientesTable() {
             }
         });
     };
-
     const handleDeleteConfirmed = (clienteCpfToDelete) => { // Recebendo o CPF como argumento
         console.log(clienteCpfToDelete); // Verificar se o CPF está chegando corretamente
         axios.delete(`http://localhost:8003/deletar-cliente/${clienteCpfToDelete}`, auth)
@@ -125,7 +124,8 @@ function ListarClientesTable() {
                     title: 'Cliente deletado com sucesso!',
                     html: "",
                     icon: 'success',
-                    iconColor: "#00ff00"
+                    iconColor: "#ffb800",
+                    confirmButtonColor: "#FFB800"
                 })
                 fetchClientes();
             })
@@ -140,8 +140,8 @@ function ListarClientesTable() {
                 });
             });
     };
-
-
+    
+    
 
     const handleSearch = () => {
         axios.get(`http://localhost:8003/buscar-cliente/${searchTerm}`, auth)
@@ -163,6 +163,7 @@ function ListarClientesTable() {
             <div className="row justify-content-center  ">
                 <div className="col-lg  ">
                     <div className="card bg-white border  shadow-lg border-3 rounded-3 bg-opacity-25">
+
                         <div className="card-body ">
                             <div className="row justify-content-center mb-4 ">
                                 <div className="col-md-6  ">
@@ -177,6 +178,7 @@ function ListarClientesTable() {
                                         />
                                         <button
                                             className="btn btn-primary fw-normal"
+
                                             type="button"
                                             onClick={handleSearch}
                                         >
@@ -208,18 +210,22 @@ function ListarClientesTable() {
                                                 <td className="text-center bg-transparent d-flex justify-content-evenly">
                                                     <button
                                                         className="btn shadow-sm btn-primary mr-2"
+
                                                         onClick={() => handleFicha(cliente)}
                                                     >
                                                         Ver Ficha
                                                     </button>
+
                                                     <button
                                                         className="btn shadow-sm btn-primary mr-2 "
                                                         onClick={() => handleEdit(cliente.cpf)}
                                                     >
                                                         Editar
                                                     </button>
+
                                                     <button
                                                         className="btn shadow-sm btn-danger "
+
                                                         onClick={() => handleDelete(cliente)}
                                                     >
                                                         Deletar

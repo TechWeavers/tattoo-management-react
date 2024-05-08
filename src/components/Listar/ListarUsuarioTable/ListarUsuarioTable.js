@@ -98,7 +98,7 @@ function ListarUsuarioTable() {
     };
 
     const handleDelete = (user) => {
-        setUserEmailToDelete(user.email); // Salvando o email do usuário a ser deletado
+        console.log(user.email); // Salvando o email do usuário a ser deletado
         Swal.fire({
             title: 'Tem certeza que deseja deletar este usuário?',
             html: "Não será possível recuperar os dados depois",
@@ -111,15 +111,22 @@ function ListarUsuarioTable() {
             iconColor: "#ffb800"
         }).then((result) => {
             if (result.isConfirmed) {
-                handleDeleteConfirmed();
+                handleDeleteConfirmed(user.email);
             }
         });
     };
 
-    const handleDeleteConfirmed = () => {
-        const userEmail = userEmailToDelete;
-        axios.delete(`http://localhost:8001/deletar-usuario/${userEmail}`, auth)
+
+    const handleDeleteConfirmed = (userEmailToDelete) => {
+        axios.delete(`http://localhost:8001/deletar-usuario/${userEmailToDelete}`, auth)
         .then(() => {
+            Swal.fire({
+                title: 'Usuário deletado com sucesso!',
+                html: "",
+                icon: 'success',
+                iconColor: "#ffb800",
+                confirmButtonColor: "#FFB800"
+            })
             fetchUsers();
         })
         .catch(err => {
