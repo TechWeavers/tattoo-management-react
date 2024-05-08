@@ -170,7 +170,7 @@ function ListarUsuarioTable() {
                                         </button>
                                     </div>
                                     <br />
-                                    <a href="/novo-usuario"><button className="btn input-group bt-cadastrar " type="button">Cadastrar novo material</button></a>
+                                    <a href="/novo-estoque"><button className="btn input-group bt-cadastrar " type="button">Cadastrar novo material</button></a>
                                 </div>
                             </div>
                             <div className="table-responsive rounded-3" style={{ maxHeight: '400px' }}>
