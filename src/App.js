@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import Login from "./views/Login/Login";
-import LoginSW from "./views/LoginSW/LoginSW";
+
 import Dashboard from "./views/Dashboard/Dashboard";
 import CadastroUsuario from "./views/CadastroUsuario/CadastroUsuario";
 import EsqueceuSenha from "./views/EsqueceuSenha/EsqueceuSenha";
@@ -16,7 +16,7 @@ function App() {
       <div className="App">
         <Routes>
           <Route path="/" element={<Login />} />            
-          <Route path="/sw" element={<LoginSW />} />            
+                    
           <Route path="/dashboard" element={<Dashboard />} />             
           <Route path="/novo-usuario" element={<CadastroUsuario />} />
           <Route path="/esqueceu-senha" element={<EsqueceuSenha />} />               
