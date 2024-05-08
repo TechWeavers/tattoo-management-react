@@ -125,7 +125,8 @@ function ListarClientesTable() {
                     title: 'Cliente deletado com sucesso!',
                     html: "",
                     icon: 'success',
-                    iconColor: "#00ff00"
+                    iconColor: "#ffb800",
+                    confirmButtonColor: "#FFB800"
                 })
                 fetchClientes();
             })

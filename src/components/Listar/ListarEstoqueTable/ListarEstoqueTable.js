@@ -7,11 +7,10 @@ import { useNavigate } from 'react-router-dom';
 
 const MySwal = withReactContent(Swal);
 
-function ListarUsuarioTable() {
+function ListarEstoqueTable() {
     const [materiais, setMateriais] = useState([]);
     const [searchTerm, setSearchTerm] = useState("");
     const [materialNomeAtual, setMaterialNomeAtual] = useState("");
-    const [materialNomeToDelete, setMaterialNomeToDelete] = useState("");
 
     const navigate = useNavigate(); // Get the useNavigate hook
     const token = localStorage.getItem('token');
@@ -97,7 +96,7 @@ function ListarUsuarioTable() {
     };
 
     const handleDelete = (material) => {
-        setMaterialNomeToDelete(material.nome); 
+        console.log(material.nome)
         Swal.fire({
             title: 'Tem certeza que deseja deletar este material?',
             html: "Não será possível recuperar os dados depois",
@@ -110,15 +109,22 @@ function ListarUsuarioTable() {
             iconColor: "#ffb800"
         }).then((result) => {
             if (result.isConfirmed) {
-                handleDeleteConfirmed();
+                handleDeleteConfirmed(material.nome);
             }
         });
     };
 
-    const handleDeleteConfirmed = () => {
-        const materialNome = materialNomeToDelete;
-        axios.delete(`http://localhost:8004/deletar-material/${materialNome}`, auth)
+    const handleDeleteConfirmed = (materialNomeToDelete) => {
+        console.log(materialNomeToDelete)
+        axios.delete(`http://localhost:8004/deletar-material/${materialNomeToDelete}`, auth)
         .then(() => {
+            Swal.fire({
+                title: 'Material deletado com sucesso!',
+                html: "",
+                icon: 'success',
+                iconColor: "#ffb800",
+                confirmButtonColor: "#FFB800"
+            })
             fetchMateriais();
         })
         .catch(err => {
@@ -218,4 +224,4 @@ function ListarUsuarioTable() {
     );
 }
 
-export default ListarUsuarioTable;
+export default ListarEstoqueTable;

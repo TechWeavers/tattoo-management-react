@@ -2,15 +2,16 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 
-function NovoUsuarioForm() {
-  const [name, setName] = useState('');
+function NovoClienteForm() {
+  const [nome, setNome] = useState('');
+  const [cpf, setCPF] = useState('');
+  const [telefone, setTelefone] = useState('');
   const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [tipo, setTipo] = useState('Tatuador');
+  const [idade, setIdade] = useState('');
 
-  const handleTipoChange = (selectedTipo) => {
+  /*const handleTipoChange = (selectedTipo) => {
     setTipo(selectedTipo);
-  };
+  };*/
 
   const token = localStorage.getItem('token');
   const auth = {
@@ -22,28 +23,31 @@ function NovoUsuarioForm() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      await axios.post('http://localhost:8001/novo-usuario', {
-        tipo,
-        name,
+      await axios.post('http://localhost:8003/novo-cliente', {
+        nome,
+        cpf,
+        telefone,
         email,
-        password,
+        idade,
       }, auth);
 
       Swal.fire({
-        title: "Usuário cadastrado com sucesso!",
+        title: "Cliente cadastrado com sucesso!",
         icon: "success",
         confirmButtonColor: "#FFB800",
         iconColor: "#ffb800"
       });
 
-      setName('');
+      setNome('');
+      setCPF('');
+      setTelefone('');
       setEmail('');
-      setPassword('');
+      setIdade('');
     } catch (error) {
       console.log(error);
       Swal.fire({
-        title: "Erro ao cadastrar o usuário",
-        text: "Opa, erro ao cadastrar o usuário",
+        title: "Erro ao cadastrar o cliente",
+        text: "Opa, erro ao manipular o cliente no banco de dados",
         icon: "error",
         confirmButtonColor: "#FFB800",
         iconColor: "#ffb800"
@@ -59,17 +63,41 @@ function NovoUsuarioForm() {
             <div className="card-body">
               <div className="row justify-content-center mb-4">
                 <div className="col-md-6">
-                      <h2 className="text-center mb-4">Cadastro de Usuário</h2>
+                      <h2 className="text-center mb-4">Cadastro de Cliente</h2>
                       <form onSubmit={handleSubmit}>
                         <div className="mb-3">
                           <input
                             className="form-control"
                             type="text"
-                            id="username"
-                            name="username"
-                            placeholder="Nome de Usuário"
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}
+                            id="nome"
+                            name="nome"
+                            placeholder="Nome do cliente"
+                            value={nome}
+                            onChange={(e) => setNome(e.target.value)}
+                            required
+                          />
+                        </div>
+                        <div className="mb-3">
+                          <input
+                            className="form-control"
+                            type="number"
+                            id="CPF"
+                            name="cpf"
+                            placeholder="CPF do cliente"
+                            value={cpf}
+                            onChange={(e) => setCPF(e.target.value)}
+                            required
+                          />
+                        </div>
+                        <div className="mb-3">
+                          <input
+                            className="form-control"
+                            type="text"
+                            id="telefone"
+                            name="telefone"
+                            placeholder="Telefone do cliente"
+                            value={telefone}
+                            onChange={(e) => setTelefone(e.target.value)}
                             required
                           />
                         </div>
@@ -88,16 +116,16 @@ function NovoUsuarioForm() {
                         <div className="mb-3">
                           <input
                             className="form-control"
-                            type="password"
-                            id="password"
-                            name="password"
-                            placeholder="Senha"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
+                            type="number"
+                            id="idade"
+                            name="idade"
+                            placeholder="Idade do cliente"
+                            value={idade}
+                            onChange={(e) => setIdade(e.target.value)}
                             required
                           />
                         </div>
-                        <div className="mb-3">
+                        {/*<div className="mb-3">
                           <button
                             className={`btn ${tipo === 'Tatuador' ? 'btn-primary' : 'btn-secondary'}`}
                             onClick={() => handleTipoChange('Tatuador')}
@@ -112,7 +140,7 @@ function NovoUsuarioForm() {
                           >
                             Administrador
                           </button>
-                        </div>
+                          </div>*/}
                         <div>
                           <button className="btn btn-primary d-block w-100" type="submit">
                             Cadastrar
@@ -129,4 +157,4 @@ function NovoUsuarioForm() {
   );
 }
 
-export default NovoUsuarioForm;
+export default NovoClienteForm;
