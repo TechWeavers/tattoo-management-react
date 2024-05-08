@@ -26,7 +26,7 @@ function ListarUsuarioTable() {
     }, []);
 
     const fetchMateriais = () => {
-        axios.get("http://localhost:8004/listar-usuarios", auth)
+        axios.get("http://localhost:8004/listar-materiais", auth)
             .then(response => {
                 if (response.data.materiais && Array.isArray(response.data.materiais)) {
                     setMateriais(response.data.materiais);
@@ -39,7 +39,7 @@ function ListarUsuarioTable() {
 
     const handleEdit = (material) => {
         setMaterialNomeAtual(material.nome); // Atualize o estado diretamente aqui
-        axios.get(`http://localhost:8001/buscar-usuario/${materialNomeAtual}`, auth)
+        axios.get(`http://localhost:8004/buscar-material/${materialNomeAtual}`, auth)
             .then(response => {
                 MySwal.fire({
                     html: <EditarUsuarioForm 
@@ -71,7 +71,7 @@ function ListarUsuarioTable() {
     
 
     const handleSubmit = (editedMaterialData) => {
-        axios.patch(`http://localhost:8001/atualizar-material/${materialNomeAtual}`, editedMaterialData , auth)
+        axios.patch(`http://localhost:8004/atualizar-material/${materialNomeAtual}`, editedMaterialData , auth)
             .then(() => {
                 Swal.fire({
                     title: "Atualizado com sucesso!",
@@ -117,14 +117,14 @@ function ListarUsuarioTable() {
 
     const handleDeleteConfirmed = () => {
         const materialNome = materialNomeToDelete;
-        axios.delete(`http://localhost:8001/deletar-usuario/${materialNome}`, auth)
+        axios.delete(`http://localhost:8004/deletar-material/${materialNome}`, auth)
         .then(() => {
             fetchMateriais();
         })
         .catch(err => {
             console.log(err);
             Swal.fire({
-                title: "Erro ao atualizar usuário",
+                title: "Erro ao deletar material",
                 text: err.response.data.detail,
                 icon: "error",
                 confirmButtonColor: "#FFB800",
@@ -134,7 +134,7 @@ function ListarUsuarioTable() {
     };
 
     const handleSearch = () => {
-        axios.get(`http://localhost:8001/buscar-usuario/${searchTerm}`, auth)
+        axios.get(`http://localhost:8004/buscar-material/${searchTerm}`, auth)
             .then(response => {
                 setMateriais(response.data);
             })
@@ -188,7 +188,7 @@ function ListarUsuarioTable() {
                                         {materiais.map(material => (
                                             <tr key={material._id}>
                                                 <td className=" bg-transparent text-center">{material.nome}</td>
-                                                <td className=" bg-transparent text-center">{material.quantidae}</td>
+                                                <td className=" bg-transparent text-center">{material.quantidade}</td>
                                                 <td className=" bg-transparent text-center">{material.valor_unitario}</td>
                                                 <td className=" bg-transparent text-center">{material.data_atualizacao}</td>
                                                 <td className="text-center bg-transparent d-flex justify-content-evenly">

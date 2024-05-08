@@ -121,6 +121,12 @@ function ListarClientesTable() {
         console.log(clienteCpfToDelete); // Verificar se o CPF está chegando corretamente
         axios.delete(`http://localhost:8003/deletar-cliente/${clienteCpfToDelete}`, auth)
             .then(() => {
+                Swal.fire({
+                    title: 'Cliente deletado com sucesso!',
+                    html: "",
+                    icon: 'success',
+                    iconColor: "#00ff00"
+                })
                 fetchClientes();
             })
             .catch(err => {
