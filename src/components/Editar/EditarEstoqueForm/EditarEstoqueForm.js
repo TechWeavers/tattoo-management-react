@@ -1,16 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 
-function EditarClienteForm({ user, closeAlert, clienteCpfAtual }) {
-  
-  // Variáveis do cliente
-  const [nome, setNome] = useState(user.nome ?? "");
-  const [cpf, setCpf] = useState(user.cpf ?? "");
-  const [telefone, setTelefone] = useState(user.telefone ?? "");
-  const [email, setEmail] = useState(user.email ?? "");
-  const [idade, setIdade] = useState(user.idade ?? "");
-  
+function EditarEstoqueForm({ user, closeAlert, userEmailAtual }) {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [tipo, setTipo] = useState("");
+  const [password, setPassword] = useState("");
+
+  useEffect(() => {
+    if (user.length > 0) { 
+      const userData = user[0];
+      setName(userData.name ?? "");
+      setEmail(userData.email ?? "");
+      setTipo(userData.tipo ?? "");
+    }
+  }, [user]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -31,9 +36,8 @@ function EditarClienteForm({ user, closeAlert, clienteCpfAtual }) {
         }
       };
 
-      const editedClienteData = { nome, cpf, telefone, email, idade};
-
-      const response = await axios.patch(`http://localhost:8001/atualizar-cliente/${clienteCpfAtual}`, editedClienteData, auth);
+      const editedUserData = { name, email, tipo, password};
+      const response = await axios.patch(`http://localhost:8001/atualizar-usuario/${userEmailAtual}`, editedUserData, auth);
 
       Swal.fire({
         title: "Atualizado com sucesso!",
@@ -49,7 +53,7 @@ function EditarClienteForm({ user, closeAlert, clienteCpfAtual }) {
       Swal.fire({
         title: "Erro",
         text: "deu merda aq chefia",
-        icon: "error",
+        icon: "success",
         confirmButtonColor: "#FFB800",
         iconColor: "#ffb800"
       });
@@ -64,11 +68,13 @@ function EditarClienteForm({ user, closeAlert, clienteCpfAtual }) {
           <input
             className="form-control"
             type="text"
-            id="nome"
-            name="nome"
+            id="name"
+            name="name"
             placeholder="Nome"
-            value={nome}
-            onChange={(e) => setNome(e.target.value)}
+            value={name}
+            onChange={(e) => {
+              setName(e.target.value);
+            }}
           />
         </div>
         <div className="mb-3">
@@ -83,37 +89,16 @@ function EditarClienteForm({ user, closeAlert, clienteCpfAtual }) {
           />
         </div>
         <div className="mb-3">
-          <input
-            className="form-control"
-            type="text"
-            id="number"
-            name="telefone"
-            placeholder="Telefone"
-            value={telefone}
-            onChange={(e) => setTelefone(e.target.value)}
-          />
-        </div>
-        <div className="mb-3">
-          <input
-            className="form-control"
-            type="number"
-            id="cpf"
-            name="cpf"
-            placeholder="CPF"
-            value={cpf}
-            onChange={(e) => setCpf(e.target.value)}
-          />
-        </div>
-        <div className="mb-3">
-          <input
-            className="form-control"
-            type="number"
-            id="idade"
-            name="idade"
-            placeholder="Idade"
-            value={idade}
-            onChange={(e) => setIdade(e.target.value)}
-          />
+          <select
+            className="form-select"
+            aria-label="Default select example"
+            value={tipo}
+            onChange={(e) => setTipo(e.target.value)}
+          >
+            <option value="">Selecione uma opção</option>
+            <option value="Tatuador">Tatuador</option>
+            <option value="Administrador">Administrador</option>
+          </select>
         </div>
         <div className="text-center">
           <button className="btn btn-primary" type="submit">
@@ -125,4 +110,4 @@ function EditarClienteForm({ user, closeAlert, clienteCpfAtual }) {
   );
 }
 
-export default EditarClienteForm;
+export default EditarEstoqueForm;
