@@ -1,16 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 
-function EditarClienteForm({ user, closeAlert, clienteCpfAtual }) {
+function EditarClienteForm({ cliente, closeAlert, clienteCpfAtual }) {
   
   // Variáveis do cliente
-  const [nome, setNome] = useState(user.nome ?? "");
-  const [cpf, setCpf] = useState(user.cpf ?? "");
-  const [telefone, setTelefone] = useState(user.telefone ?? "");
-  const [email, setEmail] = useState(user.email ?? "");
-  const [idade, setIdade] = useState(user.idade ?? "");
+  const [nome, setNome] = useState(cliente.nome ?? "");
+  const [cpf, setCpf] = useState(cliente.cpf ?? "");
+  const [telefone, setTelefone] = useState(cliente.telefone ?? "");
+  const [email, setEmail] = useState(cliente.email ?? "");
+  const [idade, setIdade] = useState(cliente.idade ?? "");
   
+  useEffect(() => {
+    if (cliente.length > 0) { 
+      const clienteData = cliente[0];
+      setNome(clienteData.nome ?? "");
+      setCpf(clienteData.cpf ?? "");
+      setTelefone(clienteData.telefone ?? "");
+      setEmail(clienteData.email ?? "");
+      setIdade(clienteData.idade ?? "");
+    }
+  }, [cliente]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -33,7 +43,7 @@ function EditarClienteForm({ user, closeAlert, clienteCpfAtual }) {
 
       const editedClienteData = { nome, cpf, telefone, email, idade};
 
-      const response = await axios.patch(`http://localhost:8001/atualizar-cliente/${clienteCpfAtual}`, editedClienteData, auth);
+      const response = await axios.patch(`http://localhost:8003/atualizar-cliente/${clienteCpfAtual}`, editedClienteData, auth);
 
       Swal.fire({
         title: "Atualizado com sucesso!",
@@ -58,7 +68,7 @@ function EditarClienteForm({ user, closeAlert, clienteCpfAtual }) {
 
   return (
     <div>
-      <h2 className="text-center mb-4">Editar Usuário</h2>
+      <h2 className="text-center mb-4">Editar Cliente</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <input
@@ -86,7 +96,7 @@ function EditarClienteForm({ user, closeAlert, clienteCpfAtual }) {
           <input
             className="form-control"
             type="text"
-            id="number"
+            id="telefone"
             name="telefone"
             placeholder="Telefone"
             value={telefone}

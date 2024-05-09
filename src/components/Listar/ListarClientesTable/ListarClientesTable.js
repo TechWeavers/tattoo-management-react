@@ -4,7 +4,6 @@ import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import EditarClienteForm from "../../Editar/EditarClienteForm/EditarClienteForm";
 import { useNavigate } from 'react-router-dom';
-import EditarFicha from '../../Editar/EditarFicha/EditarFicha'
 
 const MySwal = withReactContent(Swal);
 
@@ -39,15 +38,15 @@ function ListarClientesTable() {
     };
 
     const handleEdit = (clienteData) => {
-        console.log(clienteData.cpf); // Atualize o estado diretamente aqui
-        axios.get(`http://localhost:8003/buscar-cliente/${clienteData.cpf}`, auth)
+        console.log(clienteData); // Atualize o estado diretamente aqui
+        axios.get(`http://localhost:8003/buscar-cliente/${clienteData}`, auth)
             .then(response => {
-                setClienteCpfAtual(clienteData.cpf);
+                setClienteCpfAtual(clienteData);
                 MySwal.fire({
                     html: <EditarClienteForm 
-                        user={response.data} 
+                        cliente={response.data} 
                         handleSubmit={handleSubmit} 
-                        clienteCpfAtual={clienteData.cpf} 
+                        clienteCpfAtual={clienteData} 
                     />,
                     customClass: {
                         container: 'my-swal-container',
@@ -56,41 +55,8 @@ function ListarClientesTable() {
                         confirmButton: 'btn btn-primary',
                         cancelButton: 'btn btn-secondary'
                     },
-                    showConfirmButton: false
-                });
-            })
-            .catch(err => {
-                console.log(err);
-                Swal.fire({
-                    title: "Erro ao atualizar usuário",
-                    text: err.response.data.detail,
-                    icon: "error",
-                    confirmButtonColor: "#FFB800",
-                    iconColor: "#ffb800"
-                });
-            });
-    };
-
-    const handleEditFicha = (clienteData) => {
-        console.log(clienteData.cpf); // Atualize o estado diretamente aqui
-        axios.get(`http://localhost:8003/buscar-cliente/${clienteData.cpf}`, auth)
-            .then(response => {
-                setClienteCpfAtual(clienteData.cpf);
-                MySwal.fire({
-                    html: <EditarFicha 
-                        user={response.data} 
-                        handleSubmit={handleSubmit} 
-                        clienteCpfAtual={clienteData.cpf} 
-                    />,
-                    customClass: {
-                        container: 'my-swal-container ',
-                        popup: 'my-swal-popup',
-                        content: 'my-swal-content',
-                        confirmButton: 'btn btn-primary',
-                        cancelButton: 'btn btn-secondary',
-                    },
-                    showConfirmButton: false,
-                    width:'80%'
+                    showConfirmButton: false, // Remove the "OK" button
+                    width: '90%'
                 });
             })
             .catch(err => {
@@ -245,21 +211,18 @@ function ListarClientesTable() {
                                                     <button
                                                         className="btn shadow-sm btn-primary mr-2"
 
-                                                        onClick={() => handleEditFicha(cliente)}
+                                                        onClick={() => handleFicha(cliente)}
                                                     >
                                                         Ver Ficha
                                                     </button>
-
                                                     <button
                                                         className="btn shadow-sm btn-primary mr-2 "
                                                         onClick={() => handleEdit(cliente.cpf)}
                                                     >
                                                         Editar
                                                     </button>
-
                                                     <button
                                                         className="btn shadow-sm btn-danger "
-
                                                         onClick={() => handleDelete(cliente)}
                                                     >
                                                         Deletar

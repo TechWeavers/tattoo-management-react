@@ -6,11 +6,6 @@ import './EditarFicha.css'
 function EditarClienteForm({ user, closeAlert, clienteCpfAtual }) {
 
   // Variáveis do cliente
-  const [nome, setNome] = useState(user.nome ?? "");
-  const [cpf, setCpf] = useState(user.cpf ?? "");
-  const [telefone, setTelefone] = useState(user.telefone ?? "");
-  const [email, setEmail] = useState(user.email ?? "");
-  const [idade, setIdade] = useState(user.idade ?? "");
   const [tratamento, setTratamento] = useState(user.tratamento ?? "");
   const [desc_tratamento, setDescTratamento] = useState(user.desc_tratamento ?? "");
   const [cirurgia, setCirurgia] = useState(user.cirurgia ?? "");

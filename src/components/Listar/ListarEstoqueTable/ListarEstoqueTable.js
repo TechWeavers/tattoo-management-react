@@ -4,10 +4,11 @@ import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import EditarUsuarioForm from "../../Editar/EditarUsuarioForm/EditarUsuarioForm";
 import { useNavigate } from 'react-router-dom';
+import EditarEstoqueForm from "../../Editar/EditarEstoqueForm/EditarEstoqueForm";
 
 const MySwal = withReactContent(Swal);
 
-function ListarUsuarioTable() {
+function ListarEstoqueTable() {
     const [materiais, setMateriais] = useState([]);
     const [searchTerm, setSearchTerm] = useState("");
     const [materialNomeAtual, setMaterialNomeAtual] = useState("");
@@ -38,14 +39,14 @@ function ListarUsuarioTable() {
     };
 
     const handleEdit = (material) => {
-        setMaterialNomeAtual(material.nome); // Atualize o estado diretamente aqui
-        axios.get(`http://localhost:8004/buscar-material/${materialNomeAtual}`, auth)
+        console.log(material.nome)
+        axios.get(`http://localhost:8004/buscar-material/${material.nome}`, auth)
             .then(response => {
                 MySwal.fire({
-                    html: <EditarUsuarioForm 
+                    html: <EditarEstoqueForm 
                         material={response.data} 
                         handleSubmit={handleSubmit} 
-                        materialNomeAtual={materialNomeAtual} 
+                        materialNomeAtual={material.nome} 
                     />,
                     customClass: {
                         container: 'my-swal-container',
@@ -71,7 +72,7 @@ function ListarUsuarioTable() {
     
 
     const handleSubmit = (editedMaterialData) => {
-        axios.patch(`http://localhost:8004/atualizar-material/${materialNomeAtual}`, editedMaterialData , auth)
+        axios.patch(`http://localhost:8004/atualizar-material/${editedMaterialData.materialNomeAtual}`, editedMaterialData , auth)
             .then(() => {
                 Swal.fire({
                     title: "Atualizado com sucesso!",
@@ -87,7 +88,7 @@ function ListarUsuarioTable() {
             .catch(err => {
                 console.log(err);
                 Swal.fire({
-                    title: "Erro em atualizar material",
+                    title: "Erro em atualizar materiaaaaaaaaal",
                     text: err.response.data.detail,
                     icon: "error",
                     confirmButtonColor: "#FFB800",
@@ -194,7 +195,7 @@ function ListarUsuarioTable() {
                                                 <td className="text-center bg-transparent d-flex justify-content-evenly">
                                                     <button 
                                                         className="btn shadow-sm btn-primary mr-2 " 
-                                                        onClick={() => handleEdit(material.nome)}
+                                                        onClick={() => handleEdit(material)}
                                                     >
                                                         Editar
                                                     </button>
@@ -218,4 +219,4 @@ function ListarUsuarioTable() {
     );
 }
 
-export default ListarUsuarioTable;
+export default ListarEstoqueTable;
