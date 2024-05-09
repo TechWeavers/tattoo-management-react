@@ -4,6 +4,7 @@ import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import EditarClienteForm from "../../Editar/EditarClienteForm/EditarClienteForm";
 import { useNavigate } from 'react-router-dom';
+import EditarFicha from '../../Editar/EditarFicha/EditarFicha'
 
 const MySwal = withReactContent(Swal);
 
@@ -55,8 +56,40 @@ function ListarClientesTable() {
                         confirmButton: 'btn btn-primary',
                         cancelButton: 'btn btn-secondary'
                     },
-                    showConfirmButton: false, // Remove the "OK" button
-                    width: '90%'
+                    showConfirmButton: false
+                });
+            })
+            .catch(err => {
+                console.log(err);
+                Swal.fire({
+                    title: "Erro ao atualizar usuário",
+                    text: err.response.data.detail,
+                    icon: "error",
+                    confirmButtonColor: "#FFB800",
+                    iconColor: "#ffb800"
+                });
+            });
+    };
+
+    const handleEditFicha = (clienteData) => {
+        console.log(clienteData.cpf); // Atualize o estado diretamente aqui
+        axios.get(`http://localhost:8003/buscar-cliente/${clienteData.cpf}`, auth)
+            .then(response => {
+                setClienteCpfAtual(clienteData.cpf);
+                MySwal.fire({
+                    html: <EditarFicha 
+                        user={response.data} 
+                        handleSubmit={handleSubmit} 
+                        clienteCpfAtual={clienteData.cpf} 
+                    />,
+                    customClass: {
+                        container: 'my-swal-container',
+                        popup: 'my-swal-popup',
+                        content: 'my-swal-content',
+                        confirmButton: 'btn btn-primary',
+                        cancelButton: 'btn btn-secondary'
+                    },
+                    showConfirmButton: false
                 });
             })
             .catch(err => {
@@ -211,7 +244,7 @@ function ListarClientesTable() {
                                                     <button
                                                         className="btn shadow-sm btn-primary mr-2"
 
-                                                        onClick={() => handleFicha(cliente)}
+                                                        onClick={() => handleEditFicha(cliente)}
                                                     >
                                                         Ver Ficha
                                                     </button>
