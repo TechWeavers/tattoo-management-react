@@ -8,7 +8,7 @@ import EditarEstoqueForm from "../../Editar/EditarEstoqueForm/EditarEstoqueForm"
 
 const MySwal = withReactContent(Swal);
 
-function ListarUsuarioTable() {
+function ListarEstoqueTable() {
     const [materiais, setMateriais] = useState([]);
     const [searchTerm, setSearchTerm] = useState("");
     const [materialNomeAtual, setMaterialNomeAtual] = useState("");
@@ -219,4 +219,4 @@ function ListarUsuarioTable() {
     );
 }
 
-export default ListarUsuarioTable;
+export default ListarEstoqueTable;
