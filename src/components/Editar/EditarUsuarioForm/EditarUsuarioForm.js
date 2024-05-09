@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 
+
 function EditarUsuarioForm({ user, closeAlert, userEmailAtual }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");

@@ -83,13 +83,14 @@ function ListarClientesTable() {
                         clienteCpfAtual={clienteData.cpf} 
                     />,
                     customClass: {
-                        container: 'my-swal-container',
+                        container: 'my-swal-container ',
                         popup: 'my-swal-popup',
                         content: 'my-swal-content',
                         confirmButton: 'btn btn-primary',
-                        cancelButton: 'btn btn-secondary'
+                        cancelButton: 'btn btn-secondary',
                     },
-                    showConfirmButton: false
+                    showConfirmButton: false,
+                    width:'80%'
                 });
             })
             .catch(err => {

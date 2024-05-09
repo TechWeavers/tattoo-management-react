@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import './EditarFicha.css'
 
 function EditarClienteForm({ user, closeAlert, clienteCpfAtual }) {
-  
+
   // Variáveis do cliente
   const [nome, setNome] = useState(user.nome ?? "");
   const [cpf, setCpf] = useState(user.cpf ?? "");
@@ -39,7 +40,7 @@ function EditarClienteForm({ user, closeAlert, clienteCpfAtual }) {
   const [isDiabetesAtivo, setIsDiabetesAtivo] = useState(false);
   const [isConvulsaoAtivo, setIsConvulsaoAtivo] = useState(false);
   const [isDoencasTransmissiveisAtivo, setIsDoencasTransmissiveisAtivo] = useState(false);
-  
+
 
 
   const [isCardiacoAtivo, setIsCardiacoAtivo] = useState(false);
@@ -48,7 +49,7 @@ function EditarClienteForm({ user, closeAlert, clienteCpfAtual }) {
   const [isPressaoAtivo, setIsPressaoAtivo] = useState(false);
   const [isAnemiaAtivo, setIsAnemiaAtivo] = useState(false);
   const [isHemofiliaAtivo, setIsHemofiliaAtivo] = useState(false);
-  
+
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -95,38 +96,41 @@ function EditarClienteForm({ user, closeAlert, clienteCpfAtual }) {
   };
 
   return (
-    <div>
+    <div >
       <h2 className="text-center mb-4">Editar Usuário</h2>
       <p className="text-center mb-4">Caso não queira editar um dos <br />campos deixe-o em branco</p>
       <form onSubmit={handleSubmit}>
         <div>
-          <div className="mb-3">
-            <label>
-              <input
-                type="radio"
-                name="tratamento"
-                value="sim"
-                checked={tratamento === "sim"}
-                onChange={(e) => {
-                  setTratamento(e.target.value);
-                  setIsTratamentoAtivo(true);
-                }}
-              />{" "}
-              Sim
-            </label>
-            <label>
-              <input
-                type="radio"
-                name="tratamento"
-                value="nao"
-                checked={tratamento === "nao"}
-                onChange={(e) => {
-                  setTratamento(e.target.value);
-                  setIsTratamentoAtivo(false);
-                  setDescTratamento(" "); // Limpar a descrição do tratamento se "Não" for selecionado
-                }}
-              />{" "}
-              Não
+          <div className="mb-3 form-check-inline">
+            <label className="form-check-label " > Sim </label>
+            <input
+              type="radio"
+              name="tratamento"
+              value="sim"
+              className="form-check-input me-5"
+              checked={tratamento === "sim"}
+              onChange={(e) => {
+                setTratamento(e.target.value);
+                setIsTratamentoAtivo(true);
+              }}
+            />{" "}
+           
+
+
+            
+            <input
+              type="radio"
+              name="tratamento"
+              value="nao"
+              className="form-check-input"
+              checked={tratamento === "nao"}
+              onChange={(e) => {
+                setTratamento(e.target.value);
+                setIsTratamentoAtivo(false);
+                setDescTratamento(" "); // Limpar a descrição do tratamento se "Não" for selecionado
+              }}
+            />{" "}
+            <label className="form-check-label" >Não
             </label>
           </div>
           {isTratamentoAtivo && (
@@ -136,6 +140,7 @@ function EditarClienteForm({ user, closeAlert, clienteCpfAtual }) {
                 type="text"
                 id="desc_tratamento"
                 name="desc_tratamento"
+                
                 placeholder="Descrição do Tratamento"
                 value={desc_tratamento}
                 onChange={(e) => setDescTratamento(e.target.value)}
@@ -144,25 +149,27 @@ function EditarClienteForm({ user, closeAlert, clienteCpfAtual }) {
           )}
         </div>
         <div>
-          <div className="mb-3">
-            <label>
+          <div className="mb-3 form-check-inline">
+            <label className="form-check-label ">Sim
+            </label>
               <input
                 type="radio"
                 name="cirurgia"
                 value="sim"
+                className="form-check-input me-5"
                 checked={cirurgia === "sim"}
                 onChange={(e) => {
                   setCirurgia(e.target.value);
                   setIsCirurgiaAtivo(true);
                 }}
               />{" "}
-              Sim
-            </label>
-            <label>
+              
+            
               <input
                 type="radio"
                 name="cirurgia"
                 value="nao"
+                className="form-check-input me-5"
                 checked={cirurgia === "nao"}
                 onChange={(e) => {
                   setCirurgia(e.target.value);
@@ -170,6 +177,7 @@ function EditarClienteForm({ user, closeAlert, clienteCpfAtual }) {
                   setDescCirurgia(" "); // Limpar a descrição do tratamento se "Não" for selecionado
                 }}
               />{" "}
+              <label className="form-check-label">
               Não
             </label>
           </div>
@@ -188,12 +196,13 @@ function EditarClienteForm({ user, closeAlert, clienteCpfAtual }) {
           )}
         </div>
         <div>
-          <div className="mb-3">
+          <div className="mb-3 form-check-inline">
             <label>
               <input
                 type="radio"
                 name="alergia"
                 value="sim"
+                className="form-check-input me-5"
                 checked={alergia === "sim"}
                 onChange={(e) => {
                   setAlergia(e.target.value);
@@ -207,14 +216,15 @@ function EditarClienteForm({ user, closeAlert, clienteCpfAtual }) {
                 type="radio"
                 name="alergia"
                 value="nao"
+                className="form-check-input me-5"
                 checked={alergia === "nao"}
                 onChange={(e) => {
                   setAlergia(e.target.value);
                   setIsAlergiaAtivo(false);
                   setDescAlergia(""); // Limpar a descrição da alergia se "Não" for selecionado
                 }}
-                />{" "}
-                Não
+              />{" "}
+              Não
             </label>
           </div>
           {isAlergiaAtivo && (
@@ -232,12 +242,13 @@ function EditarClienteForm({ user, closeAlert, clienteCpfAtual }) {
           )}
         </div>
         <div>
-          <div className="mb-3">
+          <div className="mb-3 form-check-inline">
             <label>
               <input
                 type="radio"
                 name="diabetes"
                 value="sim"
+                className="form-check-input me-5"
                 checked={diabetes === "sim"}
                 onChange={(e) => {
                   setDiabetes(e.target.value);
@@ -251,6 +262,7 @@ function EditarClienteForm({ user, closeAlert, clienteCpfAtual }) {
                 type="radio"
                 name="diabetes"
                 value="nao"
+                className="form-check-input me-5"
                 checked={diabetes === "nao"}
                 onChange={(e) => {
                   setDiabetes(e.target.value);
@@ -276,12 +288,13 @@ function EditarClienteForm({ user, closeAlert, clienteCpfAtual }) {
           )}
         </div>
         <div>
-          <div className="mb-3">
+          <div className="mb-3 form-check-inline">
             <label>
               <input
                 type="radio"
                 name="convulsao"
                 value="sim"
+                className="form-check-input me-5"
                 checked={convulsao === "sim"}
                 onChange={(e) => {
                   setConvulsao(e.target.value);
@@ -295,6 +308,7 @@ function EditarClienteForm({ user, closeAlert, clienteCpfAtual }) {
                 type="radio"
                 name="convulsao"
                 value="nao"
+                className="form-check-input me-5"
                 checked={convulsao === "nao"}
                 onChange={(e) => {
                   setConvulsao(e.target.value);
@@ -320,12 +334,13 @@ function EditarClienteForm({ user, closeAlert, clienteCpfAtual }) {
           )}
         </div>
         <div>
-          <div className="mb-3">
+          <div className="mb-3 form-check-inline">
             <label>
               <input
                 type="radio"
                 name="doencas_transmissiveis"
                 value="sim"
+                className="form-check-input me-5"
                 checked={doencas_transmissiveis === "sim"}
                 onChange={(e) => {
                   setDoencasTransmissiveis(e.target.value);
@@ -339,6 +354,7 @@ function EditarClienteForm({ user, closeAlert, clienteCpfAtual }) {
                 type="radio"
                 name="doencas_transmissiveis"
                 value="nao"
+                className="form-check-input me-5"
                 checked={doencas_transmissiveis === "nao"}
                 onChange={(e) => {
                   setDoencasTransmissiveis(e.target.value);
@@ -364,11 +380,13 @@ function EditarClienteForm({ user, closeAlert, clienteCpfAtual }) {
           )}
         </div>
         <div>
+        <div className="mb-3 form-check-inline">
           <label>
             <input
               type="radio"
               name="cardiaco"
               value="sim"
+              className="form-check-input me-5"
               checked={cardiaco === "sim"}
               onChange={(e) => {
                 setCardiaco(e.target.value);
@@ -382,6 +400,7 @@ function EditarClienteForm({ user, closeAlert, clienteCpfAtual }) {
               type="radio"
               name="cardiaco"
               value="nao"
+              className="form-check-input me-5"
               checked={cardiaco === "nao"}
               onChange={(e) => {
                 setCardiaco(e.target.value);
@@ -390,158 +409,177 @@ function EditarClienteForm({ user, closeAlert, clienteCpfAtual }) {
             />{" "}
             Não
           </label>
+          </div>
         </div>
         <div>
-        <div>
-          <label>
-            Câncer:
-            <input
-              type="radio"
-              name="cancer"
-              value="sim"
-              checked={cancer === "sim"}
-              onChange={(e) => {
-                setCancer(e.target.value);
-                setIsCancerAtivo(true);
-              }}
-            />{" "}
-            Sim
-            <input
-              type="radio"
-              name="cancer"
-              value="nao"
-              checked={cancer === "nao"}
-              onChange={(e) => {
-                setCancer(e.target.value);
-                setIsCancerAtivo(false);
-              }}
-            />{" "}
-            Não
-          </label>
+        <div className="mb-3 form-check-inline">
+            <label>
+              Câncer:
+              <input
+                type="radio"
+                name="cancer"
+                value="sim"
+                className="form-check-input me-5"
+                checked={cancer === "sim"}
+                onChange={(e) => {
+                  setCancer(e.target.value);
+                  setIsCancerAtivo(true);
+                }}
+              />{" "}
+              Sim
+              <input
+                type="radio"
+                name="cancer"
+                value="nao"
+                className="form-check-input me-5"
+                checked={cancer === "nao"}
+                onChange={(e) => {
+                  setCancer(e.target.value);
+                  setIsCancerAtivo(false);
+                }}
+              />{" "}
+              Não
+            </label>
+            </div>
+          </div>
+
+          <div>
+          <div className="mb-3 form-check-inline">
+            <label>
+              Drogas:
+              <input
+                type="radio"
+                name="drogas"
+                value="sim"
+                className="form-check-input me-5"
+                checked={drogas === "sim"}
+                onChange={(e) => {
+                  setDrogas(e.target.value);
+                  setIsDrogasAtivo(true);
+                }}
+              />{" "}
+              Sim
+              <input
+                type="radio"
+                name="drogas"
+                value="nao"
+                className="form-check-input me-5"
+                checked={drogas === "nao"}
+                onChange={(e) => {
+                  setDrogas(e.target.value);
+                  setIsDrogasAtivo(false);
+                }}
+              />{" "}
+              Não
+            </label>
+            </div>
+          </div>
+
+          <div>
+          <div className="mb-3 form-check-inline">
+            <label>
+              Pressão:
+              <input
+                type="radio"
+                name="pressao"
+                value="sim"
+                className="form-check-input me-5"
+                checked={pressao === "sim"}
+                onChange={(e) => {
+                  setPressao(e.target.value);
+                  setIsPressaoAtivo(true);
+                }}
+              />{" "}
+              Sim
+              <input
+                type="radio"
+                name="pressao"
+                value="nao"
+                className="form-check-input me-5"
+                checked={pressao === "nao"}
+                onChange={(e) => {
+                  setPressao(e.target.value);
+                  setIsPressaoAtivo(false);
+                }}
+              />{" "}
+              Não
+            </label>
+            </div>
+          </div>
+
+          <div>
+          <div className="mb-3 form-check-inline">
+            <label>
+              Anemia:
+              <input
+                type="radio"
+                name="anemia"
+                value="sim"
+                className="form-check-input me-5"
+                checked={anemia === "sim"}
+                onChange={(e) => {
+                  setAnemia(e.target.value);
+                  setIsAnemiaAtivo(true);
+                }}
+              />{" "}
+              Sim
+              <input
+                type="radio"
+                name="anemia"
+                value="nao"
+                className="form-check-input me-5"
+                checked={anemia === "nao"}
+                onChange={(e) => {
+                  setAnemia(e.target.value);
+                  setIsAnemiaAtivo(false);
+                }}
+              />{" "}
+              Não
+            </label>
+            </div>
+          </div>
+
+          <div>
+          <div className="mb-3 form-check-inline">
+            <label>
+              Hemofilia:
+              <input
+                type="radio"
+                name="hemofilia"
+                value="sim"
+                className="form-check-input me-5"
+                checked={hemofilia === "sim"}
+                onChange={(e) => {
+                  setHemofilia(e.target.value);
+                  setIsHemofiliaAtivo(true);
+                }}
+              />{" "}
+              Sim
+              <input
+                type="radio"
+                name="hemofilia"
+                value="nao"
+                className="form-check-input me-5"
+                checked={hemofilia === "nao"}
+                onChange={(e) => {
+                  setHemofilia(e.target.value);
+                  setIsHemofiliaAtivo(false);
+                }}
+              />{" "}
+              Não
+            </label>
+          </div>
         </div>
-        
-        <div>
-          <label>
-            Drogas:
-            <input
-              type="radio"
-              name="drogas"
-              value="sim"
-              checked={drogas === "sim"}
-              onChange={(e) => {
-                setDrogas(e.target.value);
-                setIsDrogasAtivo(true);
-              }}
-            />{" "}
-            Sim
-            <input
-              type="radio"
-              name="drogas"
-              value="nao"
-              checked={drogas === "nao"}
-              onChange={(e) => {
-                setDrogas(e.target.value);
-                setIsDrogasAtivo(false);
-              }}
-            />{" "}
-            Não
-          </label>
-        </div>
-        
-        <div>
-          <label>
-            Pressão:
-            <input
-              type="radio"
-              name="pressao"
-              value="sim"
-              checked={pressao === "sim"}
-              onChange={(e) => {
-                setPressao(e.target.value);
-                setIsPressaoAtivo(true);
-              }}
-            />{" "}
-            Sim
-            <input
-              type="radio"
-              name="pressao"
-              value="nao"
-              checked={pressao === "nao"}
-              onChange={(e) => {
-                setPressao(e.target.value);
-                setIsPressaoAtivo(false);
-              }}
-            />{" "}
-            Não
-          </label>
-        </div>
-        
-        <div>
-          <label>
-            Anemia:
-            <input
-              type="radio"
-              name="anemia"
-              value="sim"
-              checked={anemia === "sim"}
-              onChange={(e) => {
-                setAnemia(e.target.value);
-                setIsAnemiaAtivo(true);
-              }}
-            />{" "}
-            Sim
-            <input
-              type="radio"
-              name="anemia"
-              value="nao"
-              checked={anemia === "nao"}
-              onChange={(e) => {
-                setAnemia(e.target.value);
-                setIsAnemiaAtivo(false);
-              }}
-            />{" "}
-            Não
-          </label>
-        </div>
-        
-        <div>
-          <label>
-            Hemofilia:
-            <input
-              type="radio"
-              name="hemofilia"
-              value="sim"
-              checked={hemofilia === "sim"}
-              onChange={(e) => {
-                setHemofilia(e.target.value);
-                setIsHemofiliaAtivo(true);
-              }}
-            />{" "}
-            Sim
-            <input
-              type="radio"
-              name="hemofilia"
-              value="nao"
-              checked={hemofilia === "nao"}
-              onChange={(e) => {
-                setHemofilia(e.target.value);
-                setIsHemofiliaAtivo(false);
-              }}
-            />{" "}
-            Não
-          </label>
-        </div>
-      </div>
-      <div className="text-center">
+        <div className="text-center">
           <button className="btn btn-primary" type="submit">
             Atualizar Usuário
           </button>
-      </div>
+        </div>
 
 
 
 
-        
+
       </form>
     </div>
   );
