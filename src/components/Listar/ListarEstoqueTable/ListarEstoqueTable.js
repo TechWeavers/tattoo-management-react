@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
-import EditarUsuarioForm from "../../Editar/EditarUsuarioForm/EditarUsuarioForm";
 import { useNavigate } from 'react-router-dom';
 import EditarEstoqueForm from "../../Editar/EditarEstoqueForm/EditarEstoqueForm";
 
@@ -39,7 +38,6 @@ function ListarEstoqueTable() {
     };
 
     const handleEdit = (material) => {
-        console.log(material.nome)
         axios.get(`http://localhost:8004/buscar-material/${material.nome}`, auth)
             .then(response => {
                 MySwal.fire({
@@ -70,9 +68,9 @@ function ListarEstoqueTable() {
             });
     };
     
-
+ 
     const handleSubmit = (editedMaterialData) => {
-        axios.patch(`http://localhost:8004/atualizar-material/${editedMaterialData.materialNomeAtual}`, editedMaterialData , auth)
+        axios.patch(`http://localhost:8004/atualizar-material/${editedMaterialData.nome}`, editedMaterialData , auth)
             .then(() => {
                 Swal.fire({
                     title: "Atualizado com sucesso!",

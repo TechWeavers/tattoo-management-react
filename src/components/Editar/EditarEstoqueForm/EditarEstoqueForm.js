@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 
-function EditarEstoqueForm({ material, closeAlert, materialAtual }) {
-  const [nome, setNome] = useState("");
-  const [quantidade, setQuantidade] = useState("");
-  const [valor_unitario, setValorUnitario] = useState("");
+function EditarEstoqueForm({ material, closeAlert, materialNomeAtual }) {
+  const [nome, setNome] = useState(material.nome ?? "");
+  const [quantidade, setQuantidade] = useState(material.quantidade ??"");
+  const [valor_unitario, setValorUnitario] = useState(material.valor_unitario ??"");
   //const [password, setPassword] = useState("");
 
   useEffect(() => {
@@ -37,16 +37,9 @@ function EditarEstoqueForm({ material, closeAlert, materialAtual }) {
       };
 
       //const editedMaterialData = { nome, quantidade, valor_unitario};
-      const response = await axios.patch(`http://localhost:8004/atualizar-material/${materialAtual}`,{ nome, quantidade, valor_unitario},  auth);
+      await axios.patch(`http://localhost:8004/atualizar-material/${materialNomeAtual}`,{ nome, quantidade, valor_unitario},  auth);
 
-      Swal.fire({
-        title: "Aguarde um momento...",
-        html: "Atualizando informações do material",
-        allowOutsideClick: false,
-        didOpen: () => {
-          Swal.showLoading()
-        }
-      });
+      
      
 
       Swal.fire({
