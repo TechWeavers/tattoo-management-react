@@ -1,0 +1,17 @@
+.glass-container {
+    background: rgba(255, 255, 255, 0.2); /* Cor de fundo com transparência */
+    backdrop-filter: blur(10px); /* Efeito de vidro */
+}
+
+.glass-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(to top right, #e07f29, transparent), /* Gradiente laranja */
+                linear-gradient(to bottom left, #f5f5f5, transparent); /* Gradiente azul */
+    mix-blend-mode: multiply; /* Mistura os gradientes */
+    z-index: -1; /* Coloca atrás do conteúdo da div */
+}
