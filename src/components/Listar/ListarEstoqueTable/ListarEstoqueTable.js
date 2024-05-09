@@ -109,13 +109,12 @@ function ListarEstoqueTable() {
             iconColor: "#ffb800"
         }).then((result) => {
             if (result.isConfirmed) {
-                handleDeleteConfirmed();
+                handleDeleteConfirmed(material.nome);
             }
         });
     };
 
-    const handleDeleteConfirmed = () => {
-        const materialNome = materialNomeToDelete;
+    const handleDeleteConfirmed = (materialNome) => {
         axios.delete(`http://localhost:8004/deletar-material/${materialNome}`, auth)
         .then(() => {
             fetchMateriais();
