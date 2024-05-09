@@ -2,27 +2,27 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 
-function EditarEstoqueForm({ user, closeAlert, userEmailAtual }) {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [tipo, setTipo] = useState("");
-  const [password, setPassword] = useState("");
+function EditarEstoqueForm({ material, closeAlert, materialAtual }) {
+  const [nome, setNome] = useState("");
+  const [quantidade, setQuantidade] = useState("");
+  const [valor_unitario, setValorUnitario] = useState("");
+  //const [password, setPassword] = useState("");
 
   useEffect(() => {
-    if (user.length > 0) { 
-      const userData = user[0];
-      setName(userData.name ?? "");
-      setEmail(userData.email ?? "");
-      setTipo(userData.tipo ?? "");
+    if (material.length > 0) { 
+      const materialData = material[0];
+      setNome(materialData.nome ?? "");
+      setQuantidade(materialData.quantidade ?? "");
+      setValorUnitario(materialData.valor_unitario ?? "");
     }
-  }, [user]);
+  }, [material]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    try {
+    try { 
       Swal.fire({
         title: "Aguarde um momento...",
-        html: "Atualizando informações do usuário",
+        html: "Atualizando informações do material",
         allowOutsideClick: false,
         didOpen: () => {
           Swal.showLoading()
@@ -36,12 +36,22 @@ function EditarEstoqueForm({ user, closeAlert, userEmailAtual }) {
         }
       };
 
-      const editedUserData = { name, email, tipo, password};
-      const response = await axios.patch(`http://localhost:8001/atualizar-usuario/${userEmailAtual}`, editedUserData, auth);
+      //const editedMaterialData = { nome, quantidade, valor_unitario};
+      const response = await axios.patch(`http://localhost:8004/atualizar-material/${materialAtual}`,{ nome, quantidade, valor_unitario},  auth);
+
+      Swal.fire({
+        title: "Aguarde um momento...",
+        html: "Atualizando informações do material",
+        allowOutsideClick: false,
+        didOpen: () => {
+          Swal.showLoading()
+        }
+      });
+     
 
       Swal.fire({
         title: "Atualizado com sucesso!",
-        text: "As informações do usuário foram atualizadas",
+        text: "As informações do material foram atualizadas",
         icon: "success",
         confirmButtonColor: "#FFB800",
         iconColor: "#ffb800",
@@ -51,8 +61,8 @@ function EditarEstoqueForm({ user, closeAlert, userEmailAtual }) {
 
     } catch (error) {
       Swal.fire({
-        title: "Erro",
-        text: "deu merda aq chefia",
+        title: "Erro ao atualizar material",
+        text: error.response.data.detail,
         icon: "success",
         confirmButtonColor: "#FFB800",
         iconColor: "#ffb800"
@@ -62,47 +72,47 @@ function EditarEstoqueForm({ user, closeAlert, userEmailAtual }) {
 
   return (
     <div>
-      <h2 className="text-center mb-4">Editar Usuário</h2>
+      <h2 className="text-center mb-4">Editar Estoque</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <input
             className="form-control"
             type="text"
-            id="name"
-            name="name"
+            id="nome"
+            name="nome"
             placeholder="Nome"
-            value={name}
+            value={nome}
             onChange={(e) => {
-              setName(e.target.value);
+              setNome(e.target.value);
             }}
           />
         </div>
         <div className="mb-3">
           <input
             className="form-control"
-            type="email"
-            id="email"
-            name="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            type="number"
+            id="quantidade"
+            name="quantidade"
+            placeholder="Quantidade"
+            value={quantidade}
+            onChange={(e) => setQuantidade(e.target.value)}
           />
         </div>
         <div className="mb-3">
-          <select
-            className="form-select"
-            aria-label="Default select example"
-            value={tipo}
-            onChange={(e) => setTipo(e.target.value)}
-          >
-            <option value="">Selecione uma opção</option>
-            <option value="Tatuador">Tatuador</option>
-            <option value="Administrador">Administrador</option>
-          </select>
+          <input
+            className="form-control"
+            type="number"
+            id="valor_unitario"
+            name="valor_unitario"
+            placeholder="valor de cada unidade"
+            value={valor_unitario}
+            onChange={(e) => setValorUnitario(e.target.value)}
+          />
         </div>
+        
         <div className="text-center">
           <button className="btn btn-primary" type="submit">
-            Atualizar Usuário
+            Atualizar Material
           </button>
         </div>
       </form>
