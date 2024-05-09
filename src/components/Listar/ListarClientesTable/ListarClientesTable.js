@@ -219,7 +219,7 @@ function ListarClientesTable() {
                                         </button>
                                     </div>
                                     <br />
-                                    <button className="btn input-group bt-cadastrar " type="button"><a href="/novo-cliente">Cadastrar novo cliente</a></button>
+                                    <a href="/novo-cliente"><button className="btn input-group bt-cadastrar " type="button">Cadastrar novo cliente</button></a>
                                 </div>
                             </div>
                             <div className="table-responsive rounded-3" style={{ maxHeight: '400px' }}>

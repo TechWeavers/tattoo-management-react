@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 
@@ -11,6 +11,16 @@ function EditarClienteForm({ user, closeAlert, clienteCpfAtual }) {
   const [email, setEmail] = useState(user.email ?? "");
   const [idade, setIdade] = useState(user.idade ?? "");
   
+  useEffect(() => {
+    if (user.length > 0) { 
+      const userData = user[0];
+      setNome(userData.nome ?? "");
+      setCpf(userData.cpf ?? "");
+      setTelefone(userData.telefone ?? "");
+      setEmail(userData.email ?? "");
+      setIdade(userData.idade ?? "");
+    }
+  }, [user]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -58,7 +68,7 @@ function EditarClienteForm({ user, closeAlert, clienteCpfAtual }) {
 
   return (
     <div>
-      <h2 className="text-center mb-4">Editar Usuário</h2>
+      <h2 className="text-center mb-4">Editar Cliente</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
           <input
