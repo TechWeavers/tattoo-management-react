@@ -29,7 +29,7 @@ function Sidebar() {
                                     data-bs-placement="right" data-bs-original-title="Home">
                                     <i className="bi bi-calendar-event h4 text-light"></i>
                                 </a>
-                                <p className="fw-light text-center fs-6 text-light">Agendamentos</p>
+                                <p className="fw-light text-center fs-6 text-light">Agenda</p>
                             </li>
                             <li>
                                 <a href="/listar-usuario" className="nav-link py-1 px-2" title="" data-bs-toggle="tooltip"

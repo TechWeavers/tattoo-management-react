@@ -53,10 +53,10 @@ function NovoEstoqueForm() {
   };
 
   return (
-    <div className="col-sm-10 p-3 min-vh-100 ms-auto">
+    <div className="col-md-11 p-3 min-vh-100 ">
       <div className="row justify-content-center">
-        <div className="col-md-8">
-          <div className="card">
+        <div className="col-lg">
+        <div className="card bg-white border  shadow-lg border-3 rounded-3 bg-opacity-25">
             <div className="card-body">
               <div className="row justify-content-center mb-4">
                 <div className="col-md-6">
@@ -64,7 +64,7 @@ function NovoEstoqueForm() {
                       <form onSubmit={handleSubmit}>
                         <div className="mb-3">
                           <input
-                            className="form-control"
+                            className="form-control shadow"
                             type="text"
                             id="nome"
                             name="nome"
@@ -76,7 +76,7 @@ function NovoEstoqueForm() {
                         </div>
                         <div className="mb-3">
                           <input
-                            className="form-control"
+                            className="form-control shadow"
                             type="number"
                             id="quantidade"
                             name="quantidade"
@@ -88,7 +88,7 @@ function NovoEstoqueForm() {
                         </div>
                         <div className="mb-3">
                           <input
-                            className="form-control"
+                            className="form-control shadow"
                             type="number"
                             id="valor_unitario"
                             name="valor_unitario"
