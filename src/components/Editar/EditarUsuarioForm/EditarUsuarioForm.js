@@ -2,12 +2,11 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 
-function EditarUsuarioForm({ material, closeAlert, materialAtual }) {
-  const [materiais, setMateriais] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [materialNomeAtual, setMaterialNomeAtual] = useState("");
-  const [materialNomeToDelete, setMaterialNomeToDelete] = useState("");
-
+function EditarUsuarioForm({ user, closeAlert, userEmailAtual }) {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [tipo, setTipo] = useState("");
+  const [password, setPassword] = useState("");
 
   useEffect(() => {
     if (user.length > 0) { 
@@ -23,7 +22,7 @@ function EditarUsuarioForm({ material, closeAlert, materialAtual }) {
     try {
       Swal.fire({
         title: "Aguarde um momento...",
-        html: "Atualizando informações do material",
+        html: "Atualizando informações do usuário",
         allowOutsideClick: false,
         didOpen: () => {
           Swal.showLoading()
@@ -37,8 +36,8 @@ function EditarUsuarioForm({ material, closeAlert, materialAtual }) {
         }
       };
 
-      const editedEstoqueData = { name, email, tipo, password};
-      const response = await axios.patch(`http://localhost:8001/atualizar-usuario/${materialAtual}`, editedEstoqueData, auth);
+      const editedUserData = { name, email, tipo, password};
+      const response = await axios.patch(`http://localhost:8001/atualizar-usuario/${userEmailAtual}`, editedUserData, auth);
 
       Swal.fire({
         title: "Atualizado com sucesso!",
