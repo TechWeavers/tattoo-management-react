@@ -143,13 +143,22 @@ function ListarUsuarioTable() {
 
     const handleSearch = () => {
         axios.get(`http://localhost:8001/buscar-usuario/${searchTerm}`, auth)
-            .then(response => {
+        .then(response => {
+            if (response.data.length === 0) {
+                MySwal.fire({
+                    title: 'Nenhum usuário encontrado',
+                    text: 'Nenhum usuário corresponde à sua busca.',
+                    icon: 'info',
+                    confirmButtonColor: '#FFB800',
+                    iconColor: '#ffb800'
+                });
+            } else {
                 setUsers(response.data);
-            })
-            .catch(err => {
-                console.log(err);
-                setUsers([]);
-            });
+            }
+        })
+        .catch(err => {
+            console.log(err);
+        });
     };
 
     return (

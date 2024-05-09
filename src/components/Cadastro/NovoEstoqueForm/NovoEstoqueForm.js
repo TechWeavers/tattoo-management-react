@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 
 function NovoEstoqueForm() {
   const [nome, setNome] = useState('');
@@ -8,6 +9,7 @@ function NovoEstoqueForm() {
   const [valor_unitario, setValorUnitario] = useState('');
   const [data_atualizacao, setDataAtualizacao] = useState('');
   
+  const navigate = useNavigate();
 
   /*const handleTipoChange = (selectedTipo) => {
     setTipo(selectedTipo);
@@ -40,6 +42,7 @@ function NovoEstoqueForm() {
       setQuantidade('');
       setValorUnitario('');
       setDataAtualizacao('');
+      navigate('/listar-materiais');
     } catch (error) {
       console.log(error);
       Swal.fire({

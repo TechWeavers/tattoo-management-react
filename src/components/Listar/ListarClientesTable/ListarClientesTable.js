@@ -3,7 +3,7 @@ import axios from "axios";
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import EditarClienteForm from "../../Editar/EditarClienteForm/EditarClienteForm";
-import { useNavigate } from 'react-router-dom';
+
 
 const MySwal = withReactContent(Swal);
 
@@ -13,7 +13,6 @@ function ListarClientesTable() {
     const [clienteCpfAtual, setClienteCpfAtual] = useState("");
 
 
-    const navigate = useNavigate(); // Get the useNavigate hook
     const token = localStorage.getItem('token');
     const auth = {
         headers: {
@@ -55,8 +54,7 @@ function ListarClientesTable() {
                         confirmButton: 'btn btn-primary',
                         cancelButton: 'btn btn-secondary'
                     },
-                    showConfirmButton: false, // Remove the "OK" button
-                    width: '90%'
+                    showConfirmButton: false
                 });
             })
             .catch(err => {
@@ -145,13 +143,23 @@ function ListarClientesTable() {
 
     const handleSearch = () => {
         axios.get(`http://localhost:8003/buscar-cliente/${searchTerm}`, auth)
-            .then(response => {
+        .then(response => {
+            if (response.data.length === 0) {
+                MySwal.fire({
+                    title: 'Nenhum cliente encontrado',
+                    text: 'Nenhum cliente corresponde à sua busca.',
+                    icon: 'info',
+                    confirmButtonColor: '#FFB800',
+                    iconColor: '#ffb800'
+                });
+            } else {
+               
                 setClientes(response.data);
-            })
-            .catch(err => {
-                console.log(err);
-                setClientes([]);
-            });
+            }
+        })
+        .catch(err => {
+            console.log(err);
+        });
     };
 
     const handleFicha = () => {

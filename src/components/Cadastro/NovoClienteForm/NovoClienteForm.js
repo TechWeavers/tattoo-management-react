@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 
 function NovoClienteForm() {
   const [nome, setNome] = useState('');
@@ -9,9 +10,8 @@ function NovoClienteForm() {
   const [email, setEmail] = useState('');
   const [idade, setIdade] = useState('');
 
-  /*const handleTipoChange = (selectedTipo) => {
-    setTipo(selectedTipo);
-  };*/
+  
+  const navigate = useNavigate(); // Get the useNavigate hook
 
   const token = localStorage.getItem('token');
   const auth = {
@@ -43,6 +43,8 @@ function NovoClienteForm() {
       setTelefone('');
       setEmail('');
       setIdade('');
+
+      navigate('/listar-clientes');
     } catch (error) {
       console.log(error);
       Swal.fire({

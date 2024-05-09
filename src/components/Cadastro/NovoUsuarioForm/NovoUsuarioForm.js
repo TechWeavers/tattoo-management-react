@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 
 function NovoUsuarioForm() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [tipo, setTipo] = useState('Tatuador');
+
+  const navigate = useNavigate();
 
   const handleTipoChange = (selectedTipo) => {
     setTipo(selectedTipo);
@@ -39,6 +42,7 @@ function NovoUsuarioForm() {
       setName('');
       setEmail('');
       setPassword('');
+      navigate('/listar-usuario');
     } catch (error) {
       console.log(error);
       Swal.fire({

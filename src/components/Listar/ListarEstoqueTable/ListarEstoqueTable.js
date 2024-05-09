@@ -134,11 +134,22 @@ function ListarEstoqueTable() {
     const handleSearch = () => {
         axios.get(`http://localhost:8004/buscar-material/${searchTerm}`, auth)
             .then(response => {
-                setMateriais(response.data);
+                if (response.data.length === 0) {
+                    // Se nenhum material for encontrado, exibe um SweetAlert
+                    MySwal.fire({
+                        title: 'Nenhum material encontrado',
+                        text: 'Nenhum material corresponde à sua busca.',
+                        icon: 'info',
+                        confirmButtonColor: '#FFB800',
+                        iconColor: '#ffb800'
+                    });
+                } else {
+                    // Se materiais forem encontrados, atualiza o estado com os resultados
+                    setMateriais(response.data);
+                }
             })
             .catch(err => {
                 console.log(err);
-                setMateriais([]);
             });
     };
 
