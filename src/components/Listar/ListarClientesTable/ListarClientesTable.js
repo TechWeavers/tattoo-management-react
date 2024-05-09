@@ -3,6 +3,7 @@ import axios from "axios";
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import EditarClienteForm from "../../Editar/EditarClienteForm/EditarClienteForm";
+import FichaForm from "../../Ficha/Ficha";
 
 
 const MySwal = withReactContent(Swal);
@@ -162,8 +163,35 @@ function ListarClientesTable() {
         });
     };
 
-    const handleFicha = () => {
-
+    const handleFicha = (cliente) => {
+            axios.get(`http://localhost:8003/buscar-cliente/${cliente.cpf}`, auth)
+                .then(response => {
+                    MySwal.fire({
+                        html: <FichaForm
+                            cliente={response.data} 
+                            handleSubmit={handleSubmit} 
+                            cpf={cliente.cpf} 
+                        />,
+                        customClass: {
+                            container: 'my-swal-container',
+                            popup: 'my-swal-popup',
+                            content: 'my-swal-content',
+                            confirmButton: 'btn btn-primary',
+                            cancelButton: 'btn btn-secondary'
+                        },
+                        showConfirmButton: false // Remove the "OK" button
+                    });
+                })
+                .catch(err => {
+                    console.log(err);
+                    Swal.fire({
+                        title: "Erro ao atualizar material",
+                        text: err.response.data.detail,
+                        icon: "error",
+                        confirmButtonColor: "#FFB800",
+                        iconColor: "#ffb800"
+                    });
+                });
     }
 
     return (
