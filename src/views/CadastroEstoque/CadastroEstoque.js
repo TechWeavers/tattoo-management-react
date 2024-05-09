@@ -6,11 +6,11 @@ function CadastroEstoque() {
   return (
     <>
     <Navbar></Navbar>
-    <div class="container my-0 mx-0">
+    
         <div class="row">
     <Sidebar></Sidebar>
     <NovoEstoqueForm></NovoEstoqueForm>
-    </div></div>
+    </div>
     </>
   );
 }
