@@ -203,7 +203,7 @@ function ListarClientesTable() {
                         <div className="card-body ">
                             <div className="row justify-content-center mb-4 ">
                                 <div className="col-md-6  ">
-                                    <h2 className="text-center mb-4">Banco de clientes</h2>
+                                    <h2 className="text-center mb-4">Clientes</h2>
                                     <div className="input-group">
                                         <input
                                             type="text"
