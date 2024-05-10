@@ -58,7 +58,7 @@ function EditarClienteForm({ cliente, closeAlert, clienteCpfAtual }) {
     } catch (error) {
       Swal.fire({
         title: "Erro",
-        text: "deu merda aq chefia",
+        text: "Algo deu errado",
         icon: "error",
         confirmButtonColor: "#FFB800",
         iconColor: "#ffb800"

@@ -4,17 +4,10 @@ import Swal from 'sweetalert2';
 
 function FichaForm({ cliente, closeAlert, cpf }) {
   const [nome, setNome] = useState(cliente.nome ?? "");
-  const [tratamento, setTratamento] = useState(cliente.tratamento ?? "");
   const [desc_tratamento, setDescTratamento] = useState(cliente.desc_tratamento ??"");
-  const [cirurgia, setCirurgia] = useState(cliente.cirurgia ??"");
-  const [desc_cirurgia, setDescCirurgia] = useState(cliente.desc_cirurgia ??"");
-  const [alergia, setAlergia] = useState(cliente.alergia ??"");
   const [desc_alergia, setDescAlergia] = useState(cliente.desc_alergia ??"");
-  const [diabetes, setDiabetes] = useState(cliente.diabetes ?? "");
   const [desc_diabetes, setDescDiabetes] = useState(cliente.desc_diabetes ?? "");
-  const [convulsao, setConvulsao] = useState(cliente.convulsao ?? "");
   const [desc_convulsao, setDescConvulsao] = useState(cliente.desc_convulsao ?? "");
-  const [doencas_transmissiveis, setDoencasTransmissiveis] = useState(cliente.doencas_transmissiveis ?? "");
   const [desc_doencas_transmissiveis, setDescDoencasTransmissiveis] = useState(cliente.desc_doencas_transmissiveis ?? "");
   const [cardiaco, setCardiaco] = useState(cliente.cardiaco ?? "");
   const [cancer, setCancer] = useState(cliente.cancer ?? "");
@@ -22,32 +15,22 @@ function FichaForm({ cliente, closeAlert, cpf }) {
   const [pressao, setPressao] = useState(cliente.pressao ?? "");
   const [anemia, setAnemia] = useState(cliente.anemia ?? "");
   const [hemofilia, setHemofilia] = useState(cliente.hemofilia ?? "");
-  const [outro, setOutro] = useState(cliente.outro ?? "");
-  //const [password, setPassword] = useState("");
 
   useEffect(() => {
     if (cliente.length > 0) { 
       const clienteData = cliente[0];
       setNome(clienteData.nome ?? "");
-      setTratamento(clienteData.tratamento ?? "");
       setDescTratamento(clienteData.desc_tratamento ?? "");
-      setCirurgia(clienteData.cirurgia ?? "");
-      setDescCirurgia(clienteData.desc_cirurgia ?? "")
-      setAlergia(clienteData.alergia ?? "")
-      setDescAlergia(clienteData.desc_alergia ?? "")
-      setDiabetes(clienteData.diabetes ?? "")
-      setDescDiabetes(clienteData.diabetes ?? "")
-      setConvulsao(clienteData.convulsao ?? "")
-      setDescConvulsao(clienteData.desc_convulsao ?? "")
-      setDoencasTransmissiveis(clienteData.doencas_transmissiveis?? "")
-      setDescDoencasTransmissiveis(clienteData.desc_doencas_transmissiveis?? "")
+      setDescAlergia(clienteData.desc_alergia ?? "");
+      setDescDiabetes(clienteData.diabetes ?? "");
+      setDescConvulsao(clienteData.desc_convulsao ?? "");
+      setDescDoencasTransmissiveis(clienteData.desc_doencas_transmissiveis?? "");
       setCardiaco(clienteData.cardiaco ?? "");
       setCancer(clienteData.cancer ?? "");
       setDrogas(clienteData.drogas ?? "");
       setPressao(clienteData.pressao ?? "");
       setAnemia(clienteData.anemia ?? "");
       setHemofilia(clienteData.hemofilia ?? "");
-      setOutro(clienteData.outro ?? "");
     }
   }, [cliente]);
 
@@ -70,7 +53,7 @@ function FichaForm({ cliente, closeAlert, cpf }) {
         }
       };
 
-      const dados_ficha = { tratamento, desc_tratamento, cirurgia, desc_cirurgia, alergia, desc_alergia, diabetes, desc_diabetes, convulsao, desc_convulsao, doencas_transmissiveis, desc_doencas_transmissiveis, cardiaco, cancer, drogas, pressao, anemia, hemofilia, outro};
+      const dados_ficha = { desc_tratamento, desc_alergia, desc_diabetes, desc_convulsao,  desc_doencas_transmissiveis, cardiaco, cancer, drogas, pressao, anemia, hemofilia};
       await axios.patch(`http://localhost:8003/atualizar-ficha/${cpf}`,dados_ficha,  auth);
       Swal.fire({
         title: "Atualizado com sucesso!",
@@ -97,23 +80,11 @@ function FichaForm({ cliente, closeAlert, cpf }) {
     <div>
       <h2 className="text-center mb-4"> Ficha de Anamnese do {nome}</h2>
       <form onSubmit={handleSubmit}>
-        <div className="mb-3">
+        <label className='form-check-label'>Faz algum tratamento? Se sim, descreva-o.</label>
+        <div className=" mb-3">
           <input
-            className="form-control"
-            type="text"
-            id="tratamento"
-            name="tratamento"
-            placeholder="tratamento"
-            value={tratamento}
-            onChange={(e) => {
-              setTratamento(e.target.value);
-            }}
-          />
-        </div>
-        <div className="mb-3">
-          <input
-            className="form-control"
-            type="text"
+            className=" mt-2 form-control"
+            type="text"  
             id="desc_tratamento"
             name="desc_tratamento"
             placeholder="Descrição do tratamento"
@@ -121,42 +92,11 @@ function FichaForm({ cliente, closeAlert, cpf }) {
             onChange={(e) => setDescTratamento(e.target.value)}
           />
         </div>
-        <div className="mb-3">
+        
+        <div className=" mt-4 mb-3">
+        <label className='form-check-label'>Tem alguma alergia? Se sim, descreva-a.</label>
           <input
-            className="form-control"
-            type="text"
-            id="cirurgia"
-            name="cirurgia"
-            placeholder="cirurgia"
-            value={cirurgia}
-            onChange={(e) => setCirurgia(e.target.value)}
-          />
-        </div>
-        <div className="mb-3">
-          <input
-            className="form-control"
-            type="text"
-            id="desc_cirurgia"
-            name="desc_cirurgia"
-            placeholder="Descrição da cirurgia"
-            value={desc_cirurgia}
-            onChange={(e) => setDescCirurgia(e.target.value)}
-          />
-        </div>
-        <div className="mb-3">
-          <input
-            className="form-control"
-            type="text"
-            id="alergia"
-            name="alergia"
-            placeholder="Alergia"
-            value={alergia}
-            onChange={(e) => setAlergia(e.target.value)}
-          />
-        </div>
-        <div className="mb-3">
-          <input
-            className="form-control"
+            className="mt-2 form-control"
             type="text"
             id="desc_alergia"
             name="desc_alergia"
@@ -165,20 +105,11 @@ function FichaForm({ cliente, closeAlert, cpf }) {
             onChange={(e) => setDescAlergia(e.target.value)}
           />
         </div>
-        <div className="mb-3">
+        
+        <div className=" mt-4 mb-3">
+        <label className='form-check-label'>Tem diabetes? Se sim, descreva-a minimamente.</label>
           <input
-            className="form-control"
-            type="text"
-            id="diabetes"
-            name="diabetes"
-            placeholder="Diabetes"
-            value={diabetes}
-            onChange={(e) => setDiabetes(e.target.value)}
-          />
-        </div>
-        <div className="mb-3">
-          <input
-            className="form-control"
+            className="mt-2 form-control"
             type="text"
             id="desc_diabetes"
             name="desc_diabetes"
@@ -187,20 +118,11 @@ function FichaForm({ cliente, closeAlert, cpf }) {
             onChange={(e) => setDescDiabetes(e.target.value)}
           />
         </div>
-        <div className="mb-3">
+        
+        <div className=" mt-4 mb-3">
+        <label className='form-check-label'>Já teve convulsão? Se sim, descreva-a minimamente.</label>
           <input
-            className="form-control"
-            type="text"
-            id="convulsao"
-            name="convulsao"
-            placeholder="Convulsão"
-            value={convulsao}
-            onChange={(e) => setConvulsao(e.target.value)}
-          />
-        </div>
-        <div className="mb-3">
-          <input
-            className="form-control"
+            className="mt-2 form-control"
             type="text"
             id="desc_convulsao"
             name="desc_convulsao"
@@ -209,20 +131,10 @@ function FichaForm({ cliente, closeAlert, cpf }) {
             onChange={(e) => setDescConvulsao(e.target.value)}
           />
         </div>
-        <div className="mb-3">
+        <div className=" mt-4 mb-3">
+        <label className='form-check-label'>Portador de doença transmissível? descreva-a minimamente.</label>
           <input
-            className="form-control"
-            type="text"
-            id="doencas_transmissiveis"
-            name="doencas_transmissiveis"
-            placeholder="doencas_transmissiveis"
-            value={doencas_transmissiveis}
-            onChange={(e) => setDoencasTransmissiveis(e.target.value)}
-          />
-        </div>
-        <div className="mb-3">
-          <input
-            className="form-control"
+            className="mt-2 form-control"
             type="text"
             id="desc_doencas_transmissiveis"
             name="desc_doencas_transmissiveis"
@@ -231,9 +143,10 @@ function FichaForm({ cliente, closeAlert, cpf }) {
             onChange={(e) => setDescDoencasTransmissiveis(e.target.value)}
           />
         </div>
-        <div className="mb-3">
+        <div className=" mt-4 mb-3">
+        <label className='form-check-label'>Cardícaco? descreva o problema minimamente.</label>
           <input
-            className="form-control"
+            className="mt-2 form-control"
             type="text"
             id="cardiaco"
             name="cardicaco"
@@ -242,9 +155,10 @@ function FichaForm({ cliente, closeAlert, cpf }) {
             onChange={(e) => setCardiaco(e.target.value)}
           />
         </div>
-        <div className="mb-3">
+        <div className=" mt-4 mb-3">
+        <label className='form-check-label'>Possui câncer? descreva-o minimamente.</label>
           <input
-            className="form-control"
+            className="mt-2 form-control"
             type="text"
             id="cancer"
             name="cancer"
@@ -253,9 +167,10 @@ function FichaForm({ cliente, closeAlert, cpf }) {
             onChange={(e) => setCancer(e.target.value)}
           />
         </div>
-        <div className="mb-3">
+        <div className=" mt-4 mb-3">
+        <label className='form-check-label'>Possui problema com drogas? descreva-o minimamente.</label>
           <input
-            className="form-control"
+            className="mt-2 form-control"
             type="text"
             id="drogas"
             name="drogas"
@@ -264,9 +179,10 @@ function FichaForm({ cliente, closeAlert, cpf }) {
             onChange={(e) => setDrogas(e.target.value)}
           />
         </div>
-        <div className="mb-3">
+        <div className=" mt-4 mb-3">
+        <label className='form-check-label'>Possui problema de pressão?  descreva-o minimamente.</label>
           <input
-            className="form-control"
+            className="mt-2 form-control"
             type="text"
             id="pressao"
             name="pressao"
@@ -275,9 +191,10 @@ function FichaForm({ cliente, closeAlert, cpf }) {
             onChange={(e) => setPressao(e.target.value)}
           />
         </div>
-        <div className="mb-3">
+        <div className=" mt-4 mb-3">
+        <label className='form-check-label'>Tem anemia? descreva-a minimamente.</label>
           <input
-            className="form-control"
+            className="mt-2 form-control"
             type="text"
             id="anemia"
             name="anemia"
@@ -286,26 +203,16 @@ function FichaForm({ cliente, closeAlert, cpf }) {
             onChange={(e) => setAnemia(e.target.value)}
           />
         </div>
-        <div className="mb-3">
+        <div className=" mt-4 mb-3">
+        <label className='form-check-label'>Possui hemofilia? descreva-a minimamente.</label>
           <input
-            className="form-control"
+            className="mt-2 form-control"
             type="text"
             id="hemofilia"
             name="hemofilia"
             placeholder="Hemofilia"
             value={hemofilia}
             onChange={(e) => setHemofilia(e.target.value)}
-          />
-        </div>
-        <div className="mb-3">
-          <input
-            className="form-control"
-            type="text"
-            id="outro"
-            name="outro"
-            placeholder="Outro descrição"
-            value={outro}
-            onChange={(e) => setOutro(e.target.value)}
           />
         </div>
         

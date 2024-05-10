@@ -26,7 +26,7 @@ function Login() {
                 localStorage.setItem('token', response.data);
                 console.log(response.data)
                 // Successful authentication, redirect to /dashboard page
-                navigate('/dashboard');
+                navigate('/listar-clientes');
             } else {
                 // Authentication failed, display an error message
                 console.error('Error authenticating user');

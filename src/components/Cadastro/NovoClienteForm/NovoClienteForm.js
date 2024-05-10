@@ -10,7 +10,7 @@ function NovoClienteForm() {
   const [email, setEmail] = useState('');
   const [idade, setIdade] = useState('');
 
-  
+
   const navigate = useNavigate(); // Get the useNavigate hook
 
   const token = localStorage.getItem('token');
@@ -58,76 +58,76 @@ function NovoClienteForm() {
   };
 
   return (
-    <div className="col-sm-10 p-3 min-vh-100 ms-auto">
-      <div className="row justify-content-center">
-        <div className="col-md-8">
-          <div className="card">
-            <div className="card-body">
-              <div className="row justify-content-center mb-4">
-                <div className="col-md-6">
-                      <h2 className="text-center mb-4">Cadastro de Cliente</h2>
-                      <form onSubmit={handleSubmit}>
-                        <div className="mb-3">
-                          <input
-                            className="form-control"
-                            type="text"
-                            id="nome"
-                            name="nome"
-                            placeholder="Nome do cliente"
-                            value={nome}
-                            onChange={(e) => setNome(e.target.value)}
-                            required
-                          />
-                        </div>
-                        <div className="mb-3">
-                          <input
-                            className="form-control"
-                            type="number"
-                            id="CPF"
-                            name="cpf"
-                            placeholder="CPF do cliente"
-                            value={cpf}
-                            onChange={(e) => setCPF(e.target.value)}
-                            required
-                          />
-                        </div>
-                        <div className="mb-3">
-                          <input
-                            className="form-control"
-                            type="text"
-                            id="telefone"
-                            name="telefone"
-                            placeholder="Telefone do cliente"
-                            value={telefone}
-                            onChange={(e) => setTelefone(e.target.value)}
-                            required
-                          />
-                        </div>
-                        <div className="mb-3">
-                          <input
-                            className="form-control"
-                            type="email"
-                            id="email"
-                            name="email"
-                            placeholder="Email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            required
-                          />
-                        </div>
-                        <div className="mb-3">
-                          <input
-                            className="form-control"
-                            type="number"
-                            id="idade"
-                            name="idade"
-                            placeholder="Idade do cliente"
-                            value={idade}
-                            onChange={(e) => setIdade(e.target.value)}
-                            required
-                          />
-                        </div>
-                        {/*<div className="mb-3">
+    <div className="col-md-11 p-3 min-vh-100 ">
+      <div className="row justify-content-center  ">
+        <div className="col-lg  ">
+          <div className="card bg-white border  shadow-lg border-3 rounded-3 bg-opacity-25">
+            <div className="card-body ">
+              <div className="row justify-content-center mb-4 ">
+                <div className="col-md-6  ">
+                  <h2 className="text-center mb-4">Cadastro de Cliente</h2>
+                  <form onSubmit={handleSubmit}>
+                    <div className="mb-3">
+                      <input
+                        className="shadow-sm form-control"
+                        type="text"
+                        id="nome"
+                        name="nome"
+                        placeholder="Nome do cliente"
+                        value={nome}
+                        onChange={(e) => setNome(e.target.value)}
+                        required
+                      />
+                    </div>
+                    <div className="mb-3">
+                      <input
+                        className="shadow-sm form-control"
+                        type="number"
+                        id="CPF"
+                        name="cpf"
+                        placeholder="CPF do cliente"
+                        value={cpf}
+                        onChange={(e) => setCPF(e.target.value)}
+                        required
+                      />
+                    </div>
+                    <div className="mb-3">
+                      <input
+                        className=" shadow-sm form-control"
+                        type="text"
+                        id="telefone"
+                        name="telefone"
+                        placeholder="Telefone do cliente"
+                        value={telefone}
+                        onChange={(e) => setTelefone(e.target.value)}
+                        required
+                      />
+                    </div>
+                    <div className="mb-3">
+                      <input
+                        className="shadow-sm form-control"
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                      />
+                    </div>
+                    <div className="mb-3">
+                      <input
+                        className="shadow-sm form-control"
+                        type="number"
+                        id="idade"
+                        name="idade"
+                        placeholder="Idade do cliente"
+                        value={idade}
+                        onChange={(e) => setIdade(e.target.value)}
+                        required
+                      />
+                    </div>
+                    {/*<div className="mb-3">
                           <button
                             className={`btn ${tipo === 'Tatuador' ? 'btn-primary' : 'btn-secondary'}`}
                             onClick={() => handleTipoChange('Tatuador')}
@@ -143,19 +143,20 @@ function NovoClienteForm() {
                             Administrador
                           </button>
                           </div>*/}
-                        <div>
-                          <button className="btn btn-primary d-block w-100" type="submit">
-                            Cadastrar
-                          </button>
-                        </div>
-                      </form>
+                    <div>
+                      <button className="btn btn-primary d-block w-100" type="submit">
+                        Cadastrar
+                      </button>
                     </div>
-                  </div>
+                  </form>
                 </div>
               </div>
             </div>
           </div>
         </div>
+      </div>
+    </div>
+    
   );
 }
 

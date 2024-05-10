@@ -4,10 +4,12 @@ import './Dashboard.css';
 
 function Dashboard() {
   return (
-    <div className="dashboard-container">
-      <Navbar />
-      <Sidebar />
+    <>
+     <Navbar></Navbar> 
+      <div className="row">
+     <Sidebar></Sidebar> 
     </div>
+    </>
   );
 }
 

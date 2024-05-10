@@ -53,7 +53,7 @@ function EditarUsuarioForm({ user, closeAlert, userEmailAtual }) {
     } catch (error) {
       Swal.fire({
         title: "Erro",
-        text: "deu merda aq chefia",
+        text: "Algo deu errado",
         icon: "success",
         confirmButtonColor: "#FFB800",
         iconColor: "#ffb800"
