@@ -137,26 +137,6 @@ function ListarCalendarioTable() {
             });
     };
 
-    const handleSearch = () => {
-        axios.get(`http://localhost:8005/buscar-agendamento/${searchTerm}`, auth)
-        .then(response => {
-            if (response.data.length === 0) {
-                MySwal.fire({
-                    title: 'Nenhum agendamento encontrado',
-                    text: 'Nenhum agendamento corresponde à sua busca.',
-                    icon: 'info',
-                    confirmButtonColor: '#FFB800',
-                    iconColor: '#ffb800'
-                });
-            } else {
-                setAgendamentos(response.data);
-            }
-        })
-        .catch(err => {
-            console.log(err);
-        });
-    };
-
     return (
         <div className="col-md-11 p-3 min-vh-100 ">
             <div className="row justify-content-center  ">
@@ -167,7 +147,7 @@ function ListarCalendarioTable() {
                                 <div className="col-md-6  ">
                                     <h2 className="text-center mb-4">Agendamentos</h2>
                                     
-                                    <button className="btn input-group bt-cadastrar " type="button"><a href="/calendario">Voltar para o calendário</a></button>
+                                    <a href="/calendario"><button className="btn input-group bt-cadastrar " type="button">Voltar para o calendário</button></a>
                                 </div>
                             </div>
                             <div className="table-responsive rounded-3" style={{ maxHeight: '400px' }}>

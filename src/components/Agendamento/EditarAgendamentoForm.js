@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 
-function EditarClienteForm({ cliente, closeAlert, clienteCpfAtual }) {
+function EditarAgendamentoForm({ cliente, closeAlert, clienteCpfAtual }) {
   
   // Variáveis do cliente
   const [nome, setNome] = useState(cliente.nome ?? "");
@@ -127,7 +127,7 @@ function EditarClienteForm({ cliente, closeAlert, clienteCpfAtual }) {
         </div>
         <div className="text-center">
           <button className="btn btn-primary" type="submit">
-            Atualizar Usuário
+            Atualizar agendamento
           </button>
         </div>
       </form>
@@ -135,4 +135,4 @@ function EditarClienteForm({ cliente, closeAlert, clienteCpfAtual }) {
   );
 }
 
-export default EditarClienteForm;
+export default EditarAgendamentoForm;
