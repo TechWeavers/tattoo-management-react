@@ -10,6 +10,9 @@ import ListarUsuario from "./views/ListarUsuario/ListarUsuario";
 import ListarClientes from "./views/ListarClientes/ListarClientes";
 import ListarMateriais from "./views/ListarMateriais/ListarMateriais"
 import CadastroClientes from "./views/CadastroClientes/CadastroClientes";
+import CalendarioView from "./views/Agendamento/Calendario/CalendarioView";
+import ListarAgendamento from "./views/Agendamento/ListarAgendamento/ListarAgendamento";
+import NovoAgendameto from "./views/Agendamento/NovoAgendamento/NovoAgendamento"
 
 
 
@@ -23,12 +26,16 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />             
           <Route path="/novo-usuario" element={<CadastroUsuario />} />
           <Route path="/novo-estoque" element={<CadastroEstoque />} />
+          <Route path="/novo-agendamento" element={<NovoAgendameto/>} />
           <Route path="/novo-cliente" element={<CadastroClientes />} />
           <Route path="/esqueceu-senha" element={<EsqueceuSenha />} />               
           <Route path="/redefinir-senha" element={<RedefinirSenhaWrapper />} />
           <Route path="/listar-usuario" element={<ListarUsuario />} /> 
           <Route path="/listar-clientes" element={<ListarClientes />} />  
-          <Route path="/listar-materiais" element={<ListarMateriais />} />            
+          <Route path="/listar-materiais" element={<ListarMateriais />} />
+          <Route path="/calendario" element={<CalendarioView />} />  
+          <Route path="/listar-agendamento" element={<ListarAgendamento />} /> 
+
         </Routes>
       </div>
     </BrowserRouter>

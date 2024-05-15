@@ -25,7 +25,7 @@ function Sidebar() {
                         <ul
                             className="nav nav-pills nav-flush flex-sm-column flex-row flex-nowrap mb-auto mx-auto text-center justify-content-between w-100 px-3 pb-0 align-items-center">
                             <li className="nav-item">
-                                <a href="/" className="nav-link py-1 px-2" title="" data-bs-toggle="tooltip"
+                                <a href="/calendario" className="nav-link py-1 px-2" title="" data-bs-toggle="tooltip"
                                     data-bs-placement="right" data-bs-original-title="Home">
                                     <i className="bi bi-calendar-event h4 text-light"></i>
                                 </a>
