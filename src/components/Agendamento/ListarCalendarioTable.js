@@ -8,6 +8,7 @@ const MySwal = withReactContent(Swal);
 
 function ListarCalendarioTable() {
     const [agendamentos, setAgendamentos] = useState([]);
+    const [searchTerm, setSearchTerm] = useState("");
     const [agendamentoIdAtual, setAgendamentoIdAtual] = useState("");
 
     const token = localStorage.getItem('token');
@@ -56,21 +57,39 @@ function ListarCalendarioTable() {
             })
             .catch(err => {
                 console.log(err);
-                showErrorAlert("Erro ao atualizar agendamento", err.response);
+                Swal.fire({
+                    title: "Erro ao atualizar agendamento",
+                    text: err.response.data.detail,
+                    icon: "error",
+                    confirmButtonColor: "#FFB800",
+                    iconColor: "#ffb800"
+                });
             });
     };
 
     const handleSubmit = (editedAgendamentoData) => {
         axios.patch(`http://localhost:8005/atualizar-agendamento/${agendamentoIdAtual}`, editedAgendamentoData , auth)
             .then(() => {
-                showSuccessAlert("Atualizado com sucesso!", "As informações do agendamento foram atualizadas");
+                Swal.fire({
+                    title: "Atualizado com sucesso!",
+                    text: "As informações do agendamento foram atualizadas",
+                    icon: "success",
+                    confirmButtonColor: "#FFB800",
+                    iconColor: "#ffb800"
+                });
                 fetchAgendamentos();
                 setAgendamentoIdAtual("");
                 MySwal.close();
             })
             .catch(err => {
                 console.log(err);
-                showErrorAlert("Erro em atualizar agendamento", err.response.data.detail);
+                Swal.fire({
+                    title: "Erro em atualizar agendamento",
+                    text: err.response.data.detail,
+                    icon: "error",
+                    confirmButtonColor: "#FFB800",
+                    iconColor: "#ffb800"
+                });
             });
     };
 
