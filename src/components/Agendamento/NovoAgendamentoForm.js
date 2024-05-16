@@ -22,6 +22,21 @@ function NovoAgendamentoForm() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    
+    // Validar se o tempo de fim é posterior ao tempo de início
+    if (hora_inicio >= hora_fim) {
+      Swal.fire({
+        title: "Opa, a hora está inconsistente",
+        text: "A hora de fim deve ser posterior à hora de início.",
+        icon: "error",
+        confirmButtonColor: "#FFB800",
+        iconColor: "#ffb800"
+      });
+      return; // Impede o envio do formulário se a validação falhar
+    }
+
+    
+    
     try {
       await axios.post('http://localhost:8005/novo-agendamento', {
         nome,
@@ -38,14 +53,14 @@ function NovoAgendamentoForm() {
         confirmButtonColor: "#FFB800",
         iconColor: "#ffb800"
       });
-
+  
       setNome('');
       setDescricao('');
       setData('');
       setEmail_convidado('');
       setHora_inicio('');
       setHora_fim('');
-
+  
       navigate('/listar-agendamento');
     } catch (error) {
       console.log(error);

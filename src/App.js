@@ -15,7 +15,6 @@ import ListarAgendamento from "./views/Agendamento/ListarAgendamento/ListarAgend
 import NovoAgendameto from "./views/Agendamento/NovoAgendamento/NovoAgendamento"
 
 
-
 function App() {
   return (
     <BrowserRouter>

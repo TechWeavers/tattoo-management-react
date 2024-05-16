@@ -8,7 +8,6 @@ const MySwal = withReactContent(Swal);
 
 function ListarCalendarioTable() {
     const [agendamentos, setAgendamentos] = useState([]);
-    const [searchTerm, setSearchTerm] = useState("");
     const [agendamentoIdAtual, setAgendamentoIdAtual] = useState("");
 
     const token = localStorage.getItem('token');
@@ -25,17 +24,17 @@ function ListarCalendarioTable() {
     const fetchAgendamentos = () => {
         axios.get("http://localhost:8005/listar-agendamentos", auth)
             .then(response => {
-                if (response.data.agendamentos && Array.isArray(response.data.agendamentos)) {
-                    setAgendamentos(response.data.agendamentos);
+                if (Array.isArray(response.data)) {
+                    setAgendamentos(response.data);
                 } else {
                     console.log("Resposta inválida:", response.data);
                 }
             })
             .catch(err => console.log(err));
     };
+    
 
     const handleEdit = (agendamentoId) => {
-        console.log(agendamentoId); // Atualize o estado diretamente aqui
         axios.get(`http://localhost:8005/buscar-agendamento/${agendamentoId}`, auth)
             .then(response => {
                 setAgendamentoIdAtual(agendamentoId);
@@ -57,44 +56,25 @@ function ListarCalendarioTable() {
             })
             .catch(err => {
                 console.log(err);
-                Swal.fire({
-                    title: "Erro ao atualizar agendamento",
-                    text: err.response.data.detail,
-                    icon: "error",
-                    confirmButtonColor: "#FFB800",
-                    iconColor: "#ffb800"
-                });
+                showErrorAlert("Erro ao atualizar agendamento", err.response.data.detail);
             });
     };
 
     const handleSubmit = (editedAgendamentoData) => {
         axios.patch(`http://localhost:8005/atualizar-agendamento/${agendamentoIdAtual}`, editedAgendamentoData , auth)
             .then(() => {
-                Swal.fire({
-                    title: "Atualizado com sucesso!",
-                    text: "As informações do agendamento foram atualizadas",
-                    icon: "success",
-                    confirmButtonColor: "#FFB800",
-                    iconColor: "#ffb800"
-                });
+                showSuccessAlert("Atualizado com sucesso!", "As informações do agendamento foram atualizadas");
                 fetchAgendamentos();
                 setAgendamentoIdAtual("");
                 MySwal.close();
             })
             .catch(err => {
                 console.log(err);
-                Swal.fire({
-                    title: "Erro em atualizar agendamento",
-                    text: err.response.data.detail,
-                    icon: "error",
-                    confirmButtonColor: "#FFB800",
-                    iconColor: "#ffb800"
-                });
+                showErrorAlert("Erro em atualizar agendamento", err.response.data.detail);
             });
     };
 
     const handleDelete = (agendamento) => {
-        console.log(agendamento.id)
         Swal.fire({
             title: 'Tem certeza que deseja deletar este agendamento?',
             html: "Não será possível recuperar os dados depois",
@@ -107,34 +87,41 @@ function ListarCalendarioTable() {
             iconColor: "#ffb800"
         }).then((result) => {
             if (result.isConfirmed) {
-                handleDeleteConfirmed(agendamento.id); // Passando o ID como argumento
+                handleDeleteConfirmed(agendamento.id);
             }
         });
     };
 
-    const handleDeleteConfirmed = (agendamentoIdToDelete) => { // Recebendo o ID como argumento
-        console.log(agendamentoIdToDelete); // Verificar se o ID está chegando corretamente
+    const handleDeleteConfirmed = (agendamentoIdToDelete) => {
         axios.delete(`http://localhost:8005/deletar-agendamento/${agendamentoIdToDelete}`, auth)
             .then(() => {
-                Swal.fire({
-                    title: 'Agendamento deletado com sucesso!',
-                    html: "",
-                    icon: 'success',
-                    iconColor: "#ffb800",
-                    confirmButtonColor: "#FFB800"
-                })
+                showSuccessAlert('Agendamento deletado com sucesso!', '');
                 fetchAgendamentos();
             })
             .catch(err => {
                 console.log(err);
-                Swal.fire({
-                    title: "Erro ao deletar agendamento",
-                    text: "Ocorreu um erro ao tentar excluir o agendamento.",
-                    icon: "error",
-                    confirmButtonColor: "#FFB800",
-                    iconColor: "#ffb800"
-                });
+                showErrorAlert("Erro ao deletar agendamento", "Ocorreu um erro ao tentar excluir o agendamento.");
             });
+    };
+
+    const showSuccessAlert = (title, text) => {
+        Swal.fire({
+            title: title,
+            text: text,
+            icon: "success",
+            confirmButtonColor: "#FFB800",
+            iconColor: "#ffb800"
+        });
+    };
+
+    const showErrorAlert = (title, text) => {
+        Swal.fire({
+            title: title,
+            text: text,
+            icon: "error",
+            confirmButtonColor: "#FFB800",
+            iconColor: "#ffb800"
+        });
     };
 
     return (
@@ -146,8 +133,9 @@ function ListarCalendarioTable() {
                             <div className="row justify-content-center mb-4 ">
                                 <div className="col-md-6  ">
                                     <h2 className="text-center mb-4">Agendamentos</h2>
-                                    
-                                    <a href="/calendario"><button className="btn input-group bt-cadastrar " type="button">Voltar para o calendário</button></a>
+                                    <a href="/calendario">
+                                        <button className="btn input-group bt-cadastrar " type="button">Voltar para o calendário</button>
+                                    </a>
                                 </div>
                             </div>
                             <div className="table-responsive rounded-3" style={{ maxHeight: '400px' }}>
@@ -164,19 +152,19 @@ function ListarCalendarioTable() {
                                     <tbody className="border-secondary border-3 rounded-3">
                                         {agendamentos.map(agendamento => (
                                             <tr key={agendamento._id}>
-                                                <td className=" bg-transparent text-center">{agendamento.nome}</td>
-                                                <td className=" bg-transparent text-center">{agendamento.descricao}</td>
-                                                <td className=" bg-transparent text-center">{agendamento.email_convidado}</td>
-                                                <td className=" bg-transparent text-center">{agendamento.data}</td>
+                                                <td className=" bg-transparent text-center">{agendamento.summary}</td>
+                                                <td className=" bg-transparent text-center">{agendamento.description}</td>
+                                                <td className=" bg-transparent text-center">{agendamento.attendees[0].email}</td>
+                                                <td className=" bg-transparent text-center">{agendamento.start && agendamento.start.dateTime ? agendamento.start.dateTime : "Data não disponível"}</td>
                                                 <td className="text-center bg-transparent d-flex justify-content-evenly">
                                                     <button
-                                                        className="btn shadow-sm btn-primary mr-2 "
-                                                        onClick={() => handleEdit(agendamento.id)}
+                                                        className="btn shadow-sm btn-primary mr-2"
+                                                        onClick={() => handleEdit(agendamento._id)}
                                                     >
                                                         Editar
                                                     </button>
                                                     <button
-                                                        className="btn shadow-sm btn-danger "
+                                                        className="btn shadow-sm btn-danger"
                                                         onClick={() => handleDelete(agendamento)}
                                                     >
                                                         Deletar
