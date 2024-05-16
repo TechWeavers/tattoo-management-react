@@ -78,7 +78,7 @@ function NovoAgendamentoForm() {
       console.log(error);
       Swal.fire({
         title: "Erro ao agendar procedimento",
-        text: "Opa, erro ao manipular o agendamento no banco de dados",
+        text: error.response.data.detail,
         icon: "error",
         confirmButtonColor: "#FFB800",
         iconColor: "#ffb800"

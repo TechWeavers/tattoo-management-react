@@ -61,7 +61,7 @@ function EditarAgendamentoForm({ agendamento, closeAlert, agendamentoIdAtual }) 
       
       Swal.fire({
         title: "Aguarde um momento...",
-        html: "Atualizando informações do usuário",
+        html: "Atualizando informações do agendamento",
         allowOutsideClick: false,
         didOpen: () => {
           Swal.showLoading()
