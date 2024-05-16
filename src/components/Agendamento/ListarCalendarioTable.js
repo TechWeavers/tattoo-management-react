@@ -56,7 +56,7 @@ function ListarCalendarioTable() {
             })
             .catch(err => {
                 console.log(err);
-                showErrorAlert("Erro ao atualizar agendamento", err.response.data.detail);
+                showErrorAlert("Erro ao atualizar agendamento", err.response);
             });
     };
 
@@ -168,7 +168,7 @@ function ListarCalendarioTable() {
                                                 <td className="text-center bg-transparent d-flex justify-content-evenly">
                                                     <button
                                                         className="btn shadow-sm btn-primary mr-2"
-                                                        onClick={() => handleEdit(agendamento._id)}
+                                                        onClick={() => handleEdit(agendamento.id)}
                                                     >
                                                         Editar
                                                     </button>
