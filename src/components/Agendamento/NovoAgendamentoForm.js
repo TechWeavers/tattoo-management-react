@@ -26,7 +26,7 @@ function NovoAgendamentoForm() {
     // Validar se o tempo de fim é posterior ao tempo de início
     if (hora_inicio >= hora_fim) {
       Swal.fire({
-        title: "Opa, a hora está inconsistente",
+        title: "Opa, perdeu a hora?",
         text: "A hora de fim deve ser posterior à hora de início.",
         icon: "error",
         confirmButtonColor: "#FFB800",
@@ -35,9 +35,21 @@ function NovoAgendamentoForm() {
       return; // Impede o envio do formulário se a validação falhar
     }
 
-    
-    
+    // Validar se a data de início é posterior à data atual
+    const currentDate = new Date().toISOString().split('T')[0]; // Obtemos a data atual
+    if (data < currentDate) {
+      Swal.fire({
+        title: "Opa, voltou no tempo?",
+        text: "A data de início deve ser igual ou posterior à data atual.",
+        icon: "error",
+        confirmButtonColor: "#FFB800",
+        iconColor: "#ffb800"
+      });
+      return; // Impede o envio do formulário se a validação falhar
+    }
+
     try {
+      
       await axios.post('http://localhost:8005/novo-agendamento', {
         nome,
         descricao,

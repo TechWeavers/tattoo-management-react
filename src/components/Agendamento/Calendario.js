@@ -9,11 +9,11 @@ function Calendario() {
                             <div className="row justify-content-center mb-4 ">
                                 <div className="col-md-6  ">
                                     <h2 className="text-center mb-4">Agenda</h2>
-                                    <div className="row justify-content-center mb-4">
-                                        <div className="col-md-12 d-flex justify-content-between">
-                                            <a href="/novo-agendamento"><button className="btn input-group bt-cadastrar" type="button">Novo Agendamento</button></a>
+                                    <div className="row justify-content-center mb-8">
+                                        <div className="col-md-32 d-flex justify-content-between">
+                                            <a href="/novo-agendamento"><button className="btn input-group bt-cadastrar" type="button">Novo agendamento</button></a>
                                             <div style={{ width: '100px' }}></div>
-                                            <a href="/listar-agendamento"><button className="btn input-group bt-cadastrar" type="button">Editar Agendamento</button></a>
+                                            <a href="/listar-agendamento"><button className="btn input-group bt-cadastrar" type="button">Editar agendamento</button></a>
                                         </div>
                                     </div>
 

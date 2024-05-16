@@ -124,6 +124,13 @@ function ListarCalendarioTable() {
         });
     };
 
+    const formatDate = (dateTimeString) => {
+        const date = new Date(dateTimeString);
+        const formattedDate = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+        const formattedTime = `${("0" + date.getHours()).slice(-2)}:${("0" + date.getMinutes()).slice(-2)}`;
+        return `${formattedDate} ${formattedTime}`;
+    };
+
     return (
         <div className="col-md-11 p-3 min-vh-100 ">
             <div className="row justify-content-center  ">
@@ -134,7 +141,7 @@ function ListarCalendarioTable() {
                                 <div className="col-md-6  ">
                                     <h2 className="text-center mb-4">Agendamentos</h2>
                                     <a href="/calendario">
-                                        <button className="btn input-group bt-cadastrar " type="button">Voltar para o calendário</button>
+                                        <button className="btn input-group bt-cadastrar " type="button">Voltar para a agenda</button>
                                     </a>
                                 </div>
                             </div>
@@ -155,7 +162,9 @@ function ListarCalendarioTable() {
                                                 <td className=" bg-transparent text-center">{agendamento.summary}</td>
                                                 <td className=" bg-transparent text-center">{agendamento.description}</td>
                                                 <td className=" bg-transparent text-center">{agendamento.attendees[0].email}</td>
-                                                <td className=" bg-transparent text-center">{agendamento.start && agendamento.start.dateTime ? agendamento.start.dateTime : "Data não disponível"}</td>
+                                                <td className=" bg-transparent text-center">
+                                                    {agendamento.start && agendamento.start.dateTime ? formatDate(agendamento.start.dateTime) : "Data não disponível"}
+                                                </td>
                                                 <td className="text-center bg-transparent d-flex justify-content-evenly">
                                                     <button
                                                         className="btn shadow-sm btn-primary mr-2"
