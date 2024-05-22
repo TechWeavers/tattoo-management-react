@@ -1,12 +1,8 @@
 const CACHE_NAME = 'my-app-cache-v1';
-const urlsToCache = [
-    '/',
-    '/index.html',
-    // Adicione outros arquivos que deseja cachear
-];
+
 
 // Evento de instalação
-self.addEventListener('install', (event) => {
+this.addEventListener('install', (event) => {
     console.log('Service Worker: Install event in progress.');
     event.waitUntil(
         caches.open(CACHE_NAME)
@@ -21,23 +17,24 @@ self.addEventListener('install', (event) => {
 });
 
 // Evento de ativação
-self.addEventListener('activate', (event) => {
-    console.log('Service Worker: Activate event in progress.');
-    event.waitUntil(
-        caches.keys().then((cacheNames) => {
-            return Promise.all(
-                cacheNames.map((cacheName) => {
-                    if (cacheName !== CACHE_NAME) {
-                        console.log('Service Worker: Deleting old cache', cacheName);
-                        return caches.delete(cacheName);
-                    }
-                })
-            );
+this.addEventListener('activate', (event) => {
+  console.log('Service Worker: Activate event in progress.');
+  event.waitUntil(
+    caches.keys().then((cacheNames) => {
+      return Promise.all(
+        cacheNames.map((cacheName) => {
+          if (cacheName !== CACHE_NAME) {
+            console.log('Service Worker: Deleting old cache', cacheName);
+            return caches.delete(cacheName);
+          }
+          return null; // Add this line to return null for the other cases
         })
-    );
+      );
+    })
+  );
 });
 
-self.addEventListener('fetch', (event) => {
+this.addEventListener('fetch', (event) => {
     event.respondWith(
       (async function() {
         try {
