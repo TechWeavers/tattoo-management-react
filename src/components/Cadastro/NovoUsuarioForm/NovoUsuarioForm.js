@@ -15,12 +15,12 @@ function NovoUsuarioForm() {
     setTipo(selectedTipo);
   };
 
-  const token = localStorage.getItem('token');
+ /* const token = localStorage.getItem('token');
   const auth = {
     headers: {
       'Authorization': `Bearer ${token}`
     }
-  };
+  };*/
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -30,7 +30,7 @@ function NovoUsuarioForm() {
         name,
         email,
         password,
-      }, auth);
+      }/*, auth*/);
 
       Swal.fire({
         title: "Usuário cadastrado com sucesso!",
