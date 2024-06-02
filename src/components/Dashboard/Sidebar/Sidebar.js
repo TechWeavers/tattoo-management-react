@@ -1,7 +1,31 @@
-import React from 'react';
+import React,{ useEffect, useState } from 'react';
 import './Sidebar.min.css'; 
+import axios from 'axios';
+
 
 function Sidebar() {
+    const [tipo, setTipo] = useState('')
+
+    useEffect(()=>{
+        const token = localStorage.getItem('token')
+        
+        const carregarAtributo = async () => {
+          try {
+    
+              const response = await axios.get(`http://localhost:8000/tipo-usuario/${token}`);
+    
+              // Extrair o atributo da resposta
+              const tipoExtraido = response.data;
+    
+              // Atualizar o estado com o atributo extraído
+              setTipo(tipoExtraido);
+          } catch (error) {
+              console.error('Erro ao carregar atributo:', error);
+          }
+      };
+    
+      carregarAtributo();
+      },[]);
   return (
             
                 <div id="sidebar" className="col-sm-1 sticky-top">
@@ -31,6 +55,7 @@ function Sidebar() {
                                 </a>
                                 <p className="fw-light text-center fs-6 text-light">Agenda</p>
                             </li>
+                            {tipo === "Administrador" && (
                             <li>
                                 <a href="/listar-usuario" className="nav-link py-1 px-2" title="" data-bs-toggle="tooltip"
                                     data-bs-placement="right" data-bs-original-title="Orders">
@@ -38,6 +63,14 @@ function Sidebar() {
                                     <p className="fw-light text-center fs-6 text-light">Usuarios</p>
                                 </a>
                             </li>
+                            )}
+                            {/*<li>
+                                <a href="/listar-usuario" className="nav-link py-1 px-2" title="" data-bs-toggle="tooltip"
+                                    data-bs-placement="right" data-bs-original-title="Orders">
+                                    <i className="bi bi-person-circle h4 text-light"></i>
+                                    <p className="fw-light text-center fs-6 text-light">Usuarios</p>
+                                </a>
+                            </li>*/}
                             <li>
                                 <a href="/listar-materiais" className="nav-link py-1 px-2" title="" data-bs-toggle="tooltip"
                                     data-bs-placement="right" data-bs-original-title="Products">

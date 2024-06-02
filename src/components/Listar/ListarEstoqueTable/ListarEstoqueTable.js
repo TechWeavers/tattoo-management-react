@@ -12,6 +12,7 @@ function ListarEstoqueTable() {
     const [searchTerm, setSearchTerm] = useState("");
     const [materialNomeAtual, setMaterialNomeAtual] = useState("");
     const [materialNomeToDelete, setMaterialNomeToDelete] = useState("");
+    const [tipo, setTipo] = useState('')
 
     const navigate = useNavigate(); // Get the useNavigate hook
     const token = localStorage.getItem('token');
@@ -24,6 +25,27 @@ function ListarEstoqueTable() {
     useEffect(() => {
         fetchMateriais();
     }, []);
+
+    useEffect(()=>{
+        const token = localStorage.getItem('token')
+        
+        const carregarAtributo = async () => {
+          try {
+    
+              const response = await axios.get(`http://localhost:8000/tipo-usuario/${token}`);
+    
+              // Extrair o atributo da resposta
+              const tipoExtraido = response.data;
+    
+              // Atualizar o estado com o atributo extraído
+              setTipo(tipoExtraido);
+          } catch (error) {
+              console.error('Erro ao carregar atributo:', error);
+          }
+      };
+    
+      carregarAtributo();
+      },[]);
 
     const fetchMateriais = () => {
         axios.get("http://localhost:8004/listar-materiais", auth)
@@ -190,7 +212,10 @@ function ListarEstoqueTable() {
                                             <th scope="col" className=" bg-secondary bg-opacity-10 text-center">Quantidade</th>
                                             <th scope="col" className=" bg-secondary bg-opacity-10 text-center">Valor unitário</th>
                                             <th scope="col" className=" bg-secondary bg-opacity-10 text-center">Data de atualização</th>
-                                            <th scope="col" className=" bg-secondary bg-opacity-10 text-center">Opções</th>
+                                            {tipo === "Administrador" && (
+                                                <th scope="col" className=" bg-secondary bg-opacity-10 text-center">Opções</th>
+                                            )}
+                                            
                                         </tr>
                                     </thead>
                                     <tbody className="border-secondary border-3 rounded-3">
@@ -200,7 +225,8 @@ function ListarEstoqueTable() {
                                                 <td className=" bg-transparent text-center">{material.quantidade}</td>
                                                 <td className=" bg-transparent text-center">{material.valor_unitario}</td>
                                                 <td className=" bg-transparent text-center">{material.data_atualizacao}</td>
-                                                <td className="text-center bg-transparent d-flex justify-content-evenly">
+                                                {tipo === "Administrador" && (
+                                                    <td className="text-center bg-transparent d-flex justify-content-evenly">
                                                     <button 
                                                         className="btn shadow-sm btn-primary mr-2 " 
                                                         onClick={() => handleEdit(material)}
@@ -214,6 +240,8 @@ function ListarEstoqueTable() {
                                                         Deletar
                                                     </button>
                                                 </td>
+                                                )}
+                                                
                                             </tr>
                                         ))}
                                     </tbody>

@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import './Login.css'; 
 import axios from 'axios';
 import Swal from 'sweetalert2';
-import { setToken } from '../../db';
+//import { setToken } from '../../db';
 
 function Login() {
     const [email, setEmail] = useState('');
@@ -26,7 +26,8 @@ function Login() {
                 // Store token in localStorage
                 //localStorage.setItem('token', response.data); por enquanto vamos armazenar o token no indexedDB
                 const token = response.data;
-                await setToken(token);
+                localStorage.setItem('token', response.data)
+                //await setToken(token);
                 
                 //console.log(response.data)
                 // Successful authentication, redirect to /dashboard page
