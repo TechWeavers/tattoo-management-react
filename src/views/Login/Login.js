@@ -31,7 +31,7 @@ function Login() {
                 
                 //console.log(response.data)
                 // Successful authentication, redirect to /dashboard page
-                navigate('/listar-clientes');
+                navigate('/dashboard');
             } else {
                 // Authentication failed, display an error message
                 console.error('Error authenticating user');
