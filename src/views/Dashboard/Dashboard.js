@@ -14,7 +14,7 @@ function Dashboard() {
   const token = localStorage.getItem('token');
   const auth = {
     headers: {
-        'Authorization': `Bearer ${token}`
+      'Authorization': `Bearer ${token}`
     }
   };
 
@@ -82,107 +82,144 @@ function Dashboard() {
     <>
       <Navbar />
 
-      <div className="container">
-        <div className="container d-flex justify-content-center mt-5">
-          <div className="col-md-6">
-            <div className="card shadow-lg rounded-3">
-              <div className="card-body">
-                <div className="row justify-content-center mb-4">
-                  <div className="col-md-6">
-                    <h3 className="text-center mb-4">Agendamentos próximos</h3>
-                  </div>
-                </div>
-                <div className="table-responsive rounded-3" style={{ maxHeight: '400px' }}>
-                  <table className="table bg-transparent rounded-3 table-bordered table-fixed">
-                    <thead className="border-secondary border-3 rounded-3">
-                      <tr>
-                        <th scope="col" className="bg-secondary bg-opacity-10 text-center">Nome</th>
-                        <th scope="col" className="bg-secondary bg-opacity-10 text-center">Descrição</th>
-                        <th scope="col" className="bg-secondary bg-opacity-10 text-center">Email cliente</th>
-                        <th scope="col" className="bg-secondary bg-opacity-10 text-center">Data</th>
-                      </tr>
-                    </thead>
-                    <tbody className="border-secondary border-3 rounded-3">
-                      {agendamentos.map(agendamento => (
-                        <tr key={agendamento._id}>
-                          <td className="bg-transparent text-center">{agendamento.summary}</td>
-                          <td className="bg-transparent text-center">{agendamento.description}</td>
-                          <td className="bg-transparent text-center">{agendamento.attendees[0].email}</td>
-                          <td className="bg-transparent text-center">
-                            {agendamento.date ? formatDate(agendamento.date) : "Data não disponível"}
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="col-md-6">
-            <div className="card shadow-lg rounded-3">
-              <div className="card-body">
-                <div className="row justify-content-center mb-4">
-                  <div className="col-md-6">
-                    <h3 className="text-center mb-4">Materiais faltantes</h3>
-                  </div>
-                </div>
-                <div className="table-responsive rounded-3" style={{ maxHeight: '400px' }}>
-                  <table className="table bg-transparent rounded-3 table-bordered table-fixed">
-                    <thead className="border-secondary border-3 rounded-3">
-                      <tr>
-                        <th scope="col" className="bg-secondary bg-opacity-10 text-center">Nome</th>
-                        <th scope="col" className="bg-secondary bg-opacity-10 text-center">Quantidade</th>
-                        <th scope="col" className="bg-secondary bg-opacity-10 text-center">Valor unitário</th>
-                      </tr>
-                    </thead>
-                    <tbody className="border-secondary border-3 rounded-3">
-                      {materiais.map(material => (
-                        <tr key={material.nome}>
-                          <td className="bg-transparent text-center">{material.nome}</td>
-                          <td className="bg-transparent text-center">{material.quantidade}</td>
-                          <td className="bg-transparent text-center">{material.valor_unitario}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="container d-flex justify-content-center mt-3">
-          <div className="row">
-            <div className="col-md-4 mb-4">
-              <div className="card shadow-lg rounded-3">
-                <div className="card-body">
-                  <h3 className="card-title text-center">Quantidade de agendamentos no mês</h3>
-                  <p className="text-center">{quantidadeAgendamentos}</p>
-                </div>
-              </div>
-            </div>
-            <div className="col-md-4 mb-4">
-              <div className="card shadow-lg rounded-3">
-                <div className="card-body">
-                  <h3 className="card-title text-center">Valor bruto</h3>
-                  <p className="text-center">{valorBruto}</p>
-                </div>
-              </div>
-            </div>
-            <div className="col-md-4 mb-4">
-              <div className="card shadow-lg rounded-3">
-                <div className="card-body">
-                  <h3 className="card-title text-center">Média valor</h3>
-                  <p className="text-center">{mediaValorAgendamentos}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
 
       <div className="row">
         <Sidebar />
+        <div className="col-md-11 p-3 min-vh-100 ">
+          <div className="container">
+            <div className="container d-flex justify-content-center ">
+              <div className="col-md-4 mb-4 me-3">
+                <div className="card shadow-lg rounded-3">
+                  <div className='card-content'>
+                    <div className="card-body">
+                      <div className=" media d-flex justify-content-between ">
+                        <div className="media-body text-left" >
+                          <h3>{quantidadeAgendamentos}</h3>
+                          <span > agendamentos no mês</span>
+                        </div>
+                        <div className='align-self-center'>
+                          <i class="bi bi-calendar3 h1 float-right"></i>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+
+              <div className="col-md-4 mb-4 me-3">
+                <div className="card shadow-lg rounded-3">
+                  <div className='card-content'>
+                    <div className="card-body">
+                      <div className=" media d-flex justify-content-between ">
+                        <div className="media-body text-left" >
+                          <h3>{valorBruto}</h3>
+                          <span>Valor bruto</span>
+
+                        </div>
+                        <div className='align-self-center'>
+                          <i class="bi bi-calendar3 h1 float-right"></i>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+
+
+              <div className="col-md-4 mb-4 me-3">
+                <div className="card shadow-lg rounded-3">
+                  <div className='card-content'>
+                    <div className="card-body">
+                      <div className=" media d-flex justify-content-between ">
+                        <div className="media-body text-left" >
+                          <h3>{mediaValorAgendamentos}</h3>
+                          <span>Média valor</span>
+                        </div>
+                        <div className='align-self-center'>
+                          <i class="bi bi-calendar3 h1 float-right"></i>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <div className="container d-flex justify-content-center mt-1">
+              <div className="col-md-6 me-5">
+                <div className="card shadow-lg rounded-3">
+                  <div className="card-body">
+                    <div className="row justify-content-center mb-4">
+                      <div className="col-md-6">
+                        <h3 className="text-center mb-4">Agendamentos próximos</h3>
+                      </div>
+                    </div>
+                    <div className="table-responsive rounded-3" style={{ maxHeight: '400px' }}>
+                      <table className="table bg-transparent rounded-3 table-bordered table-fixed">
+                        <thead className="border-secondary border-3 rounded-3">
+                          <tr>
+                            <th scope="col" className="bg-secondary bg-opacity-10 text-center">Nome</th>
+                            <th scope="col" className="bg-secondary bg-opacity-10 text-center">Descrição</th>
+                            <th scope="col" className="bg-secondary bg-opacity-10 text-center">Email cliente</th>
+                            <th scope="col" className="bg-secondary bg-opacity-10 text-center">Data</th>
+                          </tr>
+                        </thead>
+                        <tbody className="border-secondary border-3 rounded-3">
+                          {agendamentos.map(agendamento => (
+                            <tr key={agendamento._id}>
+                              <td className="bg-transparent text-center">{agendamento.summary}</td>
+                              <td className="bg-transparent text-center">{agendamento.description}</td>
+                              <td className="bg-transparent text-center">{agendamento.attendees[0].email}</td>
+                              <td className="bg-transparent text-center">
+                                {agendamento.date ? formatDate(agendamento.date) : "Data não disponível"}
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="col-md-6">
+                <div className="card shadow-lg rounded-3">
+                  <div className="card-body">
+                    <div className="row justify-content-center mb-4">
+                      <div className="col-md-6">
+                        <h3 className="text-center mb-4">Materiais faltantes</h3>
+                      </div>
+                    </div>
+                    <div className="table-responsive rounded-3" style={{ maxHeight: '400px' }}>
+                      <table className="table bg-transparent rounded-3 table-bordered table-fixed">
+                        <thead className="border-secondary border-3 rounded-3">
+                          <tr>
+                            <th scope="col" className="bg-secondary bg-opacity-10 text-center">Nome</th>
+                            <th scope="col" className="bg-secondary bg-opacity-10 text-center">Quantidade</th>
+                            <th scope="col" className="bg-secondary bg-opacity-10 text-center">Valor unitário</th>
+                          </tr>
+                        </thead>
+                        <tbody className="border-secondary border-3 rounded-3">
+                          {materiais.map(material => (
+                            <tr key={material.nome}>
+                              <td className="bg-transparent text-center">{material.nome}</td>
+                              <td className="bg-transparent text-center">{material.quantidade}</td>
+                              <td className="bg-transparent text-center">{material.valor_unitario}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
       </div>
     </>
   );
