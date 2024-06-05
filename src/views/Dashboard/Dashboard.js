@@ -3,6 +3,7 @@ import axios from 'axios';
 import Navbar from "../../components/Dashboard/Navbar/Navbar";
 import Sidebar from "../../components/Dashboard/Sidebar/Sidebar";
 import './Dashboard.css';
+import Swal from 'sweetalert2';
 
 function Dashboard() {
   const [agendamentos, setAgendamentos] = useState([]);
@@ -68,6 +69,13 @@ function Dashboard() {
       setValorBruto(response.data);
     } catch (error) {
       console.error('Error fetching valor bruto:', error);
+      Swal.fire({
+        title: "Erro ao  buscar algum dado do relatório!",
+        text: "Opa, erro ao cadastrar o usuário",
+        icon: "error",
+        confirmButtonColor: "#FFB800",
+        iconColor: "#ffb800"
+      });
     }
   }
 

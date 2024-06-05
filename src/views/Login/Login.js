@@ -26,12 +26,13 @@ function Login() {
                 // Store token in localStorage
                 //localStorage.setItem('token', response.data); por enquanto vamos armazenar o token no indexedDB
                 const token = response.data;
-                localStorage.setItem('token', response.data)
+                console.log(token)
+                localStorage.setItem('token', token)
                 //await setToken(token);
                 
                 //console.log(response.data)
                 // Successful authentication, redirect to /dashboard page
-                navigate('/dashboard');
+                navigate('/calendario');
             } else {
                 // Authentication failed, display an error message
                 console.error('Error authenticating user');

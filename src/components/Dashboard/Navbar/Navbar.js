@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import './Navbar.min.css'; 
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
  function Navbar() {
   const [tipo, setTipo] = useState('')
+  const navigate = useNavigate();
 
   useEffect(()=>{
     const token = localStorage.getItem('token')
@@ -27,6 +29,15 @@ import axios from 'axios';
   },[]);
 // Executa apenas uma vez, quando o componente é montado
 
+function logout(){
+  document.getElementById('logoutButton').addEventListener('click', function() {
+    // Remover o item 'token' do localStorage
+    localStorage.removeItem('token');
+    // Redirecionar para a página de login ou atualizar a página
+    navigate('/');
+});
+}
+
 
 
   return (
@@ -48,7 +59,7 @@ import axios from 'axios';
             <div className="collapse navbar-collapse" id="navcol-5">
             <ul className="navbar-nav ms-auto">              
             </ul>
-            <a className="btn btn-primary ms-md-2" role="button" href="/">Sair</a>
+            <button id="logoutButton" className="btn btn-primary ms-md-2" onClick={logout}>Sair</button>
             </div>
         </div>
     </nav>
