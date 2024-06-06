@@ -13,6 +13,7 @@ import CadastroClientes from "./views/CadastroClientes/CadastroClientes";
 import CalendarioView from "./views/Agendamento/Calendario/CalendarioView";
 import ListarAgendamento from "./views/Agendamento/ListarAgendamento/ListarAgendamento";
 import NovoAgendameto from "./views/Agendamento/NovoAgendamento/NovoAgendamento"
+import Error from "./components/Error/Error";
 
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
           <Route path="/listar-materiais" element={<ListarMateriais />} />
           <Route path="/calendario" element={<CalendarioView />} />  
           <Route path="/listar-agendamento" element={<ListarAgendamento />} /> 
+          <Route path="*" element={<Error />} /> 
 
         </Routes>
       </div>
