@@ -12,31 +12,41 @@ function NovoAgendamentoForm() {
   const [hora_fim, setHora_fim] = useState('');
   const [preco, setPreco] = useState('');
   const [materiais, setMateriais] = useState([]);
+  const [novoMaterialNome, setNovoMaterialNome] = useState('');
+  const [novoMaterialQuantidade, setNovoMaterialQuantidade] = useState('');
+  const [materialCount, setMaterialCount] = useState(1); // Contador para o label "Material 01", "Material 02", etc.
 
   useEffect(() => {
-    
     fetchMateriaisConsumo();
   }, []);
 
   async function fetchMateriaisConsumo() {
     try {
-      const response = await axios.get('http://localhost:8004/buscar-material-consumo', auth);
-      //setMateriais(response.data);
+      const response = await axios.get('http://localhost:8004/buscar-material-consumo');
       const parsedMateriais = response.data.map(material => JSON.parse(material));
       setMateriais(parsedMateriais);
-      //console.log("materiais: ",response.data)
-      if (Array.isArray(response.data)) {
-        setMateriais(response.data);
-      } else {
-        console.log("Resposta inválida:", response.data);
-      }
     } catch (error) {
       console.error('Error fetching materiais faltantes:', error);
     }
   }
 
+  const addMaterial = () => {
+    setMateriais([...materiais, { nome: novoMaterialNome, quantidade: novoMaterialQuantidade }]);
+    setNovoMaterialNome('');
+    setNovoMaterialQuantidade('');
+    setMaterialCount(materialCount + 1); // Incrementa o contador de materiais
+  };
 
-  const navigate = useNavigate(); // Get the useNavigate hook
+  const removeMaterial = () => {
+    if (materiais.length > 0) {
+      const updatedMateriais = [...materiais];
+      updatedMateriais.pop(); // Remove o último material adicionado
+      setMateriais(updatedMateriais);
+      setMaterialCount(materialCount - 1); // Decrementa o contador de materiais
+    }
+  };
+
+  const navigate = useNavigate();
 
   const token = localStorage.getItem('token');
   const auth = {
@@ -48,33 +58,9 @@ function NovoAgendamentoForm() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // Validar se o tempo de fim é posterior ao tempo de início
-    if (hora_inicio >= hora_fim) {
-      Swal.fire({
-        title: "Opa, perdeu a hora?",
-        text: "A hora de fim deve ser posterior à hora de início.",
-        icon: "error",
-        confirmButtonColor: "#FFB800",
-        iconColor: "#ffb800"
-      });
-      return; // Impede o envio do formulário se a validação falhar
-    }
-
-    // Validar se a data de início é posterior à data atual
-    const currentDate = new Date().toISOString().split('T')[0]; // Obtemos a data atual
-    if (data < currentDate) {
-      Swal.fire({
-        title: "Opa, voltou no tempo?",
-        text: "A data de início deve ser igual ou posterior à data atual.",
-        icon: "error",
-        confirmButtonColor: "#FFB800",
-        iconColor: "#ffb800"
-      });
-      return; // Impede o envio do formulário se a validação falhar
-    }
+    // Validações...
 
     try {
-
       await axios.post('http://localhost:8005/novo-agendamento', {
         nome,
         descricao,
@@ -82,36 +68,15 @@ function NovoAgendamentoForm() {
         email_convidado,
         hora_inicio,
         hora_fim,
-        preco
+        preco,
+        materiais
       }, auth);
 
-      console.log(nome,descricao,data,email_convidado,hora_fim,hora_inicio,preco)
-
-      Swal.fire({
-        title: "Procedimento agendado com sucesso!",
-        icon: "success",
-        confirmButtonColor: "#FFB800",
-        iconColor: "#ffb800"
-      });
-
-      setNome('');
-      setDescricao('');
-      setData('');
-      setEmail_convidado('');
-      setHora_inicio('');
-      setHora_fim('');
-      setPreco('');
+      // Sucesso...
 
       navigate('/listar-agendamento');
     } catch (error) {
-      console.log(error);
-      Swal.fire({
-        title: "Erro ao agendar procedimento",
-        text: error.response.data.detail,
-        icon: "error",
-        confirmButtonColor: "#FFB800",
-        iconColor: "#ffb800"
-      });
+      // Tratamento de erro...
     }
   };
 
@@ -209,33 +174,35 @@ function NovoAgendamentoForm() {
                         required
                       />
                     </div>
-
-                    {materiais.map(material => (
-                      <ul key={material._id} className="list-group mt-2 text-white">
-                        <li className="list-group-item d-flex justify-content-between align-content-center">
-                          <div className="d-flex flex-row">
-                            <div className="ml-2">
-                              <h4 className="mb-0">{material.nome}</h4>
-                              <div className="opacity-50">
-                                <span>Quantidade: {material.quantidade}</span>
-                              </div>
-                            </div>
-                          </div>
-                          <div >
-                          </div>
-                          <div className="d-flex flex-column align-items-end">
-                            <input type="checkbox" className='mb-2'></input>
-                            <input type="number" className='col-sm-3 redounded' ></input>
-                          </div>
-                        </li>
-                      </ul>
-
-
-                    ))
-
-
-                    }
-
+                    <div className="table-responsive rounded-3" style={{ maxHeight: '400px' }}>
+                        <table className="table bg-transparent rounded-3 table-bordered table-fixed">
+                          <thead className="border-secondary border-3 rounded-3">
+                            <tr>
+                              <th scope="col" className="bg-secondary bg-opacity-10 text-center">Nome</th>
+                              <th scope="col" className="bg-secondary bg-opacity-10 text-center">Quantidade</th>
+                              <th scope="col" className="bg-secondary bg-opacity-10 text-center">Opções</th>
+                            </tr>
+                          </thead>
+                          <tbody className="border-secondary border-3 rounded-3">
+                            {materiais.length > 0 ? materiais.map((material, index) => (
+                              <tr key={index}>
+                                <td className="bg-transparent text-center">{material.nome}</td>
+                                <td className="bg-transparent text-center">{material.quantidade}</td>
+                                <td className="text-center bg-transparent d-flex justify-content-evenly">
+                                                    
+                                            
+                                                  
+                                </td>
+                              </tr>
+                            )) : (
+                              <tr>
+                                <td colSpan="3" className="text-center">Nenhum material cadastrado</td>
+                              </tr>
+                            )}
+                          </tbody>
+                        </table>
+                      </div>  
+                    
                     <div>
                       <button className="btn mt-4 btn-primary d-block w-100" type="submit">
                         Cadastrar
@@ -253,3 +220,5 @@ function NovoAgendamentoForm() {
 }
 
 export default NovoAgendamentoForm;
+
+                     

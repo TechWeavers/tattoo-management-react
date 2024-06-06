@@ -187,6 +187,7 @@ function ListarCalendarioTable() {
                                                 </td>
                                                 <td className=" bg-transparent text-center">{agendamento.preco}</td>
                                                 <td className="text-center bg-transparent d-flex justify-content-evenly">
+                                                    
                                                     <button
                                                         className="btn shadow-sm btn-primary mr-2"
                                                         onClick={() => handleEdit(agendamento.id)}
