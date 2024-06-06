@@ -61,6 +61,8 @@ function NovoAgendamentoForm() {
         preco
       }, auth);
 
+      console.log(nome,descricao,data,email_convidado,hora_fim,hora_inicio,preco)
+
       Swal.fire({
         title: "Procedimento agendado com sucesso!",
         icon: "success",
