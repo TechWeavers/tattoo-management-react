@@ -151,78 +151,39 @@ function ListarCalendarioTable() {
         return `${formattedDate} ${formattedTime}`;
     };
 
-    /*async function enviarEmails() {
-        document.getElementById('email').addEventListener('click', async function() {
-            try {
-                await axios.post('http://localhost:8008/email-24horas-depois', {
-                  
-                });
-    
-                await axios.post('http://localhost:8008/email-24horas-antes', {
-                  
-                });
-    
-                await axios.post('http://localhost:8008/email-retorno', {
-                  
-                });
-          
-                Swal.fire({
-                  title: "Emails enviados com sucesso!",
-                  icon: "success",
-                  confirmButtonColor: "#FFB800",
-                  iconColor: "#ffb800"
-                });
-           
-               
-              } catch (error) {
-                console.log(error);
-                Swal.fire({
-                  title: "Erro no envio de emails automáticos",
-                  text: "Opa, erro ao enviar emails para usuários cadastrados",
-                  icon: "error",
-                  confirmButtonColor: "#FFB800",
-                  iconColor: "#ffb800"
-                });
-              }
-            
-        });
-    }*/
 
-    const enviarEmails = (event) => {
-        event.preventDefault();
-        try{
-            axios.post('http://localhost:8008/email-24horas-depois', {
-                  
-            });
-    
-             axios.post('http://localhost:8008/email-24horas-antes', {
+        const enviarEmails = async () => {
+            try {
+              // Enviando a primeira requisição
+              await axios.post('http://localhost:8008/email-24horas-depois');
               
-            });
-    
-             axios.post('http://localhost:8008/email-retorno', {
+              // Enviando a segunda requisição
+              await axios.post('http://localhost:8008/email-24horas-antes');
               
-            });
-      
-            
-                    Swal.fire({
-                        title: "Emails enviados com sucesso!",
-                        text: "As informações do agendamento foram atualizadas",
-                        icon: "success",
-                        confirmButtonColor: "#FFB800",
-                        iconColor: "#ffb800"
-                    });
-                    
-        }catch(error){
-            Swal.fire({
-                title: "Erro em enviar emails",
-                text: error.response.data.detail,
+              // Enviando a terceira requisição
+              await axios.post('http://localhost:8008/email-retorno');
+              
+              // Mostra um alerta de sucesso usando SweetAlert2
+              Swal.fire({
+                title: "Emails enviados com sucesso!",
+                icon: "success",
+                confirmButtonColor: "#FFB800",
+                iconColor: "#ffb800"
+              });
+        
+            } catch (error) {
+              console.error(error);
+              
+              // Mostra um alerta de erro usando SweetAlert2
+              Swal.fire({
+                title: "Erro no envio de emails automáticos",
+                text: "Opa, erro ao enviar emails para usuários cadastrados",
                 icon: "error",
                 confirmButtonColor: "#FFB800",
                 iconColor: "#ffb800"
-            });
-        }
-
-    };
+              });
+            }
+          };
 
     return (
         <div className="col-md-11 p-3 min-vh-100 ">
@@ -234,10 +195,13 @@ function ListarCalendarioTable() {
                                 <div className="col-md-6  ">
                                     <h2 className="text-center mb-4">Agendamentos</h2>
                                     <a href="/calendario">
-                                        <button className="btn input-group bt-cadastrar botao-agendamentos" type="button">Voltar para a agenda</button> <br />
-                                        <button id="email" className="btn input-group bt-cadastrar" type="button" onClick={enviarEmails}>Envio de emails automáticos</button>
+                                        <button className="btn input-group bt-cadastrar botao-agendamentos" type="button">Voltar para a agenda</button>
+                                        
                                     </a>
+                                    
+                                    <button id="email" className="btn input-group bt-cadastrar" type="button" onClick={enviarEmails}>Envio de emails automáticos</button>
                                 </div>
+                                
                             </div>
                             <div className="table-responsive rounded-3" style={{ maxHeight: '400px' }}>
                                 <table className="table bg-transparent   rounded-3 table-bordered table-fixed">
