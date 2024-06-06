@@ -4,6 +4,7 @@ import Navbar from "../../components/Dashboard/Navbar/Navbar";
 import Sidebar from "../../components/Dashboard/Sidebar/Sidebar";
 import './Dashboard.css';
 import Swal from 'sweetalert2';
+import Error from "../../components/Error/Error"
 
 function Dashboard() {
   const [agendamentos, setAgendamentos] = useState([]);
@@ -85,6 +86,8 @@ function Dashboard() {
     const formattedTime = `${("0" + date.getHours()).slice(-2)}:${("0" + date.getMinutes()).slice(-2)}`;
     return `${formattedDate} ${formattedTime}`;
   };
+
+  if(localStorage.getItem('token')){
 
   return (
     <>
@@ -231,6 +234,13 @@ function Dashboard() {
       </div>
     </>
   );
+}else{
+  return (
+    <>
+      <Error></Error>
+    </>
+  );
+}
 }
 
 export default Dashboard;
