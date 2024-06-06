@@ -44,11 +44,10 @@ function EsqueceuForm() {
  
  
     return (
-      <section className="position-relative py-4 py-xl-5">
-        <div className="container position-relative">
-          <div className="row d-flex justify-content-center">
-            <div className="col-md-8 col-lg-6 col-xl-5 col-xxl-4">
-              <div className="card mb-5">
+      <section className="position-relative py-4 py-xl-5" >
+          <div className="d-flex align-items-center justify-content-center vh-100">
+            <div className="col-md-6 col-lg-4 col-xl-3 col-xxl-3">
+                <div className="card mb-5 login shadow-sm ">
                 <div className="card-body p-sm-5">
                   <h2 className="text-center mb-4">Recuperar senha</h2>
                   <form onSubmit={handleSubmit}>
@@ -77,7 +76,7 @@ function EsqueceuForm() {
               </div>
             </div>
           </div>
-        </div>
+        
       </section>
     );
   }

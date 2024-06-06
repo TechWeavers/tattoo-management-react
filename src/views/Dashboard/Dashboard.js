@@ -4,6 +4,7 @@ import Navbar from "../../components/Dashboard/Navbar/Navbar";
 import Sidebar from "../../components/Dashboard/Sidebar/Sidebar";
 import './Dashboard.css';
 import Swal from 'sweetalert2';
+import DarkMode from '../../components/Darkmode/Darkmode';
 import Error from "../../components/Error/Error"
 
 function Dashboard() {
@@ -113,7 +114,7 @@ function Dashboard() {
         <div className="col-md-11 p-3 min-vh-100 ">
           <div className="container">
             <div className="container d-flex justify-content-center ">
-              <div className="col-md-4 mb-4 me-3">
+              <div className="col-md-4 mb-4 me-3" style={{ opacity: 0.75 }}>
                 <div className="card shadow-lg rounded-3">
                   <div className='card-content'>
                     <div className="card-body">
@@ -133,7 +134,7 @@ function Dashboard() {
 
 
 
-              <div className="col-md-4 mb-4 me-3">
+              <div className="col-md-4 mb-4 me-3" style={{ opacity: 0.75 }}>
                 <div className="card shadow-lg rounded-3">
                   <div className='card-content'>
                     <div className="card-body">
@@ -155,7 +156,7 @@ function Dashboard() {
 
 
 
-              <div className="col-md-4 mb-4 me-3">
+              <div className="col-md-4 mb-4 me-3" style={{ opacity: 0.75 }}>
                 <div className="card shadow-lg rounded-3">
                   <div className='card-content'>
                     <div className="card-body">
@@ -175,7 +176,7 @@ function Dashboard() {
 
             </div>
             <div className="container d-flex justify-content-center mt-1">
-              <div className="col-md-6 me-5">
+              <div className="col-md-6 me-5" style={{ opacity: 0.75 }}>
                 <div className="card shadow-lg rounded-3">
                   <div className="card-body">
                     <div className="row justify-content-center mb-4">
@@ -211,7 +212,7 @@ function Dashboard() {
                   </div>
                 </div>
               </div>
-              <div className="col-md-6">
+              <div className="col-md-6" style={{ opacity: 0.75 }}>
                 <div className="card shadow-lg rounded-3">
                   <div className="card-body">
                     <div className="row justify-content-center mb-4">
@@ -493,22 +494,23 @@ function Dashboard() {
                           </tbody>
                         </table>
                       </div>
-                    </div>
                   </div>
                 </div>
               </div>
             </div>
+
           </div>
         </div>
-      </>
-    );
-  } else {
-    return (
-      <>
-        <Error />
-      </>
-    );
-  }
+      </div>
+    </>
+  );
+}else{
+  return (
+    <>
+      <Error></Error>
+    </>
+  );
+}
 }
 
 export default Dashboard;

@@ -32,6 +32,13 @@ function Sidebar() {
                     <div id="itensSidebar" className="d-flex flex-sm-column flex-row flex-nowrap align-items-center sticky-top">
                         <ul
                             className="nav nav-pills nav-flush flex-sm-column flex-row flex-nowrap mb-auto mx-auto text-center justify-content-between w-100 px-3 pb-0 align-items-center">
+                            <li>
+                                <a href="/dashboard" className="nav-link py-1 px-2" title="" data-bs-toggle="tooltip"
+                                    data-bs-placement="right" data-bs-original-title="Products">
+                                    <i className="bi bi-house h4 text-light"></i>
+                                    <p className="fw-light text-center fs-6 text-light">Dashboard</p>
+                                </a>
+                            </li>
                             <li className="nav-item">
                                 <a href="/calendario" className="nav-link py-1 px-2" title="" data-bs-toggle="tooltip"
                                     data-bs-placement="right" data-bs-original-title="Home">
@@ -69,13 +76,7 @@ function Sidebar() {
                                     <p className="fw-light text-center fs-6 text-light">Clientes</p>
                                 </a>
                             </li>
-                            <li>
-                                <a href="/dashboard" className="nav-link py-1 px-2" title="" data-bs-toggle="tooltip"
-                                    data-bs-placement="right" data-bs-original-title="Products">
-                                    <i className="bi bi-house h4 text-light"></i>
-                                    <p className="fw-light text-center fs-6 text-light">Dashboard</p>
-                                </a>
-                            </li>
+                            
 
                         </ul>
                     </div>

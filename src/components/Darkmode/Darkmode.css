@@ -1,0 +1,20 @@
+/* Suas regras existentes */
+
+body {
+    transition: background-color 0.5s, color 0.5s;
+}
+
+.dark-mode {
+    background-color: #333;
+    color: #fff;
+}
+
+.btn-darkinho {
+    width: 64px;
+    height: 64px;
+    transition: background-color 0.5s, color 0.5s
+}
+
+.no-transition {
+    transition: none !important;
+}
