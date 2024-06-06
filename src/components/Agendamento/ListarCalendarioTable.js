@@ -172,6 +172,7 @@ function ListarCalendarioTable() {
                                             <th scope="col" className=" bg-secondary bg-opacity-10 text-center">Descrição</th>
                                             <th scope="col" className=" bg-secondary bg-opacity-10 text-center">Email cliente</th>
                                             <th scope="col" className=" bg-secondary bg-opacity-10 text-center">Data</th>
+                                            <th scope="col" className=" bg-secondary bg-opacity-10 text-center">Preço</th>
                                             <th scope="col" className=" bg-secondary bg-opacity-10 text-center">Opções</th>
                                         </tr>
                                     </thead>
@@ -184,6 +185,7 @@ function ListarCalendarioTable() {
                                                 <td className=" bg-transparent text-center">
                                                     {agendamento.start && agendamento.start.dateTime ? formatDate(agendamento.start.dateTime) : "Data não disponível"}
                                                 </td>
+                                                <td className=" bg-transparent text-center">{agendamento.preco}</td>
                                                 <td className="text-center bg-transparent d-flex justify-content-evenly">
                                                     <button
                                                         className="btn shadow-sm btn-primary mr-2"
