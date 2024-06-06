@@ -11,6 +11,30 @@ function NovoAgendamentoForm() {
   const [hora_inicio, setHora_inicio] = useState('');
   const [hora_fim, setHora_fim] = useState('');
   const [preco, setPreco] = useState('');
+  const [materiais, setMateriais] = useState([]);
+
+  useEffect(() => {
+    
+    fetchMateriaisConsumo();
+  }, []);
+
+  async function fetchMateriaisConsumo() {
+    try {
+      const response = await axios.get('http://localhost:8004/buscar-material-consumo', auth);
+      //setMateriais(response.data);
+      const parsedMateriais = response.data.map(material => JSON.parse(material));
+      setMateriais(parsedMateriais);
+      //console.log("materiais: ",response.data)
+      if (Array.isArray(response.data)) {
+        setMateriais(response.data);
+      } else {
+        console.log("Resposta inválida:", response.data);
+      }
+    } catch (error) {
+      console.error('Error fetching materiais faltantes:', error);
+    }
+  }
+
 
   const navigate = useNavigate(); // Get the useNavigate hook
 
@@ -23,7 +47,7 @@ function NovoAgendamentoForm() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    
+
     // Validar se o tempo de fim é posterior ao tempo de início
     if (hora_inicio >= hora_fim) {
       Swal.fire({
@@ -50,7 +74,7 @@ function NovoAgendamentoForm() {
     }
 
     try {
-      
+
       await axios.post('http://localhost:8005/novo-agendamento', {
         nome,
         descricao,
@@ -67,7 +91,7 @@ function NovoAgendamentoForm() {
         confirmButtonColor: "#FFB800",
         iconColor: "#ffb800"
       });
-  
+
       setNome('');
       setDescricao('');
       setData('');
@@ -75,7 +99,7 @@ function NovoAgendamentoForm() {
       setHora_inicio('');
       setHora_fim('');
       setPreco('');
-  
+
       navigate('/listar-agendamento');
     } catch (error) {
       console.log(error);
@@ -183,8 +207,35 @@ function NovoAgendamentoForm() {
                         required
                       />
                     </div>
+
+                    {materiais.map(material => (
+                      <ul key={material._id} className="list-group mt-2 text-white">
+                        <li className="list-group-item d-flex justify-content-between align-content-center">
+                          <div className="d-flex flex-row">
+                            <div className="ml-2">
+                              <h4 className="mb-0">{material.nome}</h4>
+                              <div className="opacity-50">
+                                <span>Quantidade: {material.quantidade}</span>
+                              </div>
+                            </div>
+                          </div>
+                          <div >
+                          </div>
+                          <div className="d-flex flex-column align-items-end">
+                            <input type="checkbox" className='mb-2'></input>
+                            <input type="number" className='col-sm-3 redounded' ></input>
+                          </div>
+                        </li>
+                      </ul>
+
+
+                    ))
+
+
+                    }
+
                     <div>
-                      <button className="btn btn-primary d-block w-100" type="submit">
+                      <button className="btn mt-4 btn-primary d-block w-100" type="submit">
                         Cadastrar
                       </button>
                     </div>
