@@ -14,6 +14,7 @@ function Calendario() {
                                             <a href="/novo-agendamento"><button className="btn input-group bt-cadastrar" type="button">Novo agendamento</button></a>
                                             <div style={{ width: '100px' }}></div>
                                             <a href="/listar-agendamento"><button className="btn input-group bt-cadastrar" type="button">Editar agendamento</button></a>
+                                            
                                         </div>
                                     </div>
 

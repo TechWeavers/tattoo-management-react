@@ -4,6 +4,7 @@ import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import EditarAgendamentoForm from "../../components/Agendamento/EditarAgendamentoForm";
 
+
 const MySwal = withReactContent(Swal);
 
 function ListarCalendarioTable() {
@@ -150,6 +151,79 @@ function ListarCalendarioTable() {
         return `${formattedDate} ${formattedTime}`;
     };
 
+    /*async function enviarEmails() {
+        document.getElementById('email').addEventListener('click', async function() {
+            try {
+                await axios.post('http://localhost:8008/email-24horas-depois', {
+                  
+                });
+    
+                await axios.post('http://localhost:8008/email-24horas-antes', {
+                  
+                });
+    
+                await axios.post('http://localhost:8008/email-retorno', {
+                  
+                });
+          
+                Swal.fire({
+                  title: "Emails enviados com sucesso!",
+                  icon: "success",
+                  confirmButtonColor: "#FFB800",
+                  iconColor: "#ffb800"
+                });
+           
+               
+              } catch (error) {
+                console.log(error);
+                Swal.fire({
+                  title: "Erro no envio de emails automáticos",
+                  text: "Opa, erro ao enviar emails para usuários cadastrados",
+                  icon: "error",
+                  confirmButtonColor: "#FFB800",
+                  iconColor: "#ffb800"
+                });
+              }
+            
+        });
+    }*/
+
+    const enviarEmails = (event) => {
+        event.preventDefault();
+        try{
+            axios.post('http://localhost:8008/email-24horas-depois', {
+                  
+            });
+    
+             axios.post('http://localhost:8008/email-24horas-antes', {
+              
+            });
+    
+             axios.post('http://localhost:8008/email-retorno', {
+              
+            });
+      
+            
+                    Swal.fire({
+                        title: "Emails enviados com sucesso!",
+                        text: "As informações do agendamento foram atualizadas",
+                        icon: "success",
+                        confirmButtonColor: "#FFB800",
+                        iconColor: "#ffb800"
+                    });
+                    
+        }catch(error){
+            Swal.fire({
+                title: "Erro em enviar emails",
+                text: error.response.data.detail,
+                icon: "error",
+                confirmButtonColor: "#FFB800",
+                iconColor: "#ffb800"
+            });
+        }
+
+    };
+
     return (
         <div className="col-md-11 p-3 min-vh-100 ">
             <div className="row justify-content-center  ">
@@ -160,7 +234,8 @@ function ListarCalendarioTable() {
                                 <div className="col-md-6  ">
                                     <h2 className="text-center mb-4">Agendamentos</h2>
                                     <a href="/calendario">
-                                        <button className="btn input-group bt-cadastrar " type="button">Voltar para a agenda</button>
+                                        <button className="btn input-group bt-cadastrar botao-agendamentos" type="button">Voltar para a agenda</button> <br />
+                                        <button id="email" className="btn input-group bt-cadastrar" type="button" onClick={enviarEmails}>Envio de emails automáticos</button>
                                     </a>
                                 </div>
                             </div>
