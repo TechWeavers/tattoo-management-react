@@ -161,7 +161,7 @@ function ListarCalendarioTable() {
               await axios.post('http://localhost:8008/email-24horas-antes');
               
               // Enviando a terceira requisição
-              await axios.post('http://localhost:8008/email-retorno');
+              /*await axios.post('http://localhost:8008/email-retorno');*/
               
               // Mostra um alerta de sucesso usando SweetAlert2
               Swal.fire({
