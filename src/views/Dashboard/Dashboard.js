@@ -349,7 +349,7 @@ function Dashboard() {
       console.error('Error fetching valor bruto:', error);
       Swal.fire({
         title: "Erro ao buscar algum dado do relatório!",
-        text: "Opa, erro ao cadastrar o usuário",
+        text: "Opa, erro no valor bruto",
         icon: "error",
         confirmButtonColor: "#FFB800",
         iconColor: "#ffb800"
@@ -451,7 +451,6 @@ function Dashboard() {
                           <tr>
                             <th scope="col" className="bg-secondary bg-opacity-10 text-center">Nome</th>
                             <th scope="col" className="bg-secondary bg-opacity-10 text-center">Descrição</th>
-                            <th scope="col" className="bg-secondary bg-opacity-10 text-center">Email cliente</th>
                             <th scope="col" className="bg-secondary bg-opacity-10 text-center">Data</th>
                           </tr>
                         </thead>
@@ -460,7 +459,7 @@ function Dashboard() {
                             <tr key={agendamento._id}>
                               <td className="bg-transparent text-center">{agendamento.summary}</td>
                               <td className="bg-transparent text-center">{agendamento.description}</td>
-                              <td className="bg-transparent text-center">{agendamento.attendees && agendamento.attendees[0].email && agendamento.attendees[0].email}</td>
+                              
 
                               <td className="bg-transparent text-center">
                                 {agendamento.date ? formatDate(agendamento.date) : "Data não disponível"}
