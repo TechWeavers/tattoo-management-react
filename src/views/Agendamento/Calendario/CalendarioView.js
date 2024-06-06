@@ -2,6 +2,7 @@ import Navbar from "../../../components/Dashboard/Navbar/Navbar";
 import Sidebar from "../../../components/Dashboard/Sidebar/Sidebar";
 import Calendario from "../../../components/Agendamento/Calendario"
 import Error from "../../../components/Error/Error"
+import DarkMode from "../../../components/Darkmode/Darkmode";
 
 function CalendarioView() {
 
@@ -14,6 +15,7 @@ function CalendarioView() {
       <Sidebar></Sidebar>
       <Calendario></Calendario>
       </div>
+      <DarkMode></DarkMode>
       </>
     );
   }else{

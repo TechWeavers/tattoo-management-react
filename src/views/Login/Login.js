@@ -4,12 +4,14 @@ import { useNavigate } from 'react-router-dom';
 import './Login.css'; 
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import DarkMode from '../../components/Darkmode/Darkmode';
 //import { setToken } from '../../db';
 
 function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate(); // Get the useNavigate hook
+    
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -32,7 +34,7 @@ function Login() {
                 
                 //console.log(response.data)
                 // Successful authentication, redirect to /dashboard page
-                navigate('/calendario');
+                navigate('/dashboard');
             } else {
                 // Authentication failed, display an error message
                 console.error('Error authenticating user');
@@ -54,10 +56,10 @@ function Login() {
     return (
         
         <section className="position-relative py-4 py-xl-5" >
-          <div className="container position-relative ">
-            <div className="row d-flex justify-content-center">
-              <div className="col-md-8 col-lg-6 col-xl-5 col-xxl-4">
-                <div className="card mb-5 login">
+          <div className="d-flex align-items-center justify-content-center vh-100">
+            <div className="col-md-6 col-lg-4 col-xl-3 col-xxl-3">
+                <div className="card mb-5 login shadow-sm ">
+
                   <div className="card-body p-sm-5">
                     <h2 className="text-center mb-4">InkDash<br></br>Tattoo management</h2>
                     <form onSubmit={handleSubmit}>
@@ -98,8 +100,9 @@ function Login() {
                 </div>
               </div>
             </div>
-          </div>
+          <DarkMode></DarkMode>
         </section>
+        
         
         
 

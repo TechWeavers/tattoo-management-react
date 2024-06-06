@@ -12,7 +12,7 @@ function ListarClientesTable() {
     const [clientes, setClientes] = useState([]);
     const [searchTerm, setSearchTerm] = useState("");
     const [clienteCpfAtual, setClienteCpfAtual] = useState("");
-
+    
 
     const token = localStorage.getItem('token');
     const auth = {
@@ -198,7 +198,7 @@ function ListarClientesTable() {
         <div className="col-md-11 p-3 min-vh-100 ">
             <div className="row justify-content-center  ">
                 <div className="col-lg  ">
-                    <div className="card bg-white border  shadow-lg border-3 rounded-3 bg-opacity-25">
+                    <div className="card bg-white border  shadow-lg border-3 rounded-3 bg-opacity-75">
                         <div className="card-body ">
                             <div className="row justify-content-center mb-4 ">
                                 <div className="col-md-6  ">
@@ -225,7 +225,8 @@ function ListarClientesTable() {
                                 </div>
                             </div>
                             <div className="table-responsive rounded-3" style={{ maxHeight: '400px' }}>
-                                <table className="table bg-transparent   rounded-3 table-bordered table-fixed">
+                                <table className="table bg-transparent rounded-3 custom-table">
+
                                     <thead className="border-secondary  border-3 rounded-3">
                                         <tr>
                                             <th scope="col" className=" bg-secondary bg-opacity-10 text-center">Nome</th>

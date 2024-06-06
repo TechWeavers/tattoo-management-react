@@ -4,6 +4,7 @@ import Navbar from "../../components/Dashboard/Navbar/Navbar";
 import Sidebar from "../../components/Dashboard/Sidebar/Sidebar";
 import './Dashboard.css';
 import Swal from 'sweetalert2';
+import DarkMode from '../../components/Darkmode/Darkmode';
 
 function Dashboard() {
   const [agendamentos, setAgendamentos] = useState([]);
@@ -229,6 +230,7 @@ function Dashboard() {
           </div>
         </div>
       </div>
+      <DarkMode></DarkMode>
     </>
   );
 }

@@ -1,6 +1,7 @@
 import Navbar from "../../components/Dashboard/Navbar/Navbar";
 import Sidebar from "../../components/Dashboard/Sidebar/Sidebar";
 import NovoClienteForm from "../../components/Cadastro/NovoClienteForm/NovoClienteForm";
+import DarkMode from "../../components/Darkmode/Darkmode";
 
 function CadastroClientes() {
   return (
@@ -11,6 +12,7 @@ function CadastroClientes() {
     <Sidebar></Sidebar>
     <NovoClienteForm></NovoClienteForm>
     </div>
+    <DarkMode></DarkMode>
     </>
   );
 }

@@ -2,6 +2,7 @@ import Navbar from "../../../components/Dashboard/Navbar/Navbar";
 import Sidebar from "../../../components/Dashboard/Sidebar/Sidebar";
 import ListarCalendarioTable from "../../../components/Agendamento/ListarCalendarioTable";
 import Error from "../../../components/Error/Error"
+import DarkMode from "../../../components/Darkmode/Darkmode";
 
 function ListarAgendamento() {
 
@@ -14,6 +15,7 @@ function ListarAgendamento() {
       <Sidebar></Sidebar>
       <ListarCalendarioTable></ListarCalendarioTable>
       </div>
+      <DarkMode></DarkMode>
       </>
     );
   }else{
