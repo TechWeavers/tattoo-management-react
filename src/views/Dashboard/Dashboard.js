@@ -5,6 +5,7 @@ import Sidebar from "../../components/Dashboard/Sidebar/Sidebar";
 import './Dashboard.css';
 import Swal from 'sweetalert2';
 import DarkMode from '../../components/Darkmode/Darkmode';
+import Error from "../../components/Error/Error"
 
 function Dashboard() {
   const [agendamentos, setAgendamentos] = useState([]);
@@ -31,7 +32,12 @@ function Dashboard() {
   async function fetchListAgendamento() {
     try {
       const response = await axios.get('http://localhost:8007/proximos-agendamentos', auth);
-      setAgendamentos(response.data);
+      //setAgendamentos(response.data);
+      if (Array.isArray(response.data)) {
+        setAgendamentos(response.data);
+    } else {
+        console.log("Resposta inválida:", response.data);
+    }
     } catch (error) {
       console.error('Error fetching agendamentos:', error);
     }
@@ -40,7 +46,15 @@ function Dashboard() {
   async function fetchMateriaisFaltantes() {
     try {
       const response = await axios.get('http://localhost:8007/materiais-faltantes', auth);
-      setMateriais(response.data);
+      //setMateriais(response.data);
+      const parsedMateriais = response.data.map(material => JSON.parse(material));
+      setMateriais(parsedMateriais);
+      /*console.log("materiais: ",response.data)
+      if (Array.isArray(response.data)) {
+        setMateriais(response.data);
+    } else {
+        console.log("Resposta inválida:", response.data);
+    }*/
     } catch (error) {
       console.error('Error fetching materiais faltantes:', error);
     }
@@ -86,6 +100,8 @@ function Dashboard() {
     const formattedTime = `${("0" + date.getHours()).slice(-2)}:${("0" + date.getMinutes()).slice(-2)}`;
     return `${formattedDate} ${formattedTime}`;
   };
+
+  if(localStorage.getItem('token')){
 
   return (
     <>
@@ -167,7 +183,7 @@ function Dashboard() {
                         <h3 className="text-center mb-4">Agendamentos próximos</h3>
                       </div>
                     </div>
-                    <div className="table-responsive rounded-3" style={{ maxHeight: '400px' }}>
+                    {<div className="table-responsive rounded-3" style={{ maxHeight: '400px' }}>
                       <table className="table bg-transparent rounded-3 table-bordered table-fixed">
                         <thead className="border-secondary border-3 rounded-3">
                           <tr>
@@ -182,7 +198,8 @@ function Dashboard() {
                             <tr key={agendamento._id}>
                               <td className="bg-transparent text-center">{agendamento.summary}</td>
                               <td className="bg-transparent text-center">{agendamento.description}</td>
-                              <td className="bg-transparent text-center">{agendamento.attendees[0].email}</td>
+                              <td className="bg-transparent text-center">{agendamento.attendees && agendamento.attendees[0].email && agendamento.attendees[0].email}</td>
+
                               <td className="bg-transparent text-center">
                                 {agendamento.date ? formatDate(agendamento.date) : "Data não disponível"}
                               </td>
@@ -190,7 +207,7 @@ function Dashboard() {
                           ))}
                         </tbody>
                       </table>
-                    </div>
+                    </div>}
                   </div>
                 </div>
               </div>
@@ -202,7 +219,7 @@ function Dashboard() {
                         <h3 className="text-center mb-4">Materiais faltantes</h3>
                       </div>
                     </div>
-                    <div className="table-responsive rounded-3" style={{ maxHeight: '400px' }}>
+                    {/*<div className="table-responsive rounded-3" style={{ maxHeight: '400px' }}>
                       <table className="table bg-transparent rounded-3 table-bordered table-fixed">
                         <thead className="border-secondary border-3 rounded-3">
                           <tr>
@@ -213,7 +230,7 @@ function Dashboard() {
                         </thead>
                         <tbody className="border-secondary border-3 rounded-3">
                           {materiais.map(material => (
-                            <tr key={material.nome}>
+                            <tr key={material._id}>
                               <td className="bg-transparent text-center">{material.nome}</td>
                               <td className="bg-transparent text-center">{material.quantidade}</td>
                               <td className="bg-transparent text-center">{material.valor_unitario}</td>
@@ -221,7 +238,31 @@ function Dashboard() {
                           ))}
                         </tbody>
                       </table>
-                    </div>
+                    </div>*/}
+                    <div className="table-responsive rounded-3" style={{ maxHeight: '400px' }}>
+                        <table className="table bg-transparent rounded-3 table-bordered table-fixed">
+                          <thead className="border-secondary border-3 rounded-3">
+                            <tr>
+                              <th scope="col" className="bg-secondary bg-opacity-10 text-center">Nome</th>
+                              <th scope="col" className="bg-secondary bg-opacity-10 text-center">Quantidade</th>
+                              <th scope="col" className="bg-secondary bg-opacity-10 text-center">Valor unitário</th>
+                            </tr>
+                          </thead>
+                          <tbody className="border-secondary border-3 rounded-3">
+                            {materiais.length > 0 ? materiais.map((material, index) => (
+                              <tr key={index}>
+                                <td className="bg-transparent text-center">{material.nome}</td>
+                                <td className="bg-transparent text-center">{material.quantidade}</td>
+                                <td className="bg-transparent text-center">{material.valor_unitario}</td>
+                              </tr>
+                            )) : (
+                              <tr>
+                                <td colSpan="3" className="text-center">Nenhum material faltante encontrado</td>
+                              </tr>
+                            )}
+                          </tbody>
+                        </table>
+                      </div>
                   </div>
                 </div>
               </div>
@@ -233,6 +274,13 @@ function Dashboard() {
       <DarkMode></DarkMode>
     </>
   );
+}else{
+  return (
+    <>
+      <Error></Error>
+    </>
+  );
+}
 }
 
 export default Dashboard;

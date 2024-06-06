@@ -1,20 +1,30 @@
 import Navbar from "../../components/Dashboard/Navbar/Navbar";
 import Sidebar from "../../components/Dashboard/Sidebar/Sidebar";
 import NovoClienteForm from "../../components/Cadastro/NovoClienteForm/NovoClienteForm";
-import DarkMode from "../../components/Darkmode/Darkmode";
+import Error from "../../../src/components/Error/Error"
 
 function CadastroClientes() {
-  return (
-    <>
-    <Navbar></Navbar>
-    
-        <div class="row">
-    <Sidebar></Sidebar>
-    <NovoClienteForm></NovoClienteForm>
-    </div>
-    <DarkMode></DarkMode>
-    </>
-  );
+
+  if(localStorage.getItem('token')){
+    return (
+      <>
+      <Navbar></Navbar>
+      
+          <div class="row">
+      <Sidebar></Sidebar>
+      <NovoClienteForm></NovoClienteForm>
+      </div>
+      </>
+    );
+
+  }else{
+    return (
+      <>
+        <Error></Error>
+      </>
+    );
+  }
+  
 }
 
 export default CadastroClientes;
