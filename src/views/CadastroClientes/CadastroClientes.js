@@ -2,6 +2,7 @@ import Navbar from "../../components/Dashboard/Navbar/Navbar";
 import Sidebar from "../../components/Dashboard/Sidebar/Sidebar";
 import NovoClienteForm from "../../components/Cadastro/NovoClienteForm/NovoClienteForm";
 import Error from "../../../src/components/Error/Error"
+import DarkMode from "../../components/Darkmode/Darkmode";
 
 function CadastroClientes() {
 
@@ -13,6 +14,7 @@ function CadastroClientes() {
           <div class="row">
       <Sidebar></Sidebar>
       <NovoClienteForm></NovoClienteForm>
+      <DarkMode></DarkMode>
       </div>
       </>
     );

@@ -1,10 +1,11 @@
-import DarkMode from "../../components/Darkmode/Darkmode";
+
 import Navbar from "../../components/Dashboard/Navbar/Navbar";
 import Sidebar from "../../components/Dashboard/Sidebar/Sidebar";
 import ListarUsuarioTable from "../../components/Listar/ListarUsuarioTable/ListarUsuarioTable";
 import Error from "../../components/Error/Error"
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import Darkmode from "../../components/Darkmode/Darkmode";
 
 function ListarUsuario() {
 
@@ -41,7 +42,7 @@ function ListarUsuario() {
         <div class="row ">
         <Sidebar></Sidebar>
         <ListarUsuarioTable></ListarUsuarioTable>
-        <DarkMode></DarkMode>
+        <Darkmode></Darkmode>
         </div>
         </>
         

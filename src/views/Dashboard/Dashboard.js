@@ -113,7 +113,7 @@ function Dashboard() {
         <div className="col-md-11 p-3 min-vh-100 ">
           <div className="container">
             <div className="container d-flex justify-content-center ">
-              <div className="col-md-4 mb-4 me-3">
+              <div className="col-md-4 mb-4 me-3" style={{ opacity: 0.75 }}>
                 <div className="card shadow-lg rounded-3">
                   <div className='card-content'>
                     <div className="card-body">
@@ -133,7 +133,7 @@ function Dashboard() {
 
 
 
-              <div className="col-md-4 mb-4 me-3">
+              <div className="col-md-4 mb-4 me-3" style={{ opacity: 0.75 }}>
                 <div className="card shadow-lg rounded-3">
                   <div className='card-content'>
                     <div className="card-body">
@@ -155,7 +155,7 @@ function Dashboard() {
 
 
 
-              <div className="col-md-4 mb-4 me-3">
+              <div className="col-md-4 mb-4 me-3" style={{ opacity: 0.75 }}>
                 <div className="card shadow-lg rounded-3">
                   <div className='card-content'>
                     <div className="card-body">
@@ -175,7 +175,7 @@ function Dashboard() {
 
             </div>
             <div className="container d-flex justify-content-center mt-1">
-              <div className="col-md-6 me-5">
+              <div className="col-md-6 me-5" style={{ opacity: 0.75 }}>
                 <div className="card shadow-lg rounded-3">
                   <div className="card-body">
                     <div className="row justify-content-center mb-4">
@@ -211,7 +211,7 @@ function Dashboard() {
                   </div>
                 </div>
               </div>
-              <div className="col-md-6">
+              <div className="col-md-6" style={{ opacity: 0.75 }}>
                 <div className="card shadow-lg rounded-3">
                   <div className="card-body">
                     <div className="row justify-content-center mb-4">
@@ -219,26 +219,6 @@ function Dashboard() {
                         <h3 className="text-center mb-4">Materiais faltantes</h3>
                       </div>
                     </div>
-                    {/*<div className="table-responsive rounded-3" style={{ maxHeight: '400px' }}>
-                      <table className="table bg-transparent rounded-3 table-bordered table-fixed">
-                        <thead className="border-secondary border-3 rounded-3">
-                          <tr>
-                            <th scope="col" className="bg-secondary bg-opacity-10 text-center">Nome</th>
-                            <th scope="col" className="bg-secondary bg-opacity-10 text-center">Quantidade</th>
-                            <th scope="col" className="bg-secondary bg-opacity-10 text-center">Valor unitário</th>
-                          </tr>
-                        </thead>
-                        <tbody className="border-secondary border-3 rounded-3">
-                          {materiais.map(material => (
-                            <tr key={material._id}>
-                              <td className="bg-transparent text-center">{material.nome}</td>
-                              <td className="bg-transparent text-center">{material.quantidade}</td>
-                              <td className="bg-transparent text-center">{material.valor_unitario}</td>
-                            </tr>
-                          ))}
-                        </tbody>
-                      </table>
-                    </div>*/}
                     <div className="table-responsive rounded-3" style={{ maxHeight: '400px' }}>
                         <table className="table bg-transparent rounded-3 table-bordered table-fixed">
                           <thead className="border-secondary border-3 rounded-3">

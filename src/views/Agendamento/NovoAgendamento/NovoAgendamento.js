@@ -2,6 +2,7 @@ import Navbar from "../../../components/Dashboard/Navbar/Navbar";
 import Sidebar from "../../../components/Dashboard/Sidebar/Sidebar";
 import NovoAgendamentoForm from "../../../components/Agendamento/NovoAgendamentoForm";
 import Error from "../../../components/Error/Error"
+import DarkMode from "../../../components/Darkmode/Darkmode";
 
 function ListarAgendamento() {
 
@@ -13,6 +14,7 @@ function ListarAgendamento() {
           <div class="row">
       <Sidebar></Sidebar>
       <NovoAgendamentoForm></NovoAgendamentoForm>
+      <DarkMode></DarkMode>
       </div>
       </>
     );

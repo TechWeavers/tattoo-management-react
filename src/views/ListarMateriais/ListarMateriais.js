@@ -13,6 +13,7 @@ function ListarClientes() {
       <div class="row ">
       <Sidebar></Sidebar>
       <ListarMateriaisTable></ListarMateriaisTable>
+      <DarkMode></DarkMode>
       </div>
       </>
     );

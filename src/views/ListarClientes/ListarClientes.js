@@ -13,6 +13,7 @@ import Navbar from "../../components/Dashboard/Navbar/Navbar";
         <div class="row ">
         <Sidebar></Sidebar>
         <ListarClientesTable></ListarClientesTable>
+        <DarkMode></DarkMode>
         </div>
         </>
       );

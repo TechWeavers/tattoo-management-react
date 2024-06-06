@@ -40,6 +40,7 @@ function CadastroUsuario() {
             <div class="row">
         <Sidebar></Sidebar>
         <NovoUsuarioForm></NovoUsuarioForm>
+        <DarkMode></DarkMode>
         </div>
         </>
       );
