@@ -10,6 +10,7 @@ function NovoAgendamentoForm() {
   const [email_convidado, setEmail_convidado] = useState('');
   const [hora_inicio, setHora_inicio] = useState('');
   const [hora_fim, setHora_fim] = useState('');
+  const [preco, setPreco] = useState('');
 
   const navigate = useNavigate(); // Get the useNavigate hook
 
@@ -56,7 +57,8 @@ function NovoAgendamentoForm() {
         data,
         email_convidado,
         hora_inicio,
-        hora_fim
+        hora_fim,
+        preco
       }, auth);
 
       Swal.fire({
@@ -72,6 +74,7 @@ function NovoAgendamentoForm() {
       setEmail_convidado('');
       setHora_inicio('');
       setHora_fim('');
+      setPreco('');
   
       navigate('/listar-agendamento');
     } catch (error) {
@@ -165,6 +168,18 @@ function NovoAgendamentoForm() {
                         placeholder="Hora de fim"
                         value={hora_fim}
                         onChange={(e) => setHora_fim(e.target.value)}
+                        required
+                      />
+                    </div>
+                    <div className="mb-3">
+                      <input
+                        className="shadow-sm form-control"
+                        type="number"
+                        id="preco"
+                        name="preco"
+                        placeholder="Preço estimado da tatuagem"
+                        value={preco}
+                        onChange={(e) => setPreco(e.target.value)}
                         required
                       />
                     </div>
