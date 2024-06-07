@@ -11,6 +11,7 @@ function ListarCalendarioTable() {
     const [agendamentos, setAgendamentos] = useState([]);
     const [searchTerm, setSearchTerm] = useState("");
     const [agendamentoIdAtual, setAgendamentoIdAtual] = useState("");
+    const [tipo, setTipo] = useState('')
 
     const token = localStorage.getItem('token');
     const auth = {
@@ -22,6 +23,29 @@ function ListarCalendarioTable() {
     useEffect(() => {
         fetchAgendamentos();
     }, []);
+
+    
+    
+    useEffect(()=>{
+      const token = localStorage.getItem('token')
+      
+      const carregarAtributo = async () => {
+        try {
+  
+            const response = await axios.get(`http://localhost:8000/tipo-usuario/${token}`);
+  
+            // Extrair o atributo da resposta
+            const tipoExtraido = response.data;
+  
+            // Atualizar o estado com o atributo extraído
+            setTipo(tipoExtraido);
+        } catch (error) {
+            console.error('Erro ao carregar atributo:', error);
+        }
+    };
+  
+    carregarAtributo();
+    },[]);
 
     const fetchAgendamentos = () => {
         axios.get("http://localhost:8005/listar-agendamentos", auth)
@@ -155,6 +179,14 @@ function ListarCalendarioTable() {
         const enviarEmails = async () => {
             try {
               // Enviando a primeira requisição
+              Swal.fire({
+                title: "Aguarde um momento...",
+                html: "Estamos enviando os emails de confirmação e pré-agendamento",
+                allowOutsideClick: false,
+                didOpen: () => {
+                  Swal.showLoading()
+                }
+              })
               await axios.post('http://localhost:8008/email-24horas-depois');
               
               // Enviando a segunda requisição
@@ -195,11 +227,11 @@ function ListarCalendarioTable() {
                                 <div className="col-md-6  ">
                                     <h2 className="text-center mb-4">Agendamentos</h2>
                                     <a href="/calendario">
-                                        <button className="btn input-group bt-cadastrar botao-agendamentos" type="button">Voltar para a agenda</button>
+                                        <button className="btn mb-4 input-group bt-cadastrar botao-agendamentos" type="button">Voltar para a agenda</button>
                                         
                                     </a>
                                     
-                                    <button id="email" className="btn input-group bt-cadastrar" type="button" onClick={enviarEmails}>Envio de emails automáticos</button>
+                                    {tipo=="Administrador" && <button id="email" className="btn input-group bt-cadastrar" type="button" onClick={enviarEmails}>Envio de emails automáticos</button>}
                                 </div>
                                 
                             </div>

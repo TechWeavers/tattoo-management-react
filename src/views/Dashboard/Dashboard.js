@@ -406,7 +406,7 @@ function Dashboard() {
 
                         </div>
                         <div className='align-self-center'>
-                          <i class="bi bi-calendar3 h1 float-right"></i>
+                          <i class="bi bi-currency-dollar h1 float-right"></i>
                         </div>
                       </div>
                     </div>
@@ -427,7 +427,7 @@ function Dashboard() {
                           <span>Média valor</span>
                         </div>
                         <div className='align-self-center'>
-                          <i class="bi bi-calendar3 h1 float-right"></i>
+                          <i className="bi bi-bar-chart-line h1 float-right"></i>
                         </div>
                       </div>
                     </div>

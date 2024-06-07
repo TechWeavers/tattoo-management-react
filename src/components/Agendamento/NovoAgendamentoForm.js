@@ -174,7 +174,8 @@ function NovoAgendamentoForm() {
                         required
                       />
                     </div>
-                    <div className="table-responsive rounded-3" style={{ maxHeight: '400px' }}>
+
+                    {/*<div className="table-responsive rounded-3" style={{ maxHeight: '400px' }}>
                         <table className="table bg-transparent rounded-3 table-bordered table-fixed">
                           <thead className="border-secondary border-3 rounded-3">
                             <tr>
@@ -201,7 +202,7 @@ function NovoAgendamentoForm() {
                             )}
                           </tbody>
                         </table>
-                      </div>  
+                      </div> */ }
                     
                     <div>
                       <button className="btn mt-4 btn-primary d-block w-100" type="submit">
